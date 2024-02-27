@@ -1,0 +1,1 @@
+Nesta pasta fica tudo o que lida diretamente com o MongoDB

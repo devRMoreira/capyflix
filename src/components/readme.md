@@ -1,0 +1,1 @@
+Criar um ficheiro por componente
