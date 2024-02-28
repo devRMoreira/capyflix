@@ -15,13 +15,11 @@ export default async function handler(req, res) {
 
         const filme = await findFilme(id)
 
-        if (filme.mensagem.includes("sucesso")) {
+        if (filme.mensagem.includes("Sucesso")) {
             return res.status(200).json(filme)
         } else {
             return res.status(403).json(filme)
         }
-
-
 
     } else {
         return res.status(403)

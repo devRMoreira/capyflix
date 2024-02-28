@@ -15,13 +15,11 @@ export default async function handler(req, res) {
 
         const membro = await findMembroEquipa(id)
 
-        if (membro.mensagem.includes("sucesso")) {
+        if (membro.mensagem.includes("Sucesso")) {
             return res.status(200).json(membro)
         } else {
             return res.status(403).json(membro)
         }
-
-
 
     } else {
         return res.status(403)

@@ -1,3 +1,4 @@
+import { findSerie } from "@/data/serie"
 
 export default async function handler(req, res) {
 
@@ -12,12 +13,12 @@ export default async function handler(req, res) {
             })
         }
 
-        const filme = await findFilme(id)
+        const serie = await findSerie(id)
 
-        if (filme.mensagem.includes("sucesso")) {
-            return res.status(200).json(filme)
+        if (serie.mensagem.includes("Sucesso")) {
+            return res.status(200).json(serie)
         } else {
-            return res.status(403).json(filme)
+            return res.status(403).json(serie)
         }
 
 
