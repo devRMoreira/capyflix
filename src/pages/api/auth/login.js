@@ -16,7 +16,7 @@ export default async function handler(req, res) {
 
         const validation = await loginValidation(user)
 
-        if (validation.message.includes("Sucesso")) {
+        if (validation.mensagem.includes("Sucesso")) {
             return res.status(201).json(validation)
         } else {
             return res.status(400).json(validation)

@@ -7,7 +7,7 @@ export async function signupValidation(user) {
 
     if (await findUserInCollection({ email })) {
         return {
-            message: "O email já se encontra registado.",
+            mensagem: "O email já se encontra registado.",
         }
     }
 
@@ -15,7 +15,7 @@ export async function signupValidation(user) {
     const addedUser = await addUserToCollection(user)
 
     return {
-        message: "Utilizador criado com sucesso!",
+        mensagem: "Utilizador criado com sucesso!",
         _id: addedUser.insertedId
     }
 
@@ -29,12 +29,12 @@ export async function loginValidation(user) {
 
     if (!registeredUser || !passwordValidation(user, registeredUser)) {
         return {
-            message: "Dados inválidos.",
+            mensagem: "Dados inválidos.",
         }
     }
 
     return {
-        message: "Sucesso."
+        mensagem: "Sucesso."
     }
 }
 

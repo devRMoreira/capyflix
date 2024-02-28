@@ -17,7 +17,7 @@ export default async function handler(req, res) {
 
         const validation = await signupValidation(user)
 
-        if (validation.message.includes("sucesso")) {
+        if (validation.mensagem.includes("sucesso")) {
             return res.status(201).json(validation)
         } else {
             return res.status(400).json(validation)

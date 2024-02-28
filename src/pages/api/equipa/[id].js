@@ -1,5 +1,29 @@
-export default function handler(req, res) {
-    const id = req.query.id
-    res.status(200).json({id});
-    
+import { findMembroEquipa } from "@/data/equipa"
+
+export default async function handler(req, res) {
+
+    if (req.method === "GET") {
+
+
+        const id = req.query.id
+
+        if (id.length !== 24) {
+            return res.status(403).json({
+                mensagem: "ID inválido."
+            })
+        }
+
+        const membro = await findMembroEquipa(id)
+
+        if (membro.mensagem.includes("sucesso")) {
+            return res.status(200).json(membro)
+        } else {
+            return res.status(403).json(membro)
+        }
+
+
+
+    } else {
+        return res.status(403)
+    }
 }
