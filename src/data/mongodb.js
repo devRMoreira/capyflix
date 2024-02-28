@@ -41,10 +41,3 @@ export async function findDocument(filter, collectionName) {
     return await collection?.findOne(filter)
 }
 
-// module.exports = {
-//     getMongoCollection,
-//     insertDocument,
-//     updateDocument,
-//     findDocument
-// }
-
