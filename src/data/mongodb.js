@@ -36,8 +36,13 @@ export async function updateDocument(filter, document, collectionName, dbName = 
 
 }
 
-export async function findDocument(filter, collectionName) {
+export async function findOneDocument(filter, collectionName) {
     const collection = await getMongoCollection(collectionName)
     return await collection?.findOne(filter)
+}
+
+export async function findDocuments(filter, collectionName) {
+    const collection = await getMongoCollection(collectionName)
+    return await collection?.findOne(filter).toArray()
 }
 

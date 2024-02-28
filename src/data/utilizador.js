@@ -1,8 +1,6 @@
-import { findDocument, insertDocument } from "./mongodb"
+import { findOneDocument, insertDocument } from "./mongodb"
 
 const defaultCollection = "utilizadores"
-
-
 
 export async function addUserToCollection(user, collectionName = defaultCollection) {
 
@@ -47,7 +45,7 @@ export async function updateUserInCollection(filter, registeredUser, collectionN
 
 export async function findUserInCollection(filter){
 
-    return await findDocument(filter, defaultCollection)
+    return await findOneDocument(filter, defaultCollection)
 }
 
 

@@ -3,7 +3,6 @@ import { signupValidation } from "@/services/validacao"
 
 export default async function handler(req, res) {
 
-
     if (req.method === "POST") {
 
         if ((!req.body.nome || !req.body.password) || !req.body.email) {
