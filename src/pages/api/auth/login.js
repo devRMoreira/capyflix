@@ -1,5 +1,5 @@
 import { passwordEncryption } from "@/backend/services/utilizador"
-import { loginValidation } from "@/backend/services/validacao"
+import { loginValidation } from "@/backend/data/validacao"
 
 export default async function handler(req, res) {
 
