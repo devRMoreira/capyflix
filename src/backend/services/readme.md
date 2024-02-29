@@ -1,1 +1,1 @@
-Nesta pasta ficam todas as funções de JS que necessitam de tratar dados, idealmente agrupar por ficheiro todas as funções que sejam relevantes umas às outras, por ex tudo o que lida com o utilizador ficar no ficheiro user.js
+Nesta pasta ficam todas as funções de ajuda para tratar dados, idealmente agrupar por ficheiro todas as funções que sejam relevantes umas às outras, por ex tudo o que ajuda a lidar com o utilizador fica no ficheiro utilizador.js
