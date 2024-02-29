@@ -1,6 +1,8 @@
 import { ObjectId } from "mongodb";
 import { findOneDocument, insertDocument } from "./mongodb";
 import { adicionarComentarioHistoricoUtilizador, findEmailInCollection, findUserInCollection } from "./utilizador";
+import { adicionarComentarioFilme } from "./filme";
+import { adicionarComentarioSerie } from "./serie";
 
 const defaultCollection = "comentarios"
 
@@ -25,19 +27,31 @@ export async function adicionarNovoComentario(comentario) {
     if (await findUserInCollection(comentario.utilizador)) {
 
         const comentarioParaAdicionar = {
-            ...comentario,
+            comentario: comentario.comentario,
+            avaliacao: comentario.avaliacao,
+            utilizador: comentario.utilizador,
             data: new Date().getTime()
         }
 
         const comentarioAdicionado = await insertDocument(comentarioParaAdicionar, defaultCollection)
-        console.log(comentarioAdicionado)
 
         const adicionarHistorico = {
             idComentario: comentarioAdicionado.insertedId,
             idUtilizador: comentarioParaAdicionar.utilizador
+        }
+
+
+        const historicoUtilizador = await adicionarComentarioHistoricoUtilizador(adicionarHistorico)
+
+        if (comentario.tipo === "filme") {
+
+            const historicoFilme = await adicionarComentarioFilme(comentario.idConteudo, comentarioAdicionado.insertedId)
+
+        } else {
+
+            const historicoSerie = await adicionarComentarioSerie(comentario.idConteudo, comentarioAdicionado.insertedId)
 
         }
-        const historicoAdicionado = await adicionarComentarioHistoricoUtilizador(adicionarHistorico)
 
         return {
             mensagem: "Comentario efetuado com sucesso!",

@@ -21,6 +21,7 @@ export default async function handler(req, res) {
         }
 
     } else if (req.method === "POST" && req.query.id === "novo") {
+        
 
         if (!req.body.comentario && !req.body.avaliacao) {
             return res.status(403).json({
@@ -28,11 +29,15 @@ export default async function handler(req, res) {
             })
         }
 
+
         const comentario = {
             comentario: req.body.comentario,
             avaliacao: req.body.avaliacao,
-            utilizador: req.body.utilizador
+            utilizador: req.body.utilizador,
+            tipo: req.body.tipo,
+            idConteudo: req.body.id
         }
+
 
         const novoComentario = await adicionarNovoComentario(comentario)
 
