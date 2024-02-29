@@ -29,10 +29,17 @@ export async function insertDocument(document, collectionName, dbName = DEFAULT_
 
 }
 
-export async function updateDocument(filter, document, collectionName, dbName = DEFAULT_DB_NAME) {
+export async function replaceDocument(filter, document, collectionName, dbName = DEFAULT_DB_NAME) {
     const client = await connectToMongo()
     const database = await client.db(dbName)
     return await database.collection(collectionName).replaceOne(filter, document)
+
+}
+
+export async function updateOneDocument(filter, update, collectionName, dbName = DEFAULT_DB_NAME) {
+    const client = await connectToMongo()
+    const database = await client.db(dbName)
+    return await database.collection(collectionName).updateOne(filter, update)
 
 }
 
@@ -43,6 +50,6 @@ export async function findOneDocument(filter, collectionName) {
 
 export async function findDocuments(filter, collectionName) {
     const collection = await getMongoCollection(collectionName)
-    return await collection?.findOne(filter).toArray()
+    return await collection?.find(filter).toArray()
 }
 

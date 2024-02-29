@@ -3,9 +3,7 @@ import { addUserToCollection, findEmailInCollection } from "@/backend/data/utili
 
 export async function signupValidation(user) {
 
-    const email = user.email
-
-    if (await findEmailInCollection({ email })) {
+    if (await findEmailInCollection(user.email)) {
         return {
             mensagem: "O email já se encontra registado.",
         }
@@ -16,16 +14,14 @@ export async function signupValidation(user) {
 
     return {
         mensagem: "Utilizador criado com sucesso!",
-        _id: addedUser.insertedId
+        id: addedUser.insertedId
     }
 
 }
 
 export async function loginValidation(user) {
 
-    const email = user.email
-
-    const registeredUser = await findEmailInCollection({ email })
+    const registeredUser = await findEmailInCollection(user.email)
 
     if (!registeredUser || !passwordValidation(user, registeredUser)) {
         return {

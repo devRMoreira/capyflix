@@ -1,10 +1,10 @@
 import { ObjectId } from "mongodb";
-import { findOneDocument, insertDocument } from "./mongodb"
+import { findOneDocument, getMongoCollection, insertDocument, replaceDocument, updateOneDocument } from "./mongodb"
 import { filtrarInformacaoPerfil } from "../services/utilizador";
 
 const defaultCollection = "utilizadores"
 
-export async function addUserToCollection(user, collectionName = defaultCollection) {
+export async function addUserToCollection(user) {
 
     const userToAdd = {
         nome: user.nome,
@@ -35,17 +35,18 @@ export async function addUserToCollection(user, collectionName = defaultCollecti
         dataRegisto: new Date().getTime()
     }
 
-
-
-    return await insertDocument(userToAdd, collectionName)
+    return await insertDocument(userToAdd, defaultCollection)
 }
 
-export async function updateUserInCollection(filter, registeredUser, collectionName = defaultCollection) {
+export async function updateUserInCollection(filter, registeredUser) {
 
-    return await updateDocument(filter, registeredUser, collectionName)
+    return await replaceDocument(filter, registeredUser, defaultCollection)
 }
 
-export async function findEmailInCollection(filter) {
+export async function findEmailInCollection(email) {
+
+    const filter = { email }
+
 
     return await findOneDocument(filter, defaultCollection)
 }
@@ -69,11 +70,30 @@ export async function findUserInCollection(id) {
     }
 }
 
+export async function adicionarComentarioHistoricoUtilizador(comentario) {
 
+    const filter = { _id: new ObjectId(comentario.idUtilizador) }
 
+    const utilizador = await getHistoricoComentariosUtilizador(filter)
 
+    const novoHistorico = {
+        $set:
+            { historicoComentarios: [...utilizador.historicoComentarios, comentario.idComentario] }
+    }
 
+    const atualizar = await updateOneDocument(filter, novoHistorico, defaultCollection)
 
+    return atualizar
+
+}
+
+async function getHistoricoComentariosUtilizador(filter) {
+
+    const projection = { historicoComentarios: 1, _id: 0 }
+
+    const collection = await getMongoCollection(defaultCollection)
+    return await collection?.findOne(filter, { projection })
+}
 
 
 

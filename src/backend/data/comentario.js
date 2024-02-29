@@ -1,5 +1,6 @@
 import { ObjectId } from "mongodb";
-import { findOneDocument } from "./mongodb";
+import { findOneDocument, insertDocument } from "./mongodb";
+import { adicionarComentarioHistoricoUtilizador, findEmailInCollection, findUserInCollection } from "./utilizador";
 
 const defaultCollection = "comentarios"
 
@@ -21,19 +22,37 @@ export async function findComentario(id) {
 
 export async function adicionarNovoComentario(comentario) {
 
-    const comentarioParaAdicionar = {
-        ...comentario,
-        data: new Date().getTime()
+    if (await findUserInCollection(comentario.utilizador)) {
+
+        const comentarioParaAdicionar = {
+            ...comentario,
+            data: new Date().getTime()
+        }
+
+        const comentarioAdicionado = await insertDocument(comentarioParaAdicionar, defaultCollection)
+        console.log(comentarioAdicionado)
+
+        const adicionarHistorico = {
+            idComentario: comentarioAdicionado.insertedId,
+            idUtilizador: comentarioParaAdicionar.utilizador
+
+        }
+        const historicoAdicionado = await adicionarComentarioHistoricoUtilizador(adicionarHistorico)
+
+        return {
+            mensagem: "Comentario efetuado com sucesso!",
+            id: comentarioAdicionado.insertedId
+        }
+
+    } else {
+        return {
+            mensagem: "Pedido inválido."
+        }
     }
-
-    const comentarioAdicionado = await insertDocument(comentarioParaAdicionar, defaultCollection)
-
-    return {
-        mensagem: "Comentario efetuado com sucesso!",
-        _id: comentarioAdicionado.insertedId
-    }
-
 }
+
+
+
 
 // * Modelo novo comentário
 // {
