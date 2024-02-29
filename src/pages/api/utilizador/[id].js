@@ -21,9 +21,7 @@ export default async function handler(req, res) {
             return res.status(403).json(utilizador)
         }
 
-
-
     } else {
-        return res.status(404).end()
+        return res.status(404).json(undefined)
     }
 }
