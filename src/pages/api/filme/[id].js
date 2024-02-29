@@ -1,4 +1,4 @@
-import { findFilme } from "@/data/filme"
+import { findFilme } from "@/backend/data/filme"
 
 export default async function handler(req, res) {
 

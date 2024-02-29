@@ -1,0 +1,1 @@
+Nesta pasta ficam todas as funções de JS que ajudam a funcionar, idealmente agrupar por ficheiro todas as funções que sejam relevantes umas às outras, por ex tudo o que lida com o utilizador ficar no ficheiro user.js

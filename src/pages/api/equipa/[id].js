@@ -1,4 +1,4 @@
-import { findMembroEquipa } from "@/data/equipa"
+import { findMembroEquipa } from "@/backend/data/equipa"
 
 export default async function handler(req, res) {
 

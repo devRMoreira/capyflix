@@ -1,4 +1,4 @@
-import { findSerie } from "@/data/serie"
+import { findSerie } from "@/backend/data/serie"
 
 export default async function handler(req, res) {
 

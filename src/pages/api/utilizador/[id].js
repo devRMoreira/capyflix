@@ -1,4 +1,4 @@
-import { findUserInCollection } from "@/data/utilizador"
+import { findUserInCollection } from "@/backend/data/utilizador"
 
 export default async function handler(req, res) {
 

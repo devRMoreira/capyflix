@@ -1,4 +1,4 @@
-import { addUserToCollection, findEmailInCollection} from "@/data/utilizador"
+import { addUserToCollection, findEmailInCollection } from "@/backend/data/utilizador"
 
 
 export async function signupValidation(user) {

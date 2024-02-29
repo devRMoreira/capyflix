@@ -1,5 +1,6 @@
 import { ObjectId } from "mongodb";
 import { findOneDocument, insertDocument } from "./mongodb"
+import { filtrarInformacaoPerfil } from "../services/utilizador";
 
 const defaultCollection = "utilizadores"
 
@@ -68,24 +69,7 @@ export async function findUserInCollection(id) {
     }
 }
 
-function filtrarInformacaoPerfil(utilizador) {
 
-    const utilizadorFiltrado = {
-        _id: utilizador._id,
-        nome:utilizador.nome,
-        conteudoVisto: utilizador.conteudoVisto,
-        conteudoPorVer: utilizador.conteudoPorVer,
-        conteudoFavorito: utilizador.conteudoFavorito,
-        seguidores: utilizador.seguidores,
-        quemSegue: utilizador.quemSegue,
-        privado: utilizador.privado,
-        estatisticas: utilizador.estatisticas,
-        imagemPerfil: utilizador.imagemPerfil,
-        dataRegisto: utilizador.dataRegisto  
-    }
-
-    return utilizadorFiltrado
-}
 
 
 
