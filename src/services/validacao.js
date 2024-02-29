@@ -1,11 +1,11 @@
-import { addUserToCollection, findUserInCollection } from "@/data/utilizador"
+import { addUserToCollection, findEmailInCollection} from "@/data/utilizador"
 
 
 export async function signupValidation(user) {
 
     const email = user.email
 
-    if (await findUserInCollection({ email })) {
+    if (await findEmailInCollection({ email })) {
         return {
             mensagem: "O email já se encontra registado.",
         }
@@ -25,7 +25,7 @@ export async function loginValidation(user) {
 
     const email = user.email
 
-    const registeredUser = await findUserInCollection({ email })
+    const registeredUser = await findEmailInCollection({ email })
 
     if (!registeredUser || !passwordValidation(user, registeredUser)) {
         return {

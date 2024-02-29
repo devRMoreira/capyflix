@@ -1,4 +1,6 @@
+import { ObjectId } from "mongodb";
 import { findOneDocument, insertDocument } from "./mongodb"
+import { filtrarInformacaoPerfil } from "@/services/utilizador";
 
 const defaultCollection = "utilizadores"
 
@@ -33,20 +35,42 @@ export async function addUserToCollection(user, collectionName = defaultCollecti
         dataRegisto: new Date().getTime()
     }
 
-    
+
 
     return await insertDocument(userToAdd, collectionName)
 }
 
 export async function updateUserInCollection(filter, registeredUser, collectionName = defaultCollection) {
-   
+
     return await updateDocument(filter, registeredUser, collectionName)
 }
 
-export async function findUserInCollection(filter){
+export async function findEmailInCollection(filter) {
 
     return await findOneDocument(filter, defaultCollection)
 }
+
+export async function findUserInCollection(id) {
+
+    const filter = { _id: new ObjectId(id) }
+    const utilizador = await findOneDocument(filter, defaultCollection)
+
+    if (utilizador === null) {
+        return {
+            mensagem: "ID inválido.",
+        }
+    }
+
+    const utilizadorFiltrado = filtrarInformacaoPerfil(utilizador)
+
+    return {
+        mensagem: "Sucesso.",
+        utilizadorFiltrado
+    }
+}
+
+
+
 
 
 
