@@ -1,5 +1,6 @@
-import { passwordEncryption } from "@/services/utilizador"
-import { signupValidation } from "@/services/validacao"
+import { passwordEncryption } from "@/backend/services/utilizador"
+import { signupValidation } from "@/backend/services/validacao"
+
 
 export default async function handler(req, res) {
 
@@ -24,7 +25,7 @@ export default async function handler(req, res) {
         }
 
     } else {
-        return res.status(403)
+        return res.status(404).end()
     }
 }
 

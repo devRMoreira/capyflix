@@ -21,9 +21,7 @@ export default async function handler(req, res) {
             return res.status(403).json(serie)
         }
 
-
-
     } else {
-        return res.status(403)
+        return res.status(404).end()
     }
 }
