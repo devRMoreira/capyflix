@@ -8,16 +8,17 @@ export function FilmeCompleto ({filme}) {
              <Image src={filme.capa} width="100" height="100" />
             <h2>{filme.titulo}</h2>
             <h2>{filme.tituloOriginal}</h2>
-            <h3>{filme.genero}</h3>
-            <p>{filme.duracao}</p>
+            <h3>{filme.genero.map((ele,index) => index < filme.genero.length-1 ? ele + "/" : ele)}</h3>
+            <h3>{String(new Date(filme.dataLancamento))}</h3>
+            <p>{filme.duracao} min</p>
             <p>{filme.classificacaoEtaria}</p>
             <p>{filme.mediaAvaliacoes}</p>
             <div>
-                <h4>Sinopse</h4>
+                <h4>Sinopse:</h4>
                 <p>{filme.sinopse}</p>
-                <h4>Elenco</h4>
-                <p>{filme.elenco.nome}</p>
-                <h4>Realizador</h4>
+                <h4>Elenco:</h4>
+                {filme.elenco.map((ele) => <span>{ele.nome} </span>)}
+                <h4>Realizador:</h4>
                 <p>{filme.realizador.nome}</p>
             </div>
         </div>
@@ -63,3 +64,36 @@ export function FilmeCompleto ({filme}) {
 //     "visualizacoes": 0,
 //     "comentarios": []
 //   }
+
+//import Image from "next/image";
+
+
+// export function FilmeCompleto ({filme}) {
+    
+//     return (
+//         <div className="h-screen bg-fundo-principal relative">
+//             <div className="">
+//                 <div>
+//              <Image className="mt-10" src={filme.capa} width="100" height="100" />
+//              </div>
+//              <div className="relative">
+//             <h2 className="text-main-white">{filme.titulo}</h2>
+//             <h2 className="text-main-white">{filme.tituloOriginal}</h2>
+//             <h3 className="text-main-white">{filme.genero}</h3>
+//             <p className="text-main-white">{filme.duracao}</p>
+//             <p className="text-main-white">{filme.classificacaoEtaria}</p>
+//             <p className="text-main-white">{filme.mediaAvaliacoes}</p>
+//             </div>
+//             </div>
+//             <p className="text-main-white">Ver trailer</p>
+//             <div className="bg-fundo-principal flex flex-col items-center">
+//                 <h4 className="text-main-white">Sinopse</h4>
+//                 <p className="text-main-white">{filme.sinopse}</p>
+//                 <h4 className="text-main-white">Elenco</h4>
+//                 <p className="text-main-white">{filme.elenco.nome}</p>
+//                 <h4 className="text-main-white">Realizador</h4>
+//                 <p className="text-main-white">{filme.realizador.nome}</p>
+//             </div>
+//         </div>
+//     )
+// }
