@@ -1,4 +1,4 @@
-import { findUserInCollection } from "@/backend/data/utilizador"
+import { adicionarSeguidor, findUserInCollection, removerSeguidor } from "@/backend/data/utilizador"
 
 export default async function handler(req, res) {
 
@@ -23,16 +23,41 @@ export default async function handler(req, res) {
 
     } else if (req.method === "PATCH") {
 
-        const quemSeguir = req.query.id
-        const novoSeguidor = req.body.id
+        const seguir = {
+            quemSeguir: req.query.id,
+            novoSeguidor: req.body.novoSeguidor
+        }
 
-        if (quemSeguir.length !== 24) {
+        if (seguir.quemSeguir.length !== 24) {
             return res.status(403).json({
                 mensagem: "ID inválido."
             })
         }
 
-        return res.status(200).json(undefined)
+        const seguido = await adicionarSeguidor(seguir)
+
+        return res.status(200).json(seguido)
+
+
+
+    } else if (req.method === "DELETE") {
+
+        const pararSeguir = {
+            quemNaoSeguir: req.query.id,
+            quemPara: req.body.quemPara
+        }
+
+        if (pararSeguir.quemNaoSeguir.length !== 24) {
+            return res.status(403).json({
+                mensagem: "ID inválido."
+            })
+        }
+
+        const desseguido = await removerSeguidor(pararSeguir)
+
+        
+
+        return res.status(200).json(desseguido)
 
 
 
