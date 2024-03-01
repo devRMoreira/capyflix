@@ -1,6 +1,7 @@
 import { ObjectId } from "mongodb";
 import { findOneDocument, getMongoCollection, insertDocument, replaceDocument, updateOneDocument } from "./mongodb"
-import { filtrarArray, filtrarArraySeguidores, filtrarInformacaoPerfil } from "../services/utilizador";
+import { filtrarInformacaoPerfil } from "../services/utilizador";
+import { filtrarArray } from "../services/util";
 
 const defaultCollection = "utilizadores"
 
@@ -157,12 +158,12 @@ export async function removerSeguidor(pararSeguir) {
 
     const novoSeguidores = {
         $set:
-            { seguidores: filtrarArraySeguidores(seguidores.seguidores, pararSeguir.quemPara) }
+            { seguidores: filtrarArray(seguidores.seguidores, pararSeguir.quemPara) }
     }
 
     const novoQuemSegue = {
         $set:
-            { quemSegue: filtrarArraySeguidores(quemSegue.quemSegue, pararSeguir.quemNaoSeguir) }
+            { quemSegue: filtrarArray(quemSegue.quemSegue, pararSeguir.quemNaoSeguir) }
     }
 
     const atualizar = {

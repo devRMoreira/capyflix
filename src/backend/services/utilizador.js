@@ -23,9 +23,6 @@ export function filtrarInformacaoPerfil(utilizador) {
     return utilizadorFiltrado
 }
 
-export function filtrarArraySeguidores(array, id){
 
-    return array.filter((ele) => ele !== id)
-}
 
 
