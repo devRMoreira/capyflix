@@ -1,6 +1,6 @@
 import { ObjectId } from "mongodb";
 import { findOneDocument, getMongoCollection, insertDocument, replaceDocument, updateOneDocument } from "./mongodb"
-import { filtrarInformacaoPerfil } from "../services/utilizador";
+import { filtrarArray, filtrarArraySeguidores, filtrarInformacaoPerfil } from "../services/utilizador";
 
 const defaultCollection = "utilizadores"
 
@@ -147,6 +147,32 @@ async function getQuemSegueUtilizador(filter) {
     return await collection?.findOne(filter, { projection })
 }
 
+export async function removerSeguidor(pararSeguir) {
+
+    const filterPararSeguir = { _id: new ObjectId(pararSeguir.quemNaoSeguir) }
+    const filterQuemPara = { _id: new ObjectId(pararSeguir.quemPara) }
+
+    const seguidores = await getSeguidoresUtilizador(filterPararSeguir)
+    const quemSegue = await getQuemSegueUtilizador(filterQuemPara)
+
+    const novoSeguidores = {
+        $set:
+            { seguidores: filtrarArraySeguidores(seguidores.seguidores, pararSeguir.quemPara) }
+    }
+
+    const novoQuemSegue = {
+        $set:
+            { quemSegue: filtrarArraySeguidores(quemSegue.quemSegue, pararSeguir.quemNaoSeguir) }
+    }
+
+    const atualizar = {
+        atualizarSeguidores: await updateOneDocument(filterPararSeguir, novoSeguidores, defaultCollection),
+        atualizarQuemPara: await updateOneDocument(filterQuemPara, novoQuemSegue, defaultCollection)
+    }
+
+    return atualizar
+
+}
 
 
 
