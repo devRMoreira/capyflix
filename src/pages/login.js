@@ -1,4 +1,4 @@
-import { Botao } from "@/frontend/components/Botao";
+import { Botao } from "@/frontend/components/botao";
 import { FilmeCompleto } from "@/frontend/components/filmeCompleto";
 import Image from "next/image";
 

@@ -1,4 +1,4 @@
-import { Botao } from "@/frontend/components/Botao";
+import { Botao } from "@/frontend/components/botao";
 import { Input } from "@/frontend/components/Input";
 
 export default function Registar() {
