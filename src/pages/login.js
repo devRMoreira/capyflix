@@ -1,4 +1,4 @@
-import { Button } from "@/frontend/components/button";
+import { Botao } from "@/frontend/components/Botao";
 import Image from "next/image";
 
 export default function Login() {
@@ -29,8 +29,8 @@ export default function Login() {
         ></input>
       </div>
       <div className="flex space-x-12 mb-24">
-        <Button texto = "LOGIN"/>
-        <Button texto = "REGISTAR"/>
+        <Botao title = "LOGIN"/>
+        <Botao title = "REGISTAR"/>
       </div>
     </div>
   );
