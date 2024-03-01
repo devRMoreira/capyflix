@@ -1,5 +1,7 @@
 import { Inter } from "next/font/google";
 import Recomendacoes from "@/frontend/components/Recomendacoes";
+import { FilmeCompleto } from "@/frontend/components/filmeCompleto";
+import { MovieCard } from "@/frontend/components/movieCard";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -121,7 +123,7 @@ export default function Home() {
   return (
     <main>
       <div className=" flex">
-
+		<FilmeCompleto filme={filme.filme}/>
       </div>
     </main>
   );

@@ -1,13 +1,13 @@
-export function MovieCard({image, Titulo, Genero, Duracao, Faixa_etaria, Classificacao}){
+export function MovieCard({filme}){
     return(
         <div>
-            <Image src={image} width="100" height="100" />
-            <h2>{Titulo_original}</h2>
-            <h2>{Titulo_traducao}</h2>
-            <h3>{Genero}</h3>
-            <p>{Duracao}</p>
-            <p>{Faixa_etaria}</p>
-            <p>{Classificacao}</p>
+            <Image src={filme.capa} width="100" height="100" />
+            <h2>{filme.titulo}</h2>
+            <h2>{filme.tituloOriginal}</h2>
+            <h3>{filme.genero}</h3>
+            <p>{filme.duracao}</p>
+            <p>{filme.classificacaoEtaria}</p>
+            <p>{filme.mediaAvaliacoes}</p>
         </div>
     )
 }
