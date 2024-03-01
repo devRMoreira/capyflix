@@ -24,7 +24,7 @@ export default async function handler(req, res) {
     } else if (req.method === "PATCH") {
 
         const quemSeguir = req.query.id
-        const novoSeguidor = req.body.id
+        const novoSeguidor = req.body.quemSegue
 
         if (quemSeguir.length !== 24) {
             return res.status(403).json({
