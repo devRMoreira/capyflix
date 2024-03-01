@@ -122,7 +122,7 @@ const serie = {
 export default function Home() {
   return (
     <main>
-      <div className=" flex">
+      <div className="flex">
 		<FilmeCompleto filme={filme.filme}/>
       </div>
     </main>
