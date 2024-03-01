@@ -11,24 +11,28 @@ export default function Registar() {
         <Input
           icone="/icones/User.png"
           placeholder="Insere o teu nome de utilizador"
+          type="text"
         ></Input>
       </div>
       <div className="mt-10">
         <Input
           icone="/icones/At Sign.png"
           placeholder="Insere o teu endereço de email"
+          type="email"
         ></Input>
       </div>
       <div className="mt-10">
         <Input
           icone="/icones/Password Key.png"
           placeholder="Insere a tua palavra-passe"
+          type="password"
         ></Input>
       </div>
       <div className="mt-10">
         <Input
           icone="/icones/Password Key.png"
           placeholder="Confirma a tua palavra-passe"
+          type="password"
         ></Input>
       </div>
       <div className="mt-14">
