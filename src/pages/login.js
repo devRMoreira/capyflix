@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function Login() {
   return (
-    <div className="bg-principal flex flex-col items-center ">
+    <div className=" bg-fundo-principal flex flex-col items-center ">
       <div className=" ">
         <Image src="/logo.png" width="300" height="50" />
       </div>
@@ -30,8 +30,8 @@ export default function Login() {
         ></input>
       </div>
       <div className="flex space-x-12 mb-24">
-        <Botao title = "LOGIN"/>
-        <Botao title = "REGISTAR"/>
+        <Botao title="LOGIN" />
+        <Botao title="REGISTAR" />
       </div>
       <FilmeCompleto/>
     </div>
