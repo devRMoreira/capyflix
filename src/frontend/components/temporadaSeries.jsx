@@ -1,15 +1,14 @@
-export function TemporadaSeries(){
+export function TemporadaSeries({serie}){
     return (
         <div>
-            < Image src={image} width="100" height="100" />
-            <h2>{Titulo}</h2>
-            <h3>{Genero}</h3>
-            <p>{Temporada}</p>
-            <p>{Faixa_etaria}</p>
-            <p>{Classificacao}</p>
+            <Image src={serie.capa} width="100" height="100" />
+            <h2>{serie.titulo}</h2>
+            <h2>{serie.tituloOriginal}</h2>
+            <h3>{serie.genero}</h3>
+            <p>{serie.temporadas}</p>
+            <p>{serie.classificacaoEtaria}</p>
+            <p>{serie.mediaAvaliacoes}</p>
             <div>
-                <h4>{Sinopse}</h4>
-                <p>{Texto}</p>
                 <Component/>
                 <Component/>
                 <Component/>

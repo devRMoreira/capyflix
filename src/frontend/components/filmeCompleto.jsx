@@ -8,16 +8,17 @@ export function FilmeCompleto ({filme}) {
              <Image src={filme.capa} width="100" height="100" />
             <h2>{filme.titulo}</h2>
             <h2>{filme.tituloOriginal}</h2>
-            <h3>{filme.genero}</h3>
-            <p>{filme.duracao}</p>
+            <h3>{filme.genero.map((ele,index) => index < filme.genero.length-1 ? ele + "/" : ele)}</h3>
+            <h3>{String(new Date(filme.dataLancamento))}</h3>
+            <p>{filme.duracao} min</p>
             <p>{filme.classificacaoEtaria}</p>
             <p>{filme.mediaAvaliacoes}</p>
             <div>
-                <h4>Sinopse</h4>
+                <h4>Sinopse:</h4>
                 <p>{filme.sinopse}</p>
-                <h4>Elenco</h4>
-                <p>{filme.elenco.nome}</p>
-                <h4>Realizador</h4>
+                <h4>Elenco:</h4>
+                {filme.elenco.map((ele) => <span>{ele.nome} </span>)}
+                <h4>Realizador:</h4>
                 <p>{filme.realizador.nome}</p>
             </div>
         </div>

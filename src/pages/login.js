@@ -1,5 +1,4 @@
 import { Botao } from "@/frontend/components/botao";
-import { FilmeCompleto } from "@/frontend/components/filmeCompleto";
 import Image from "next/image";
 
 export default function Login() {
@@ -10,7 +9,7 @@ export default function Login() {
       </div>
       <div className="mb-20">
         <p className=" text-laranja-principal">
-          CapyFlix: A Capyvara sabe o que é bom.
+          A Capyvara sabe o que é bom.
         </p>
       </div>
       <div className="mb-20 ring-2 ring-laranja-principal">
@@ -33,7 +32,6 @@ export default function Login() {
         <Botao title="LOGIN" />
         <Botao title="REGISTAR" />
       </div>
-      <FilmeCompleto/>
     </div>
   );
 }
