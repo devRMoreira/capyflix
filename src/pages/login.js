@@ -1,4 +1,5 @@
 import { Botao } from "@/frontend/components/Botao";
+import { FilmeCompleto } from "@/frontend/components/filmeCompleto";
 import Image from "next/image";
 
 export default function Login() {
@@ -32,6 +33,7 @@ export default function Login() {
         <Botao title = "LOGIN"/>
         <Botao title = "REGISTAR"/>
       </div>
+      <FilmeCompleto/>
     </div>
   );
 }
