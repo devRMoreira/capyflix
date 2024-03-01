@@ -35,7 +35,7 @@ export async function addUserToCollection(user) {
             },
             series: {
                 quantidade: 0,
-                tempo:0,
+                tempo: 0,
                 generos: 0
             }
         },
@@ -102,6 +102,51 @@ async function getHistoricoComentariosUtilizador(filter) {
     const collection = await getMongoCollection(defaultCollection)
     return await collection?.findOne(filter, { projection })
 }
+
+
+export async function adicionarSeguidor(seguir) {
+
+    const filterSeguir = { _id: new ObjectId(seguir.quemSeguir) }
+    const filterQuemSegue = { _id: new ObjectId(seguir.novoSeguidor) }
+
+    const seguidores = await getSeguidoresUtilizador(filterSeguir)
+    const quemSegue = await getQuemSegueUtilizador(filterQuemSegue)
+
+    const novoSeguidores = {
+        $set:
+            { seguidores: [...seguidores.seguidores, seguir.novoSeguidor] }
+    }
+
+    const novoQuemSegue = {
+        $set:
+            { quemSegue: [...quemSegue.quemSegue, seguir.quemSeguir] }
+    }
+
+    const atualizar = {
+        atualizarSeguidores: await updateOneDocument(filterSeguir, novoSeguidores, defaultCollection),
+        atualizarQuemSegue: await updateOneDocument(filterQuemSegue, novoQuemSegue, defaultCollection)
+    }
+
+    return atualizar
+
+}
+
+async function getSeguidoresUtilizador(filter) {
+
+    const projection = { seguidores: 1, _id: 0 }
+
+    const collection = await getMongoCollection(defaultCollection)
+    return await collection?.findOne(filter, { projection })
+}
+
+async function getQuemSegueUtilizador(filter) {
+
+    const projection = { quemSegue: 1, _id: 0 }
+
+    const collection = await getMongoCollection(defaultCollection)
+    return await collection?.findOne(filter, { projection })
+}
+
 
 
 
