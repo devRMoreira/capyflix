@@ -23,15 +23,14 @@ export default function Login() {
   }
 
   return (
-    <div className=" max-w-96 h-full bg-fundo-principal flex flex-col items-center ">
-      <div className=" ">
-        <Image src="/logo.png" width="300" height="50" />
-      </div>
-      <div className="mb-20">
+    <div className=" min-h-screen max-w-96 h-full bg-fundo-principal flex flex-col items-center ">
+      <Image className="mb-8" src="/logo.png" width="300" height="50" />
+
+      <div className="mb-16">
         <p className=" text-laranja-principal">A Capyvara sabe o que é bom.</p>
       </div>
       <form onSubmit={handleClick} className=" flex flex-col items-center">
-        <div className="mb-14">
+        <div className="mb-6">
           <Input
             icone="/icones/User.png"
             placeholder="Insere o teu nome de utilizador"
@@ -42,7 +41,7 @@ export default function Login() {
             onChange={handleChangeNome}
           ></Input>
         </div>
-        <div className=" mb-24">
+        <div className=" mb-20">
           <Input
             icone="/icones/Password Key.png"
             placeholder="Insere a tua palavra-passe"
@@ -53,10 +52,12 @@ export default function Login() {
             onChange={handleChangeSenha}
           ></Input>
         </div>
-        <div className="flex space-x-12 mb-8">
+        <div className=" flex space-x-12 mb-8">
           <Botao title="LOGIN" />
         </div>
-        <Botao title="REGISTAR" />
+        <div className=" mb-10">
+          <Botao title="REGISTAR" />
+        </div>
       </form>
     </div>
   );

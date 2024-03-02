@@ -34,12 +34,12 @@ export default function Registar() {
   }
 
   return (
-    <div className="flex flex-col items-center max-w-96 h-full bg-fundo-principal">
-      <h1 className=" text-lg mt-10 font-semibold text-main-white">
+    <div className="flex flex-col items-center max-w-96 min-h-screen h-full bg-fundo-principal">
+      <h1 className=" mb-10 text-2xl mt-16 font-semibold text-main-white">
         REGISTA-TE
       </h1>
       <form onSubmit={handleClick} className=" flex flex-col items-center">
-        <div className="mt-14">
+        <div className="mt-6">
           <Input
             icone="/icones/User.png"
             placeholder="Insere o teu nome de utilizador"
@@ -49,7 +49,7 @@ export default function Registar() {
             onChange={handleChangeNome}
           ></Input>
         </div>
-        <div className="mt-10">
+        <div className="mt-6">
           <Input
             icone="/icones/At Sign.png"
             placeholder="Insere o teu endereço de email"
@@ -59,7 +59,7 @@ export default function Registar() {
             onChange={handleChangeEmail}
           ></Input>
         </div>
-        <div className="mt-10">
+        <div className="mt-6">
           <Input
             icone="/icones/Password Key.png"
             placeholder="Insere a tua palavra-passe"
@@ -69,7 +69,7 @@ export default function Registar() {
             onChange={handleChangeSenha}
           ></Input>
         </div>
-        <div className="mt-10">
+        <div className="mt-6">
           <Input
             icone="/icones/Password Key.png"
             placeholder="Confirma a tua palavra-passe"
@@ -79,7 +79,7 @@ export default function Registar() {
             onChange={handleChangeConfirmarSenha}
           ></Input>
         </div>
-        <div className="mt-14">
+        <div className="mt-20 mb-28">
           <Botao title="REGISTAR"></Botao>
         </div>
       </form>
