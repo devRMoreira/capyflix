@@ -14,6 +14,7 @@ module.exports = {
         "main-white": "#FFFFFF",
         "fundo-botao": "#1A3554",
         "laranja-principal": "#D88924",
+        navbar: "#1A3554",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
