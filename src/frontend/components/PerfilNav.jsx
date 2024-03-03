@@ -1,6 +1,6 @@
 export function PerfilNav({ avatar, username, comentarios, ligacoes, config }) {
   return (
-    <div className=" flex w-full h-20 bg-navbar px-5">
+    <div className=" flex w-full h-16 bg-navbar px-5">
       <div className=" w-full flex justify-between">
         <div className=" flex items-center">
           <a href="/">
