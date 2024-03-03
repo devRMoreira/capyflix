@@ -1,5 +1,5 @@
 import { findFilme } from "@/backend/data/filme"
-import { adicionarFilmePorVer, adicionarFilmeVisto } from "@/backend/data/listasUtilizador"
+import { adicionarFilmeFavorito, adicionarFilmePorVer, adicionarFilmeVisto } from "@/backend/data/listasUtilizador"
 
 export default async function handler(req, res) {
 
@@ -32,7 +32,7 @@ export default async function handler(req, res) {
 
         const conteudo = {
             idFilme: req.query.id,
-            idUtilizador: req.body.id
+            idUtilizador: req.body.idUtilizador
         }
 
 
@@ -47,6 +47,14 @@ export default async function handler(req, res) {
         if (req.body.lista === "porVer") {
 
             const adicionado = await adicionarFilmePorVer(conteudo)
+
+            return res.status(200).json(adicionado)
+
+        }
+
+        if (req.body.lista === "favorito") {
+
+            const adicionado = await adicionarFilmeFavorito(conteudo)
 
             return res.status(200).json(adicionado)
 

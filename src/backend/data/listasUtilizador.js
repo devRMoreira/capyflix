@@ -10,11 +10,10 @@ export async function adicionarFilmeVisto(conteudo) {
 
     const listaVisto = await getListaVistoUtilizador(filterQuemViu)
 
-    console.log(listaVisto)
 
     const novaLista = {
         $set:
-            { "conteudoVisto.filmes": [...listaVisto.filmes, conteudo.idFilme] }
+            { "conteudoVisto.filmes": [...listaVisto.conteudoVisto.filmes, conteudo.idFilme] }
     }
 
     const atualizar = await updateOneDocument(filterQuemViu, novaLista, defaultCollection)
@@ -29,10 +28,17 @@ export async function adicionarFilmePorVer(conteudo) {
 
 }
 
+export async function adicionarFilmeFavorito(conteudo) {
+
+
+
+}
+
 async function getListaVistoUtilizador(filter) {
 
     const projection = {
-        conteudoVisto: 1, _id: 0
+        "conteudoVisto.filmes": 1,
+        _id: 0
     }
 
     const collection = await getMongoCollection(defaultCollection)
