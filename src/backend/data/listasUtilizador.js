@@ -10,10 +10,14 @@ export async function adicionarFilmeVisto(conteudo) {
 
     const listaVisto = await getListaVistoUtilizador(filterQuemViu)
 
-
+    const filmeParaAdicionar = {
+        id: conteudo.idFilme,
+        visualizado: new Date().getTime()
+    }
+    
     const novaLista = {
         $set:
-            { "conteudoVisto.filmes": [...listaVisto.conteudoVisto.filmes, conteudo.idFilme] }
+            { "conteudoVisto.filmes": [...listaVisto.conteudoVisto.filmes,filmeParaAdicionar] }
     }
 
     const atualizar = await updateOneDocument(filterQuemViu, novaLista, defaultCollection)
