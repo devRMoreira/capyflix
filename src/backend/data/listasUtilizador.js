@@ -6,21 +6,21 @@ const defaultCollection = "utilizadores"
 
 export async function adicionarFilmeVisto(conteudo) {
 
-    const filterQuemViu = { _id: new ObjectId(conteudo.idUtilizador) }
+    const filter = { _id: new ObjectId(conteudo.idUtilizador) }
 
-    const listaVisto = await getListaVistoUtilizador(filterQuemViu)
+    const listaVisto = await getListaVistoUtilizador(filter)
 
     const filmeParaAdicionar = {
         id: conteudo.idFilme,
         visualizado: new Date().getTime()
     }
-    
+
     const novaLista = {
         $set:
-            { "conteudoVisto.filmes": [...listaVisto.conteudoVisto.filmes,filmeParaAdicionar] }
+            { "conteudoVisto.filmes": [...listaVisto.conteudoVisto.filmes, filmeParaAdicionar] }
     }
 
-    const atualizar = await updateOneDocument(filterQuemViu, novaLista, defaultCollection)
+    const atualizar = await updateOneDocument(filter, novaLista, defaultCollection)
 
     return atualizar
 
@@ -28,6 +28,18 @@ export async function adicionarFilmeVisto(conteudo) {
 
 export async function adicionarFilmePorVer(conteudo) {
 
+    const filter = { _id: new ObjectId(conteudo.idUtilizador) }
+
+    const listaVisto = await getListaPorVerUtilizador(filter)
+
+    const novaLista = {
+        $set:
+            { "conteudoPorVer.filmes": [...listaVisto.conteudoPorVer.filmes, conteudo.idFilme] }
+    }
+
+    const atualizar = await updateOneDocument(filter, novaLista, defaultCollection)
+
+    return atualizar
 
 
 }
@@ -51,7 +63,10 @@ async function getListaVistoUtilizador(filter) {
 
 async function getListaPorVerUtilizador(filter) {
 
-    const projection = { "conteudoPorVer.filmes": 1, _id: 0 }
+    const projection = {
+        "conteudoPorVer.filmes": 1,
+        _id: 0
+    }
 
     const collection = await getMongoCollection(defaultCollection)
     return await collection?.findOne(filter, projection)
