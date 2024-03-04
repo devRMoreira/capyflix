@@ -1,6 +1,8 @@
 import { EpisodioSerie } from "./episodioSerie";
+import Image from "next/image";
 
-export function TemporadaSeries({serie}){
+
+export function TemporadaSeries({ serie }) {
     return (
         <div>
             <Image src={serie.capa} width="100" height="100" />
@@ -11,12 +13,12 @@ export function TemporadaSeries({serie}){
             <p>{serie.classificacaoEtaria}</p>
             <p>{serie.mediaAvaliacoes}</p>
             <div>
-                <EpisodioSerie/>
-                <EpisodioSerie/>
-                <EpisodioSerie/>
-                <EpisodioSerie/>
-                <EpisodioSerie/>
-                <EpisodioSerie/>
+                <EpisodioSerie />
+                <EpisodioSerie />
+                <EpisodioSerie />
+                <EpisodioSerie />
+                <EpisodioSerie />
+                <EpisodioSerie />
             </div>
         </div>
     )
