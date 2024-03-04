@@ -14,6 +14,7 @@ module.exports = {
         "main-white": "#FFFFFF",
         "fundo-botao": "#1A3554",
         "laranja-principal": "#D88924",
+        "borda-cinza": "#4B4B4B",
         navbar: "#1A3554",
       },
       backgroundImage: {
