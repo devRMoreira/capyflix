@@ -1,3 +1,5 @@
+import { EpisodioSerie } from "./episodioSerie";
+
 export function TemporadaSeries({serie}){
     return (
         <div>
@@ -9,10 +11,12 @@ export function TemporadaSeries({serie}){
             <p>{serie.classificacaoEtaria}</p>
             <p>{serie.mediaAvaliacoes}</p>
             <div>
-                <Component/>
-                <Component/>
-                <Component/>
-                <Component/>
+                <EpisodioSerie/>
+                <EpisodioSerie/>
+                <EpisodioSerie/>
+                <EpisodioSerie/>
+                <EpisodioSerie/>
+                <EpisodioSerie/>
             </div>
         </div>
     )

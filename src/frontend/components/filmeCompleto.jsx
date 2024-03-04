@@ -45,17 +45,17 @@ export function FilmeCompleto ({filme}) {
     return (
         <div className="h-screen bg-fundo-principal relative">
             <div className="flex ">
-                <div className="">
-             <Image className="ml-2 mt-2" src={filme.capa} width="100" height="100" />
+             <div className="">
+                <Image className="ml-2 mt-2" src={filme.capa} width="100" height="100" />
              </div>
-             <div className="relative mt-2 ml-4">
-            <h2 className="text-main-white">{filme.titulo}</h2>
-            <h2 className="text-main-white">{filme.tituloOriginal}</h2>
-            <h3 className="text-main-white">{filme.genero}</h3>
-            <p className="text-main-white">{filme.duracao}</p>
-            <p className="text-main-white">{filme.classificacaoEtaria}</p>
-            <p className="text-main-white">{filme.mediaAvaliacoes}</p>
-            </div>
+              <div className="relative mt-2 ml-4">
+                  <h2 className="text-main-white">{filme.titulo}</h2>
+                  <h2 className="text-main-white">{filme.tituloOriginal}</h2>
+                  <h3 className="text-main-white">{filme.genero}</h3>
+                  <p className="text-main-white">{filme.duracao}</p>
+                  <p className="text-main-white">{filme.classificacaoEtaria}</p>
+                  <p className="text-main-white">{filme.mediaAvaliacoes}</p>
+              </div>
             </div>
             <p className="text-main-white">Ver trailer</p>
             <div className="bg-fundo-principal flex flex-col items-left">
