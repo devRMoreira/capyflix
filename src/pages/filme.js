@@ -38,7 +38,8 @@ const filme = {
 
 export default function Filme() {
   return (
-    <div>
+    <div className=" min-h-screen md:max-w-96 h-full bg-fundo-principal flex flex-col ">
+
       <div>
         <FilmeCompleto filme={filme} />
       </div>

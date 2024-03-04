@@ -55,7 +55,7 @@ export default function home(){
       <div className=" ml-4 mr-4 md:ml-2 md:mr-2">
         <HomeFilmeSerieResumo filme={filme}></HomeFilmeSerieResumo>
 </div>
-        
+       <div className=" h-[50px]"></div> 
   </div>
   );
 }

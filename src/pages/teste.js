@@ -128,11 +128,6 @@ export default function Home() {
 		<FilmeCompleto filme={filme.filme}/> 
 		{/* <MovieCard filme={filme.filme}/> */}
 		{/* <SerieCard serie={serie.serie}/> */}
-		<NavApp 
-		Homep="/icones/Homep.png"
-		pesquisar="/icones/pesquisar.png"
-		avatar="/icones/avatar.png"
-		/>
       </div>
     </main>
   );

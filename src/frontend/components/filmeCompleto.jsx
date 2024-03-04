@@ -44,30 +44,43 @@ const filme = {
 export function FilmeCompleto ({filme}) {
     
     return (
-        <div className="h-screen bg-fundo-principal relative">
+        <div className="h-screen bg-fundo-principal relative mt-10">
             <div className="flex ">
-             <div className="">
+             <div className="mt-5 flex justify-center items-center gap-10 w-full max-w-sm">
                 <Image className="ml-2 mt-2" src={filme.capa} width="100" height="100" />
              </div>
-              <div className="relative mt-2 ml-4">
-                  <h2 className="text-main-white">{filme.titulo}</h2>
-                  <h2 className="text-main-white">{filme.tituloOriginal}</h2>
-                  <h3 className="text-main-white">{filme.genero.map((ele,index) => index < filme.genero.length-1 ? ele + "/" : ele)}</h3>
-                  <h3 className="text-main-white">Data de Lançamento: {moment(filme.dataLancamento).format('DD/MM/YYYY')}</h3>
-                  <p className="text-main-white">{filme.duracao}</p>
-                  <p className="text-main-white">{filme.classificacaoEtaria}</p>
-                  <p className="text-main-white">{filme.mediaAvaliacoes}</p>
+              <div className="relative ml-1 ">
+                  <h2 className="text-sm leading-6 text-main-white font-semibold">{filme.titulo}</h2>
+                  <h2 className="text-sm leading-6 text-main-white font-medium">{filme.tituloOriginal}</h2>
+                  <h3 className="text-sm leading-6 text-main-white">{filme.genero.map((ele,index) => index < filme.genero.length-1 ? ele + "/" : ele)}</h3>
+                  <h3 className="text-sm leading-6 text-main-white">Data de Lançamento: {moment(filme.dataLancamento).format('DD/MM/YYYY')}</h3>
+                  <p className="text-sm leading-6 text-main-white">{filme.duracao}</p>
+                  <p className="text-sm leading-6 text-main-white">{filme.classificacaoEtaria}</p>
+                  <p className="text-sm leading-6 text-main-white">{filme.mediaAvaliacoes}</p>
+                  <div className="flex items-center justify-end mr-10">
+                    <img className="mr-2" src="/icones/visto.png"></img>
+                    <img src="/icones/vermais.png"></img>
+                  </div>
               </div>
             </div>
-            <p className="text-main-white">Ver trailer</p>
-            <div className="bg-fundo-principal flex flex-col items-left">
-                <h4 className="text-main-white ">Sinopse</h4>
-                <p className="text-main-white">{filme.sinopse}</p>
-                <h4 className="text-main-white">Elenco</h4>
-                <p className="text-main-white">{filme.elenco.nome}</p>
-                <h4 className="text-main-white">Realizador</h4>
-                <p className="text-main-white">{filme.realizador.nome}</p>
+            <div className="flex items-center justify-start">
+            <p className="text-main-white ml-7 text-xs">Ver trailer</p>
+            <a>
+            <img src="/icones/YouTube.png" alt="Ver trailer"></img>
+            </a>
             </div>
+            
+            <div className="bg-fundo-principal flex flex-col items-left">
+                <h4 className="text-main-white mt-4 ml-5 font-semibold">Sinopse</h4>
+                <p className="text-main-white mt-3 ml-5">{filme.sinopse}</p>
+                <h4 className="text-main-white mt-3 ml-5 font-semibold">Elenco</h4>
+                <p className="text-main-white mt-3 ml-5">{filme.elenco.nome}</p>
+                <h4 className="text-main-white mt-6 ml-5 font-semibold">Realizador</h4>
+                <p className="text-main-white mt-3 ml-5">{filme.realizador.nome}</p>
+            </div>
+            <div className="flex justify-center">
+  <div className="border-t-2 border-gray-200 w-4/5 mt-4"></div>
+</div>
         </div>
     )
 }
