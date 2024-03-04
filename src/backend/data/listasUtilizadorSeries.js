@@ -1,6 +1,6 @@
 import { ObjectId } from "mongodb"
 import { getMongoCollection, updateOneDocument } from "./mongodb"
-import { filtrarArray, filtrarArrayObjetos } from "../services/util"
+import { encontrarIdArrayObjetos, filtrarArray, filtrarArrayObjetos } from "../services/util"
 
 const defaultCollection = "utilizadores"
 
@@ -18,7 +18,7 @@ export async function adicionarSerieVisto(conteudo) {
 
     const novaLista = {
         $set:
-            { "conteudoVisto.series": [...listaVisto.conteudoVisto.series, serieParaAdicionar] }
+            { "conteudoVisto.series": [serieParaAdicionar, ...listaVisto.conteudoVisto.series] }
     }
 
     const atualizar = await updateOneDocument(filter, novaLista, defaultCollection)
@@ -33,9 +33,14 @@ export async function adicionarSeriePorVer(conteudo) {
 
     const listaPorVer = await getListaPorVerUtilizador(filter)
 
+    const seriePorVer = {
+        id: conteudo.idSerie,
+        episodiosVistos: []
+    }
+
     const novaLista = {
         $set:
-            { "conteudoPorVer.series": [...listaPorVer.conteudoPorVer.series, conteudo.idSerie] }
+            { "conteudoPorVer.series": [seriePorVer, ...listaPorVer.conteudoPorVer.series] }
     }
 
     const atualizar = await updateOneDocument(filter, novaLista, defaultCollection)
@@ -51,14 +56,14 @@ export async function adicionarSerieFavorito(conteudo) {
 
     const listaFavoritos = await getListaFavoritosUtilizador(filter)
 
-    const SserieParaAdicionar = {
+    const serieParaAdicionar = {
         tipo: "serie",
         id: conteudo.idSerie
     }
 
     const novaLista = {
         $set:
-            { conteudoFavorito: [...listaFavoritos.conteudoFavorito, SserieParaAdicionar] }
+            { conteudoFavorito: [serieParaAdicionar, ...listaFavoritos.conteudoFavorito] }
     }
 
     const atualizar = await updateOneDocument(filter, novaLista, defaultCollection)
@@ -118,6 +123,46 @@ export async function removerSerieFavorito(conteudo) {
 
     return atualizar
 
+}
+
+export async function adicionarEpisodio(conteudo) {
+
+    const filter = { _id: new ObjectId(conteudo.idUtilizador) }
+
+    const listaPorVer = await getListaPorVerUtilizador(filter)
+
+    const serie = encontrarIdArrayObjetos(listaPorVer.conteudoPorVer.series, conteudo.idSerie)
+
+    serie.episodiosVistos = [...serie.episodiosVistos, conteudo.episodio]
+
+    const novaLista = {
+        $set:
+            { "conteudoPorVer.series": [serie, ...filtrarArrayObjetos(listaPorVer.conteudoVisto.series)] }
+    }
+
+    const atualizar = await updateOneDocument(filter, novaLista, defaultCollection)
+
+    return atualizar
+}
+
+export async function removerEpisodio(conteudo) {
+
+    const filter = { _id: new ObjectId(conteudo.idUtilizador) }
+
+    const listaPorVer = await getListaPorVerUtilizador(filter)
+
+    const serie = encontrarIdArrayObjetos(listaPorVer.conteudoPorVer.series, conteudo.idSerie)
+
+    serie.episodiosVistos = filtrarArray(serie.episodiosVistos, conteudo.episodio)
+
+    const novaLista = {
+        $set:
+            { "conteudoPorVer.series": [serie, ...filtrarArrayObjetos(listaPorVer.conteudoVisto.series)] }
+    }
+
+    const atualizar = await updateOneDocument(filter, novaLista, defaultCollection)
+
+    return atualizar
 }
 
 

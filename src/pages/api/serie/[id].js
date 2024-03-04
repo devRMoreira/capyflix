@@ -1,4 +1,4 @@
-import { adicionarSerieFavorito, adicionarSeriePorVer, adicionarSerieVisto, removerSerieFavorito, removerSeriePorVer, removerSerieVisto } from "@/backend/data/listasUtilizadorSeries"
+import { adicionarEpisodio, adicionarSerieFavorito, adicionarSeriePorVer, adicionarSerieVisto, removerEpisodio, removerSerieFavorito, removerSeriePorVer, removerSerieVisto } from "@/backend/data/listasUtilizadorSeries"
 import { findSerie } from "@/backend/data/serie"
 
 export default async function handler(req, res) {
@@ -46,9 +46,22 @@ export default async function handler(req, res) {
 
         if (req.body.lista === "porVer") {
 
-            const adicionado = await adicionarSeriePorVer(conteudo)
+            if (!req.body.episodio) {
 
-            return res.status(200).json(adicionado)
+                const adicionado = await adicionarSeriePorVer(conteudo)
+
+                return res.status(200).json(adicionado)
+
+            } else {
+
+                conteudo.episodio = req.body.episodio
+
+                const adicionado = await adicionarEpisodio(conteudo)
+
+                return res.status(200).json(adicionado)
+
+            }
+
 
         }
 
@@ -87,9 +100,22 @@ export default async function handler(req, res) {
 
         if (req.body.lista === "porVer") {
 
-            const removido = await removerSeriePorVer(conteudo)
+            if (!req.body.episodio) {
 
-            return res.status(200).json(removido)
+                const adicionado = await removerSeriePorVer(conteudo)
+
+                return res.status(200).json(adicionado)
+
+            } else {
+
+                conteudo.episodio = req.body.episodio
+
+                const adicionado = await removerEpisodio(conteudo)
+
+                return res.status(200).json(adicionado)
+
+            }
+
 
         }
 

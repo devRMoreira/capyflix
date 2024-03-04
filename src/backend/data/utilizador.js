@@ -19,10 +19,7 @@ export async function addUserToCollection(user) {
             filmes: [],
             series: []
         },
-        conteudoFavorito: [{
-            tipo: "",
-            id: ""
-        }],
+        conteudoFavorito: [{}],
         historicoComentarios: [],
         seguidores: [],
         quemSegue: [],
