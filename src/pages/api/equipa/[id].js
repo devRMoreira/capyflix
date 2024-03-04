@@ -1,4 +1,4 @@
-import { findMembroEquipa } from "@/backend/data/equipa"
+import { getMembroEquipa } from "@/backend/data/equipa"
 
 export default async function handler(req, res) {
 
@@ -13,7 +13,7 @@ export default async function handler(req, res) {
             })
         }
 
-        const membro = await findMembroEquipa(id)
+        const membro = await getMembroEquipa(id)
 
         if (membro.mensagem.includes("Sucesso")) {
             return res.status(200).json(membro)

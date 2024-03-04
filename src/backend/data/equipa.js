@@ -3,7 +3,7 @@ import { findOneDocument } from "./mongodb";
 
 const defaultCollection = "equipa"
 
-export async function findMembroEquipa(id) {
+export async function getMembroEquipa(id) {
     const filter = { _id: new ObjectId(id) }
     const membro = await findOneDocument(filter, defaultCollection)
 
