@@ -6,7 +6,8 @@ export function MovieCard({filme}){
             <Image src={filme.capa} width="100" height="100" />
             <h2>{filme.titulo}</h2>
             <h2>{filme.tituloOriginal}</h2>
-            <h3>{filme.genero.map((ele,index) => index < filme.genero.length-1 ? ele + "/" : ele)}</h3>
+            <h3>{filme.genero.map((ele, index) => index < filme.genero.length - 1 ? ele + "/" : ele)}</h3>
+            <h3 className="text-main-white">Data de Lançamento: {moment(filme.dataLancamento).format('DD/MM/YYYY')}</h3>
             <p>{filme.duracao}</p>
             <p>{filme.classificacaoEtaria}</p>
             <p>{filme.mediaAvaliacoes}</p>

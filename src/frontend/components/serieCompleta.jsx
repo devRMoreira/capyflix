@@ -1,3 +1,4 @@
+import moment from "moment";
 import { TemporadaSeries } from "./temporadaSeries";
 
 export function SerieCompleta({serie}){
@@ -7,8 +8,8 @@ export function SerieCompleta({serie}){
             <h2>{serie.titulo}</h2>
             <h2>{serie.tituloOriginal}</h2>
             <h3>{serie.genero}</h3>
-            <h3>{serie.dataLancamento}</h3>
-            <p>{serie.temporadas}</p>
+            <h3>{moment(serie.dataLancamento).format('DD/MM/YYYY')}</h3>
+            {/* <p>{serie.temporadas}</p> */}
             <p>{serie.classificacaoEtaria}</p>
             <p>{serie.mediaAvaliacoes}</p>
             <div>
@@ -18,10 +19,10 @@ export function SerieCompleta({serie}){
                 <p>{serie.elenco.nome}</p>
                 <h4>Realizador</h4>
                 <p>{serie.realizador.nome}</p>
+               {/*  <TemporadaSeries/>
                 <TemporadaSeries/>
                 <TemporadaSeries/>
-                <TemporadaSeries/>
-                <TemporadaSeries/>
+                <TemporadaSeries/> */}
             </div>
         </div>
     )

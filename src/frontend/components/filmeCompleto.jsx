@@ -1,3 +1,4 @@
+import moment from "moment";
 import Image from "next/image";
 
 const filme = {
@@ -51,7 +52,8 @@ export function FilmeCompleto ({filme}) {
               <div className="relative mt-2 ml-4">
                   <h2 className="text-main-white">{filme.titulo}</h2>
                   <h2 className="text-main-white">{filme.tituloOriginal}</h2>
-                  <h3 className="text-main-white">{filme.genero}</h3>
+                  <h3 className="text-main-white">{filme.genero.map((ele,index) => index < filme.genero.length-1 ? ele + "/" : ele)}</h3>
+                  <h3 className="text-main-white">Data de Lançamento: {moment(filme.dataLancamento).format('DD/MM/YYYY')}</h3>
                   <p className="text-main-white">{filme.duracao}</p>
                   <p className="text-main-white">{filme.classificacaoEtaria}</p>
                   <p className="text-main-white">{filme.mediaAvaliacoes}</p>
