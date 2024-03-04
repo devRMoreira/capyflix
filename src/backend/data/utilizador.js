@@ -19,10 +19,7 @@ export async function addUserToCollection(user) {
             filmes: [],
             series: []
         },
-        conteudoFavorito: [{
-            tipo: "",
-            id: ""
-        }],
+        conteudoFavorito: [{}],
         historicoComentarios: [],
         seguidores: [],
         quemSegue: [],
@@ -58,6 +55,37 @@ export async function findEmailInCollection(email) {
 
 
     return await findOneDocument(filter, defaultCollection)
+}
+
+export async function alterarPassword(password) {
+
+    const filter = { _id: new ObjectId(password.idUtilizador) }
+
+    const novaPassword = {
+        $set:
+            { password: password.novaPassword }
+    }
+
+    const atualizar = await updateOneDocument(filter, novaPassword, defaultCollection)
+
+    return atualizar
+}
+
+export async function alterarTipoPerfil(utilizador) {
+
+    const filter = { _id: new ObjectId(utilizador) }
+
+    const privado = await getPrivado(filter)
+
+    const novoStatus = {
+        $set:
+            { privado: !privado.privado }
+    }
+
+    const atualizar = await updateOneDocument(filter, novoStatus, defaultCollection)
+    console.log(atualizar)
+
+    return atualizar
 }
 
 export async function findUserInCollection(id) {
@@ -99,6 +127,14 @@ export async function adicionarComentarioHistoricoUtilizador(comentario) {
 async function getHistoricoComentariosUtilizador(filter) {
 
     const projection = { historicoComentarios: 1, _id: 0 }
+
+    const collection = await getMongoCollection(defaultCollection)
+    return await collection?.findOne(filter, { projection })
+}
+
+async function getPrivado(filter) {
+
+    const projection = { privado: 1, _id: 0 }
 
     const collection = await getMongoCollection(defaultCollection)
     return await collection?.findOne(filter, { projection })

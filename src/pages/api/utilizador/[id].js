@@ -1,4 +1,5 @@
-import { adicionarSeguidor, findUserInCollection, removerSeguidor } from "@/backend/data/utilizador"
+import { adicionarSeguidor, alterarPassword, alterarTipoPerfil, findUserInCollection, removerSeguidor } from "@/backend/data/utilizador"
+import { passwordEncryption } from "@/backend/services/utilizador"
 
 export default async function handler(req, res) {
 
@@ -21,22 +22,49 @@ export default async function handler(req, res) {
             return res.status(403).json(utilizador)
         }
 
+
+
     } else if (req.method === "PATCH") {
 
-        const seguir = {
-            quemSeguir: req.query.id,
-            novoSeguidor: req.body.novoSeguidor
+        if (req.body.novoSeguidor) {
+
+            const seguir = {
+                quemSeguir: req.query.id,
+                novoSeguidor: req.body.novoSeguidor
+            }
+
+            if (seguir.quemSeguir.length !== 24) {
+                return res.status(403).json({
+                    mensagem: "ID inválido."
+                })
+            }
+
+            const seguido = await adicionarSeguidor(seguir)
+
+            return res.status(200).json(seguido)
+
+        } else if (req.body.novaPassword) {
+
+            const novaPassword = {
+                idUtilizador: req.query.id,
+                novaPassword: passwordEncryption(req.body.novaPassword)
+            }
+
+            const alterado = await alterarPassword(novaPassword)
+
+            return res.status(200).json(alterado)
+
+        } else if (req.body.privado) {
+
+            const utilizador = req.query.id
+
+            const alterado = await alterarTipoPerfil(utilizador)
+
+            return res.status(200).json(alterado)
+
+        } else {
+            return res.status(404).json(undefined)
         }
-
-        if (seguir.quemSeguir.length !== 24) {
-            return res.status(403).json({
-                mensagem: "ID inválido."
-            })
-        }
-
-        const seguido = await adicionarSeguidor(seguir)
-
-        return res.status(200).json(seguido)
 
 
 
@@ -55,7 +83,7 @@ export default async function handler(req, res) {
 
         const desseguido = await removerSeguidor(pararSeguir)
 
-        
+
 
         return res.status(200).json(desseguido)
 

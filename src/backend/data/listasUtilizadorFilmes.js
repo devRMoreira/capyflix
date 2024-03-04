@@ -18,7 +18,7 @@ export async function adicionarFilmeVisto(conteudo) {
 
     const novaLista = {
         $set:
-            { "conteudoVisto.filmes": [...listaVisto.conteudoVisto.filmes, filmeParaAdicionar] }
+            { "conteudoVisto.filmes": [filmeParaAdicionar, ...listaVisto.conteudoVisto.filmes,] }
     }
 
     const atualizar = await updateOneDocument(filter, novaLista, defaultCollection)
@@ -35,7 +35,7 @@ export async function adicionarFilmePorVer(conteudo) {
 
     const novaLista = {
         $set:
-            { "conteudoPorVer.filmes": [...listaPorVer.conteudoPorVer.filmes, conteudo.idFilme] }
+            { "conteudoPorVer.filmes": [conteudo.idFilme, ...listaPorVer.conteudoPorVer.filmes] }
     }
 
     const atualizar = await updateOneDocument(filter, novaLista, defaultCollection)
@@ -58,7 +58,7 @@ export async function adicionarFilmeFavorito(conteudo) {
 
     const novaLista = {
         $set:
-            { conteudoFavorito: [...listaFavoritos.conteudoFavorito, filmeParaAdicionar] }
+            { conteudoFavorito: [filmeParaAdicionar, ...listaFavoritos.conteudoFavorito] }
     }
 
     const atualizar = await updateOneDocument(filter, novaLista, defaultCollection)

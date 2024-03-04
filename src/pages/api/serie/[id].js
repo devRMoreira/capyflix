@@ -1,4 +1,4 @@
-import { adicionarSerieFavorito, adicionarSeriePorVer, adicionarSerieVisto, removerSerieFavorito, removerSeriePorVer, removerSerieVisto } from "@/backend/data/listasUtilizadorSeries"
+import { adicionarEpisodio, adicionarSerieFavorito, adicionarSeriePorVer, adicionarSerieVisto, removerEpisodio, removerSerieFavorito, removerSeriePorVer, removerSerieVisto } from "@/backend/data/listasUtilizadorSeries"
 import { findSerie } from "@/backend/data/serie"
 
 export default async function handler(req, res) {
@@ -42,21 +42,34 @@ export default async function handler(req, res) {
 
             return res.status(200).json(adicionado)
 
-        }
+        } else if (req.body.lista === "porVer") {
 
-        if (req.body.lista === "porVer") {
+            if (!req.body.episodio) {
 
-            const adicionado = await adicionarSeriePorVer(conteudo)
+                const adicionado = await adicionarSeriePorVer(conteudo)
 
-            return res.status(200).json(adicionado)
+                return res.status(200).json(adicionado)
 
-        }
+            } else {
 
-        if (req.body.lista === "favorito") {
+                conteudo.episodio = req.body.episodio
+
+                const adicionado = await adicionarEpisodio(conteudo)
+
+                return res.status(200).json(adicionado)
+
+            }
+
+
+        } else if (req.body.lista === "favorito") {
 
             const adicionado = await adicionarSerieFavorito(conteudo)
 
             return res.status(200).json(adicionado)
+
+        } else {
+
+            return res.status(404).json(undefined)
 
         }
 
@@ -83,21 +96,34 @@ export default async function handler(req, res) {
 
             return res.status(200).json(removido)
 
-        }
+        } else if (req.body.lista === "porVer") {
 
-        if (req.body.lista === "porVer") {
+            if (!req.body.episodio) {
 
-            const removido = await removerSeriePorVer(conteudo)
+                const adicionado = await removerSeriePorVer(conteudo)
 
-            return res.status(200).json(removido)
+                return res.status(200).json(adicionado)
 
-        }
+            } else {
 
-        if (req.body.lista === "favorito") {
+                conteudo.episodio = req.body.episodio
+
+                const adicionado = await removerEpisodio(conteudo)
+
+                return res.status(200).json(adicionado)
+
+            }
+
+
+        } else if (req.body.lista === "favorito") {
 
             const removido = await removerSerieFavorito(conteudo)
 
             return res.status(200).json(removido)
+
+        } else {
+
+            return res.status(404).json(undefined)
 
         }
 
