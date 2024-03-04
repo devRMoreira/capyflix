@@ -1,5 +1,6 @@
 import { ObjectId } from "mongodb"
 import { getMongoCollection, updateOneDocument } from "./mongodb"
+import { filtrarArray, filtrarArrayObjetos } from "../services/util"
 
 const defaultCollection = "utilizadores"
 
@@ -66,6 +67,67 @@ export async function adicionarFilmeFavorito(conteudo) {
 
 
 }
+
+export async function removerFilmeVisto(conteudo) {
+
+    const filter = { _id: new ObjectId(conteudo.idUtilizador) }
+
+    const listaVisto = await getListaVistoUtilizador(filter)
+
+    const novaLista = {
+        $set:
+            { "conteudoVisto.filmes": filtrarArrayObjetos(listaVisto.conteudoVisto.filmes, conteudo.idFilme) }
+    }
+
+    const atualizar = await updateOneDocument(filter, novaLista, defaultCollection)
+
+    return atualizar
+
+}
+
+export async function removerFilmePorVer(conteudo) {
+
+    const filter = { _id: new ObjectId(conteudo.idUtilizador) }
+
+    const listaPorVer = await getListaPorVerUtilizador(filter)
+
+    const novaLista = {
+        $set:
+            { "conteudoPorVer.filmes": [...listaPorVer.conteudoPorVer.filmes, conteudo.idFilme] }
+    }
+
+    const atualizar = await updateOneDocument(filter, novaLista, defaultCollection)
+
+    return atualizar
+
+
+}
+
+export async function removerFilmeFavorito(conteudo) {
+
+    const filter = { _id: new ObjectId(conteudo.idUtilizador) }
+
+    const listaFavoritos = await getListaFavoritosUtilizador(filter)
+
+    const filmeParaRemover = {
+        tipo: "filme",
+        id: conteudo.idFilme
+    }
+
+    const novaLista = {
+        $set:
+            { conteudoFavorito: [...listaFavoritos.conteudoFavorito, filmeParaRemover] }
+    }
+
+    const atualizar = await updateOneDocument(filter, novaLista, defaultCollection)
+
+    return atualizar
+
+
+}
+
+
+
 
 async function getListaVistoUtilizador(filter) {
 

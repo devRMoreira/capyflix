@@ -1,5 +1,5 @@
 import { findFilme } from "@/backend/data/filme"
-import { adicionarFilmeFavorito, adicionarFilmePorVer, adicionarFilmeVisto } from "@/backend/data/listasUtilizador"
+import { adicionarFilmeFavorito, adicionarFilmePorVer, adicionarFilmeVisto, removerFilmeFavorito, removerFilmePorVer, removerFilmeVisto } from "@/backend/data/listasUtilizador"
 
 export default async function handler(req, res) {
 
@@ -71,20 +71,35 @@ export default async function handler(req, res) {
             })
         }
 
-        if (req.body.lista === "visto") {
-
-
-
+        const conteudo = {
+            idFilme: req.query.id,
+            idUtilizador: req.body.idUtilizador
         }
 
+
+        if (req.body.lista === "visto") {
+
+            const removido = await removerFilmeVisto(conteudo)
+
+            return res.status(200).json(removido)
+
+        }
 
         if (req.body.lista === "porVer") {
 
+            const removido = await removerFilmePorVer(conteudo)
 
+            return res.status(200).json(removido)
 
         }
 
+        if (req.body.lista === "favorito") {
 
+            const removido = await removerFilmeFavorito(conteudo)
+
+            return res.status(200).json(removido)
+
+        }
 
 
     } else {
