@@ -2,11 +2,19 @@ import { SerieCompleta } from "@/frontend/components/serieCompleta";
 import Image from "next/image";
 
 export default function Serie() {
+<<<<<<< HEAD
 	return (
 		<div>
 			<div><SerieCompleta serie={serie.serie} /></div>
 		</div>
 	)
+=======
+    return (
+        <div>
+            <div><SerieCompleta serie={serie.serie} /></div>
+        </div>
+    )
+>>>>>>> 455c0a865df4b951094bd72e3c0e50f049eb9cea
 }
 
 const serie = {
