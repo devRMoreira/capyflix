@@ -1,8 +1,57 @@
 import { ObjectId } from "mongodb"
-import { getMongoCollection, updateOneDocument } from "./mongodb"
+import { updateOneDocument } from "./mongodb"
 import { encontrarIdArrayObjetos, filtrarArray, filtrarArrayObjetos } from "../services/util"
+import { getListaVistoUtilizador, getListaPorVerUtilizador, getListaFavoritosUtilizador } from "./utilizador"
 
 const defaultCollection = "utilizadores"
+
+export async function adicionarLista(conteudo, lista){
+
+    if(conteudo.episodio) {
+        return await adicionarEpisodio(conteudo)
+    }
+
+    switch (lista) {
+        case "visto":
+            return await adicionarListaVisto(conteudo)
+
+        case "favorito":
+            return await adicionarListaFavoritos(conteudo)
+
+        case "porVer":
+            return await adicionarListaPorVer(conteudo)
+
+        default:
+            return "Inválido"
+    }
+
+
+}
+
+export async function removerLista(conteudo, lista){
+
+    if(conteudo.episodio) {
+        return await removerEpisodio(conteudo)
+    }
+
+    switch (lista) {
+        case "visto":
+            await removerListaVisto(conteudo)
+            break;
+
+        case "favorito":
+            await removerListaFavoritos(conteudo)
+            break;
+
+        case "porVer":
+            return await removerListaPorVer(conteudo)
+
+        default:
+            return "Inválido"
+    }
+
+
+}
 
 export async function adicionarListaVisto(conteudo) {
 
@@ -170,37 +219,35 @@ export async function removerEpisodio(conteudo) {
     return atualizar
 }
 
+export async function getCapas(id) {
 
+    const filter = { _id: new ObjectId(id) }
 
-async function getListaVistoUtilizador(filter) {
+    const lista = await getListaFavoritosUtilizador(filter)
 
-    const projection = {
-        conteudoVisto: 1,
-        _id: 0
+    const capas = []
+
+    for (const ele of listaFavoritos.conteudoFavorito) {
+
+        let capa
+
+        if (ele.tipo === "filme") {
+            capa = await getCapaFilme(ele.id)
+        }
+
+        if (ele.tipo === "serie") {
+            capa = await getCapaSerie(ele.id)
+        }
+
+        if (capa) {
+            capas.push(capa)
+        }
     }
 
-    const collection = await getMongoCollection(defaultCollection)
-    return await collection?.findOne(filter, { projection })
-}
+    console.log(capas)
 
-async function getListaPorVerUtilizador(filter) {
 
-    const projection = {
-        conteudoPorVer: 1,
-        _id: 0
-    }
+    return capas
 
-    const collection = await getMongoCollection(defaultCollection)
-    return await collection?.findOne(filter, { projection })
-}
 
-async function getListaFavoritosUtilizador(filter) {
-
-    const projection = {
-        _id: 0,
-        conteudoFavorito: 1
-    }
-
-    const collection = await getMongoCollection(defaultCollection)
-    return await collection.findOne(filter, { projection })
 }
