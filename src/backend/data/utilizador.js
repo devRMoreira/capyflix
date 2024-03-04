@@ -2,6 +2,8 @@ import { ObjectId } from "mongodb";
 import { findOneDocument, getMongoCollection, insertDocument, replaceDocument, updateOneDocument } from "./mongodb"
 import { filtrarInformacaoPerfil } from "../services/utilizador";
 import { filtrarArray } from "../services/util";
+import { getCapaFilme} from "./filme";
+import { getCapaSerie } from "./serie";
 
 const defaultCollection = "utilizadores"
 
@@ -208,6 +210,50 @@ export async function removerSeguidor(pararSeguir) {
     }
 
     return atualizar
+
+}
+
+export async function getListaFavoritosUtilizador(filter) {
+
+    const projection = {
+        _id: 0,
+        conteudoFavorito: 1
+    }
+
+    const collection = await getMongoCollection(defaultCollection)
+    return await collection.findOne(filter, { projection })
+}
+
+export async function getCapas(id) {
+
+    const filter = { _id: new ObjectId(id) }
+
+    const lista = await getListaFavoritosUtilizador(filter)
+
+    const capas = []
+
+    for (const ele of listaFavoritos.conteudoFavorito) {
+
+        let capa
+
+        if (ele.tipo === "filme") {
+            capa = await getCapaFilme(ele.id)
+        }
+
+        if (ele.tipo === "serie") {
+            capa = await getCapaSerie(ele.id)
+        }
+
+        if (capa) {
+            capas.push(capa)
+        }
+    }
+
+    console.log(capas)
+
+
+    return capas
+
 
 }
 
