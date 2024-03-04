@@ -22,7 +22,7 @@ export function PerfilNav({ avatar, username, comentarios, ligacoes, config }) {
             <img
               src={ligacoes}
               alt="Perfis que o usuário segue e seus seguidores"
-              className="pr-2"
+              className="pr-2 w-8 h-6"
             ></img>
           </a>
           <a href="/">
