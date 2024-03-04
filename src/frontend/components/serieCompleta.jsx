@@ -8,7 +8,7 @@ export function SerieCompleta({ serie }) {
             <h2>{serie.titulo}</h2>
             <h2>{serie.tituloOriginal}</h2>
             <h3>{serie.genero}</h3>
-            <h3>{serie.dataLancamento}</h3>
+            <h3 className="text-main-white">Data de Lançamento: {moment(serie.dataLancamento).format('DD/MM/YYYY')}</h3>
             {serie.temporadas.map((ele, i) => <p> Temporada {i + 1}</p>)}
             
             {serie.temporadas.map((ele, i) => ele.map((ele, i) => <div>
