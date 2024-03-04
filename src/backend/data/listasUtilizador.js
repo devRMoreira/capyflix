@@ -109,20 +109,14 @@ export async function removerFilmeFavorito(conteudo) {
 
     const listaFavoritos = await getListaFavoritosUtilizador(filter)
 
-    const filmeParaRemover = {
-        tipo: "filme",
-        id: conteudo.idFilme
-    }
-
     const novaLista = {
         $set:
-            { conteudoFavorito: [...listaFavoritos.conteudoFavorito, filmeParaRemover] }
+            { conteudoFavorito: filtrarArrayObjetos(listaFavoritos.conteudoFavorito, conteudo.idFilme) }
     }
 
     const atualizar = await updateOneDocument(filter, novaLista, defaultCollection)
 
     return atualizar
-
 
 }
 
