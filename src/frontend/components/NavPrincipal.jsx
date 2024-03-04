@@ -1,6 +1,6 @@
 export function NavPrincipal({ home, pesquisar, perfil }) {
   return (
-    <div className=" max-w-96 mx-auto fixed bottom-0 flex w-full h-12 bg-navbar px-5">
+    <div className=" md:max-w-96 mx-auto fixed bottom-0 flex w-full h-12 bg-navbar px-5">
       <div className=" w-full flex justify-around">
         <div className=" flex items-center">
           <a href="/">
