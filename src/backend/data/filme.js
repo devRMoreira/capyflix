@@ -3,7 +3,7 @@ import { findOneDocument, getMongoCollection, updateOneDocument } from "./mongod
 
 const defaultCollection = "filmes"
 
-export async function findFilme(id) {
+export async function getFilme(id) {
     const filter = { _id: new ObjectId(id) }
     const filme = await findOneDocument(filter, defaultCollection)
 
@@ -43,4 +43,14 @@ async function getComentariosFilme(filter) {
 
     const collection = await getMongoCollection(defaultCollection)
     return await collection?.findOne(filter, { projection })
+}
+
+export async function getCapaFilme(id) {
+    
+    const filter = { _id: new ObjectId(id) }
+    const projection = { capa: 1}
+
+    const collection = await getMongoCollection(defaultCollection)
+    return await collection?.findOne(filter, { projection })
+
 }

@@ -3,7 +3,7 @@ import { findOneDocument, getMongoCollection, updateOneDocument } from "./mongod
 
 const defaultCollection = "series"
 
-export async function findSerie(id) {
+export async function getSerie(id) {
     const filter = { _id: new ObjectId(id) }
     const serie = await findOneDocument(filter, defaultCollection)
 
@@ -43,4 +43,14 @@ async function getComentariosSerie(filter) {
 
     const collection = await getMongoCollection(defaultCollection)
     return await collection?.findOne(filter, { projection })
+}
+
+export async function getCapaSerie(id) {
+
+    const filter = { _id: new ObjectId(id) }
+    const projection = { capa: 1 }
+
+    const collection = await getMongoCollection(defaultCollection)
+    return await collection?.findOne(filter, { projection })
+
 }

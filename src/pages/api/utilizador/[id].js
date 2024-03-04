@@ -1,4 +1,4 @@
-import { adicionarSeguidor, alterarPassword, alterarTipoPerfil, findUserInCollection, removerSeguidor } from "@/backend/data/utilizador"
+import { adicionarSeguidor, alterarPassword, alterarTipoPerfil, findUserInCollection, getCapasFavoritos, getCapasPorVer, getCapasVisto, removerSeguidor } from "@/backend/data/utilizador"
 import { passwordEncryption } from "@/backend/services/utilizador"
 
 export default async function handler(req, res) {
@@ -14,6 +14,26 @@ export default async function handler(req, res) {
             })
         }
 
+        if (req.body.lista === "visto") {
+
+            const listaVisto = await getCapasVisto(id)
+
+            return res.status(200).json(listaVisto)
+
+        } else if (req.body.lista === "porVer") {
+
+            const listaPorVer = await getCapasPorVer(id)
+
+            return res.status(200).json(listaPorVer)
+
+        } else if (req.body.lista === "favorito") {
+
+            const listaFavorito = await getCapasFavoritos(id)
+
+            return res.status(200).json(listaFavorito)
+
+        }
+
         const utilizador = await findUserInCollection(id)
 
         if (utilizador.mensagem.includes("Sucesso")) {
@@ -24,20 +44,7 @@ export default async function handler(req, res) {
 
 
 
-    } else if (req.method === "POST") {
-
-        const id = req.query.id
-
-        if (id.length !== 24) {
-            return res.status(403).json({
-                mensagem: "ID inválido."
-            })
-        }
-
-        
-
-
-    }else if (req.method === "PATCH") {
+    } else if (req.method === "PATCH") {
 
         if (req.body.novoSeguidor) {
 

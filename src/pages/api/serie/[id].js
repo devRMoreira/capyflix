@@ -1,5 +1,5 @@
-import { adicionarEpisodio, adicionarSerieFavorito, adicionarSeriePorVer, adicionarSerieVisto, removerEpisodio, removerSerieFavorito, removerSeriePorVer, removerSerieVisto } from "@/backend/data/listasUtilizadorSeries"
-import { findSerie } from "@/backend/data/serie"
+import { adicionarEpisodio, adicionarListaFavoritos, adicionarListaPorVer, adicionarListaVisto, removerEpisodio, removerListaFavoritos, removerListaPorVer, removerListaVisto } from "@/backend/data/listas"
+import { getSerie } from "@/backend/data/serie"
 
 export default async function handler(req, res) {
 
@@ -14,7 +14,7 @@ export default async function handler(req, res) {
             })
         }
 
-        const serie = await findSerie(id)
+        const serie = await getSerie(id)
 
         if (serie.mensagem.includes("Sucesso")) {
             return res.status(200).json(serie)
@@ -38,7 +38,7 @@ export default async function handler(req, res) {
 
         if (req.body.lista === "visto") {
 
-            const adicionado = await adicionarSerieVisto(conteudo)
+            const adicionado = await adicionarListaVisto(conteudo)
 
             return res.status(200).json(adicionado)
 
@@ -46,7 +46,7 @@ export default async function handler(req, res) {
 
             if (!req.body.episodio) {
 
-                const adicionado = await adicionarSeriePorVer(conteudo)
+                const adicionado = await adicionarListaPorVer(conteudo)
 
                 return res.status(200).json(adicionado)
 
@@ -63,7 +63,7 @@ export default async function handler(req, res) {
 
         } else if (req.body.lista === "favorito") {
 
-            const adicionado = await adicionarSerieFavorito(conteudo)
+            const adicionado = await adicionarListaFavoritos(conteudo)
 
             return res.status(200).json(adicionado)
 
@@ -92,7 +92,7 @@ export default async function handler(req, res) {
 
         if (req.body.lista === "visto") {
 
-            const removido = await removerSerieVisto(conteudo)
+            const removido = await removerListaVisto(conteudo)
 
             return res.status(200).json(removido)
 
@@ -100,7 +100,7 @@ export default async function handler(req, res) {
 
             if (!req.body.episodio) {
 
-                const adicionado = await removerSeriePorVer(conteudo)
+                const adicionado = await removerListaPorVer(conteudo)
 
                 return res.status(200).json(adicionado)
 
@@ -117,7 +117,7 @@ export default async function handler(req, res) {
 
         } else if (req.body.lista === "favorito") {
 
-            const removido = await removerSerieFavorito(conteudo)
+            const removido = await removerListaFavoritos(conteudo)
 
             return res.status(200).json(removido)
 

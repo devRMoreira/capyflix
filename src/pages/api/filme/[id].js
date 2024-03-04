@@ -1,5 +1,5 @@
-import { findFilme } from "@/backend/data/filme"
-import { adicionarFilmeFavorito, adicionarFilmePorVer, adicionarFilmeVisto, removerFilmeFavorito, removerFilmePorVer, removerFilmeVisto } from "@/backend/data/listasUtilizadorFilmes"
+import { getFilme } from "@/backend/data/filme"
+import { adicionarListaFavoritos, adicionarListaPorVer, adicionarListaVisto, removerListaFavoritos, removerListaPorVer, removerListaVisto } from "@/backend/data/listas"
 
 export default async function handler(req, res) {
 
@@ -14,7 +14,7 @@ export default async function handler(req, res) {
             })
         }
 
-        const filme = await findFilme(id)
+        const filme = await getFilme(id)
 
         if (filme.mensagem.includes("Sucesso")) {
             return res.status(200).json(filme)
@@ -38,19 +38,19 @@ export default async function handler(req, res) {
 
         if (req.body.lista === "visto") {
 
-            const adicionado = await adicionarFilmeVisto(conteudo)
+            const adicionado = await adicionarListaVisto(conteudo)
 
             return res.status(200).json(adicionado)
 
         } else if (req.body.lista === "porVer") {
 
-            const adicionado = await adicionarFilmePorVer(conteudo)
+            const adicionado = await adicionarListaPorVer(conteudo)
 
             return res.status(200).json(adicionado)
 
         } else if (req.body.lista === "favorito") {
 
-            const adicionado = await adicionarFilmeFavorito(conteudo)
+            const adicionado = await adicionarListaFavoritos(conteudo)
 
             return res.status(200).json(adicionado)
 
@@ -79,19 +79,19 @@ export default async function handler(req, res) {
 
         if (req.body.lista === "visto") {
 
-            const removido = await removerFilmeVisto(conteudo)
+            const removido = await removerListaVisto(conteudo)
 
             return res.status(200).json(removido)
 
         } else if (req.body.lista === "porVer") {
 
-            const removido = await removerFilmePorVer(conteudo)
+            const removido = await removerListaPorVer(conteudo)
 
             return res.status(200).json(removido)
 
         } else if (req.body.lista === "favorito") {
 
-            const removido = await removerFilmeFavorito(conteudo)
+            const removido = await removerListaFavoritos(conteudo)
 
             return res.status(200).json(removido)
 
