@@ -7,15 +7,10 @@ export function TemporadaSeries({ serie }) {
     return (
         <div>
             <div>
-                <SerieCard/>
+                <SerieCard serie={serie } />
             </div>
             <div>
-                <EpisodioSerie />
-                <EpisodioSerie />
-                <EpisodioSerie />
-                <EpisodioSerie />
-                <EpisodioSerie />
-                <EpisodioSerie />
+               
             </div>
         </div>
     )
