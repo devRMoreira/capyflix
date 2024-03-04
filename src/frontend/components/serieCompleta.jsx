@@ -1,5 +1,4 @@
 import moment from "moment";
-import { TemporadaSeries } from "./temporadaSeries";
 import { EpisodioSerie } from "./episodioSerie";
 
 export function SerieCompleta({ serie }) {
@@ -11,12 +10,8 @@ export function SerieCompleta({ serie }) {
             <h3>{serie.genero}</h3>
             <h3 className="text-main-white">Data de Lançamento: {moment(serie.dataLancamento).format('DD/MM/YYYY')}</h3>
             {serie.temporadas.map((ele, i) => <p> Temporada {i + 1}</p>)}
-            
-            {serie.temporadas.map((ele, i) => ele.map((ele, i) => <EpisodioSerie
-                numero={ i+1}
-                titulo={ele.titulo}
-                sinopse={ele.descricao}
-            />))}
+
+            {serie.temporadas.map((ele, i) => ele.map((ele, i) => <EpisodioSerie numero={i + 1} titulo={ele.titulo} descricao={ele.descricao} />))}
             <p>{serie.classificacaoEtaria}</p>
             <p>{serie.mediaAvaliacoes}</p>
             <div>
@@ -26,7 +21,7 @@ export function SerieCompleta({ serie }) {
                 <p>{serie.elenco.nome}</p>
                 <h4>Realizador</h4>
                 <p>{serie.realizador.nome}</p>
-               {/*  <TemporadaSeries/>
+                {/*  <TemporadaSeries/>
                 <TemporadaSeries/>
                 <TemporadaSeries/>
                 <TemporadaSeries/> */}
