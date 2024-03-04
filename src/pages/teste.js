@@ -3,6 +3,7 @@ import Recomendacoes from "@/frontend/components/Recomendacoes";
 import { FilmeCompleto } from "@/frontend/components/filmeCompleto";
 import { MovieCard } from "@/frontend/components/movieCard";
 import { SerieCard } from "@/frontend/components/serieCard";
+import { NavApp } from "@/frontend/components/NavApp";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -123,10 +124,15 @@ const serie = {
 export default function Home() {
   return (
     <main>
-      <div className=" flex">
+      <div className=" min-h-screen max-w-96 h-full bg-fundo-principal flex flex-col items-center ">
 		<FilmeCompleto filme={filme.filme}/> 
 		{/* <MovieCard filme={filme.filme}/> */}
 		{/* <SerieCard serie={serie.serie}/> */}
+		<NavApp 
+		Homep="/icones/Homep.png"
+		pesquisar="/icones/pesquisar.png"
+		avatar="/icones/avatar.png"
+		/>
       </div>
     </main>
   );
