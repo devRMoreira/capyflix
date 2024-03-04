@@ -5,9 +5,9 @@ import { getListaVistoUtilizador, getListaPorVerUtilizador, getListaFavoritosUti
 
 const defaultCollection = "utilizadores"
 
-export async function adicionarLista(conteudo, lista){
+export async function adicionarLista(conteudo, lista) {
 
-    if(conteudo.episodio) {
+    if (conteudo.episodio) {
         return await adicionarEpisodio(conteudo)
     }
 
@@ -15,10 +15,10 @@ export async function adicionarLista(conteudo, lista){
         case "visto":
             return await adicionarListaVisto(conteudo)
 
-        case "favorito":
+        case "porVer":
             return await adicionarListaFavoritos(conteudo)
 
-        case "porVer":
+        case "favorito":
             return await adicionarListaPorVer(conteudo)
 
         default:
@@ -28,9 +28,9 @@ export async function adicionarLista(conteudo, lista){
 
 }
 
-export async function removerLista(conteudo, lista){
+export async function removerLista(conteudo, lista) {
 
-    if(conteudo.episodio) {
+    if (conteudo.episodio) {
         return await removerEpisodio(conteudo)
     }
 
@@ -219,35 +219,3 @@ export async function removerEpisodio(conteudo) {
     return atualizar
 }
 
-export async function getCapas(id) {
-
-    const filter = { _id: new ObjectId(id) }
-
-    const lista = await getListaFavoritosUtilizador(filter)
-
-    const capas = []
-
-    for (const ele of listaFavoritos.conteudoFavorito) {
-
-        let capa
-
-        if (ele.tipo === "filme") {
-            capa = await getCapaFilme(ele.id)
-        }
-
-        if (ele.tipo === "serie") {
-            capa = await getCapaSerie(ele.id)
-        }
-
-        if (capa) {
-            capas.push(capa)
-        }
-    }
-
-    console.log(capas)
-
-
-    return capas
-
-
-}

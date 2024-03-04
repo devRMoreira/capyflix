@@ -46,12 +46,3 @@ async function getComentariosSerie(filter) {
 }
 
 
-export async function getCapaSerie(id) {
-
-    const filter = { _id: new ObjectId(id) }
-    const projection = { capa: 1 }
-
-    const collection = await getMongoCollection(defaultCollection)
-    return await collection?.findOne(filter, { projection })
-
-}

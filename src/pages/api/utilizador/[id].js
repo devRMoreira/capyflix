@@ -1,5 +1,6 @@
+import { getCapas } from "@/backend/data/capas"
 import { adicionarSeguidor, removerSeguidor } from "@/backend/data/seguidores"
-import { alterarPassword, alterarTipoPerfil, findUserInCollection, getCapasFavoritos, getCapasPorVer, getCapasVisto} from "@/backend/data/utilizador"
+import { alterarPassword, alterarTipoPerfil, findUserInCollection} from "@/backend/data/utilizador"
 import { passwordEncryption } from "@/backend/services/utilizador"
 
 export default async function handler(req, res) {
@@ -15,24 +16,14 @@ export default async function handler(req, res) {
             })
         }
 
-        if (req.body.lista === "visto") {
 
-            const listaVisto = await getCapasVisto(id)
+        if (req.body.lista) {
 
-            return res.status(200).json(listaVisto)
+            const lista = req.body.lista
 
-        } else if (req.body.lista === "porVer") {
+            const listaCapas = await getCapas(id, lista)
 
-            const listaPorVer = await getCapasPorVer(id)
-
-            return res.status(200).json(listaPorVer)
-
-        } else if (req.body.lista === "favorito") {
-
-            const listaFavorito = await getCapasFavoritos(id)
-
-            return res.status(200).json(listaFavorito)
-
+            return res.status(200).json(listaCapas)
         }
 
         const utilizador = await findUserInCollection(id)
