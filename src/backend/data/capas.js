@@ -7,17 +7,16 @@ const colecaoSeries = "series"
 
 export async function getCapas(id, lista) {
 
-    let capas
 
     switch (lista) {
         case "visto":
-            return capas = await getCapasListaVisto(id)
+            return await getCapasListaVisto(id)
 
         case "porVer":
-            return capas = await getCapasListaPorVer(id)
+            return await getCapasListaPorVer(id)
 
         case "favorito":
-            return capas = await getCapasListaFavoritos(id)
+            return await getCapasListaFavoritos(id)
 
         default:
             return "Inválido"
