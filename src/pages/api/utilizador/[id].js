@@ -24,7 +24,20 @@ export default async function handler(req, res) {
 
 
 
-    } else if (req.method === "PATCH") {
+    } else if (req.method === "POST") {
+
+        const id = req.query.id
+
+        if (id.length !== 24) {
+            return res.status(403).json({
+                mensagem: "ID inválido."
+            })
+        }
+
+        
+
+
+    }else if (req.method === "PATCH") {
 
         if (req.body.novoSeguidor) {
 

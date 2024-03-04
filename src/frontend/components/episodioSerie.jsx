@@ -1,11 +1,9 @@
-export function EpisodioSerie ({serie}){
+export function EpisodioSerie(episodio) {
+
     return (
         <div>
-            <p>{serie.temporadas.episodios.numero}</p>
-            <h4>{serie.temporadas.episodios.titulo}</h4>
-            <div>
-               <p>{serie.temporadas.episodios.descricao}</p>
-            </div>
-        </div>
-    )
+            <h3>Episódio {episodio.numero}</h3>
+            <h3>{episodio.titulo}</h3>
+            <p>{episodio.descricao}</p>
+        </div>)
 }
