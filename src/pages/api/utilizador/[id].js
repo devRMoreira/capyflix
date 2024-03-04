@@ -1,4 +1,5 @@
-import { adicionarSeguidor, alterarPassword, alterarTipoPerfil, findUserInCollection, getCapasFavoritos, getCapasPorVer, getCapasVisto, removerSeguidor } from "@/backend/data/utilizador"
+import { adicionarSeguidor, removerSeguidor } from "@/backend/data/seguidores"
+import { alterarPassword, alterarTipoPerfil, findUserInCollection, getCapasFavoritos, getCapasPorVer, getCapasVisto} from "@/backend/data/utilizador"
 import { passwordEncryption } from "@/backend/services/utilizador"
 
 export default async function handler(req, res) {

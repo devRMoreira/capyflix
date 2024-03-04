@@ -45,6 +45,7 @@ async function getComentariosSerie(filter) {
     return await collection?.findOne(filter, { projection })
 }
 
+
 export async function getCapaSerie(id) {
 
     const filter = { _id: new ObjectId(id) }

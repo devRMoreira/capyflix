@@ -1,7 +1,6 @@
 import { ObjectId } from "mongodb"
 import { getMongoCollection, updateOneDocument } from "./mongodb"
 import { encontrarIdArrayObjetos, filtrarArray, filtrarArrayObjetos } from "../services/util"
-import { getListaFavoritosUtilizador } from "./utilizador"
 
 const defaultCollection = "utilizadores"
 
@@ -193,4 +192,15 @@ async function getListaPorVerUtilizador(filter) {
 
     const collection = await getMongoCollection(defaultCollection)
     return await collection?.findOne(filter, { projection })
+}
+
+async function getListaFavoritosUtilizador(filter) {
+
+    const projection = {
+        _id: 0,
+        conteudoFavorito: 1
+    }
+
+    const collection = await getMongoCollection(defaultCollection)
+    return await collection.findOne(filter, { projection })
 }

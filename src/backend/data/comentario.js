@@ -1,6 +1,6 @@
 import { ObjectId } from "mongodb";
 import { findOneDocument, insertDocument } from "./mongodb";
-import { adicionarComentarioHistoricoUtilizador, findEmailInCollection, findUserInCollection } from "./utilizador";
+import { adicionarComentarioHistoricoUtilizador, findUserInCollection } from "./utilizador";
 import { adicionarComentarioFilme } from "./filme";
 import { adicionarComentarioSerie } from "./serie";
 

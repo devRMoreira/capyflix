@@ -1,7 +1,6 @@
 import { ObjectId } from "mongodb";
 import { findOneDocument, getMongoCollection, insertDocument, replaceDocument, updateOneDocument } from "./mongodb"
 import { filtrarInformacaoPerfil } from "../services/utilizador";
-import { filtrarArray } from "../services/util";
 import { getCapaFilme} from "./filme";
 import { getCapaSerie } from "./serie";
 
@@ -54,7 +53,6 @@ export async function updateUserInCollection(filter, registeredUser) {
 export async function findEmailInCollection(email) {
 
     const filter = { email }
-
 
     return await findOneDocument(filter, defaultCollection)
 }
@@ -143,42 +141,7 @@ async function getPrivado(filter) {
 }
 
 
-export async function adicionarSeguidor(seguir) {
-
-    const filterSeguir = { _id: new ObjectId(seguir.quemSeguir) }
-    const filterQuemSegue = { _id: new ObjectId(seguir.novoSeguidor) }
-
-    const seguidores = await getSeguidoresUtilizador(filterSeguir)
-    const quemSegue = await getQuemSegueUtilizador(filterQuemSegue)
-
-    const novoSeguidores = {
-        $set:
-            { seguidores: [...seguidores.seguidores, seguir.novoSeguidor] }
-    }
-
-    const novoQuemSegue = {
-        $set:
-            { quemSegue: [...quemSegue.quemSegue, seguir.quemSeguir] }
-    }
-
-    const atualizar = {
-        atualizarSeguidores: await updateOneDocument(filterSeguir, novoSeguidores, defaultCollection),
-        atualizarQuemSegue: await updateOneDocument(filterQuemSegue, novoQuemSegue, defaultCollection)
-    }
-
-    return atualizar
-
-}
-
-async function getSeguidoresUtilizador(filter) {
-
-    const projection = { seguidores: 1, _id: 0 }
-
-    const collection = await getMongoCollection(defaultCollection)
-    return await collection?.findOne(filter, { projection })
-}
-
-async function getQuemSegueUtilizador(filter) {
+export async function getQuemSegueUtilizador(filter) {
 
     const projection = { quemSegue: 1, _id: 0 }
 
@@ -186,43 +149,16 @@ async function getQuemSegueUtilizador(filter) {
     return await collection?.findOne(filter, { projection })
 }
 
-export async function removerSeguidor(pararSeguir) {
 
-    const filterPararSeguir = { _id: new ObjectId(pararSeguir.quemNaoSeguir) }
-    const filterQuemPara = { _id: new ObjectId(pararSeguir.quemPara) }
+export async function getSeguidoresUtilizador(filter) {
 
-    const seguidores = await getSeguidoresUtilizador(filterPararSeguir)
-    const quemSegue = await getQuemSegueUtilizador(filterQuemPara)
-
-    const novoSeguidores = {
-        $set:
-            { seguidores: filtrarArray(seguidores.seguidores, pararSeguir.quemPara) }
-    }
-
-    const novoQuemSegue = {
-        $set:
-            { quemSegue: filtrarArray(quemSegue.quemSegue, pararSeguir.quemNaoSeguir) }
-    }
-
-    const atualizar = {
-        atualizarSeguidores: await updateOneDocument(filterPararSeguir, novoSeguidores, defaultCollection),
-        atualizarQuemPara: await updateOneDocument(filterQuemPara, novoQuemSegue, defaultCollection)
-    }
-
-    return atualizar
-
-}
-
-export async function getListaFavoritosUtilizador(filter) {
-
-    const projection = {
-        _id: 0,
-        conteudoFavorito: 1
-    }
+    const projection = { seguidores: 1, _id: 0 }
 
     const collection = await getMongoCollection(defaultCollection)
-    return await collection.findOne(filter, { projection })
+    return await collection?.findOne(filter, { projection })
 }
+
+
 
 export async function getCapas(id) {
 
