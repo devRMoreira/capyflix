@@ -153,7 +153,7 @@ export async function removerListaPorVer(conteudo) {
 
     const novaLista = {
         $set:
-            { conteudoPorVer: filtrarArrayObjetos(listaVisto.conteudoVisto, conteudo.idFilme ?? conteudo.idSerie) }
+            { conteudoPorVer: filtrarArrayObjetos(listaPorVer.conteudoPorver, conteudo.idFilme ?? conteudo.idSerie) }
     }
 
     const atualizar = await updateOneDocument(filter, novaLista, defaultCollection)
