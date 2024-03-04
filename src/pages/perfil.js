@@ -100,11 +100,11 @@ export default function Perfil() {
         </div>
       </div>
 
-      <NavPrincipal
+      {/* <NavPrincipal
         home="/icones/Home.png"
         pesquisar="/icones/Search.png"
         perfil="/icones/avatar.png"
-      ></NavPrincipal>
+      ></NavPrincipal> */}
     </div>
   );
 }
