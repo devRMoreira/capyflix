@@ -93,7 +93,7 @@ export async function removerFilmePorVer(conteudo) {
 
     const novaLista = {
         $set:
-            { "conteudoPorVer.filmes": [...listaPorVer.conteudoPorVer.filmes, conteudo.idFilme] }
+            { "conteudoPorVer.filmes": filtrarArray(listaPorVer.conteudoPorVer.filmes, conteudo.idFilme) }
     }
 
     const atualizar = await updateOneDocument(filter, novaLista, defaultCollection)
