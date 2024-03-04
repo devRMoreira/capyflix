@@ -1,8 +1,8 @@
-export function EpisodioSerie({ episodios }) {
+export function EpisodioSerie(episodio) {
     return (
         <div>
-            <h3>{episodios.numero}</h3>
-            <h3>{episodios.titulo}</h3>
-            <p>{episodios.descricao}</p>
+            <h3>{episodio.numero}</h3>
+            <h3>{episodio.titulo}</h3>
+            <p>{episodio.descricao}</p>
         </div>)
 }

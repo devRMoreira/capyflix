@@ -13,7 +13,7 @@ export function SerieCompleta({ serie }) {
             {serie.temporadas.map((ele, i) => <p> Temporada {i + 1}</p>)}
             
             {serie.temporadas.map((ele, i) => ele.map((ele, i) => <EpisodioSerie
-                nEpisodio={ i+1}
+                numero={ i+1}
                 titulo={ele.titulo}
                 sinopse={ele.descricao}
             />))}
