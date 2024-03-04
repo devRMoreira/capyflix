@@ -98,7 +98,7 @@ export async function removerSeriePorVer(conteudo) {
 
     const novaLista = {
         $set:
-            { "conteudoPorVer.series": filtrarArray(listaPorVer.conteudoPorVer.series, conteudo.idSerie) }
+            { "conteudoPorVer.series": filtrarArrayObjetos(listaPorVer.conteudoPorVer.series, conteudo.idSerie) }
     }
 
     const atualizar = await updateOneDocument(filter, novaLista, defaultCollection)
