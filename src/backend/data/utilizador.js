@@ -1,8 +1,6 @@
 import { ObjectId } from "mongodb";
 import { findOneDocument, getMongoCollection, insertDocument, replaceDocument, updateOneDocument } from "./mongodb"
 import { filtrarInformacaoPerfil } from "../services/utilizador";
-import { getCapaFilme } from "./filme";
-import { getCapaSerie } from "./serie";
 
 const defaultCollection = "utilizadores"
 
