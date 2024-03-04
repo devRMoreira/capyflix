@@ -1,5 +1,5 @@
 import { findFilme } from "@/backend/data/filme"
-import { adicionarFilmeFavorito, adicionarFilmePorVer, adicionarFilmeVisto, removerFilmeFavorito, removerFilmePorVer, removerFilmeVisto } from "@/backend/data/listasUtilizador"
+import { adicionarFilmeFavorito, adicionarFilmePorVer, adicionarFilmeVisto, removerFilmeFavorito, removerFilmePorVer, removerFilmeVisto } from "@/backend/data/listasUtilizadorFilmes"
 
 export default async function handler(req, res) {
 
