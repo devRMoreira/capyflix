@@ -52,7 +52,7 @@ export async function adicionarSerieFavorito(conteudo) {
     const listaFavoritos = await getListaFavoritosUtilizador(filter)
 
     const SserieParaAdicionar = {
-        tipo: "Serie",
+        tipo: "serie",
         id: conteudo.idSerie
     }
 
