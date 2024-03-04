@@ -26,28 +26,28 @@ export default function Configuracoes() {
       </button>
       <a
         href="/"
-        className=" flex justify-between items-center mt-10 mx-6 text-main-white border-b border-borda-cinza"
+        className=" flex justify-between mt-10 mx-6 text-main-white border-b border-borda-cinza"
       >
         Alterar Foto de Perfil
         <img src="/icones/avatar.png" className=" mb-6"></img>
       </a>
       <a
         href="/"
-        className=" flex justify-between items-center mt-10 mx-6 text-main-white border-b border-borda-cinza"
+        className=" flex justify-between  mt-10 mx-6 text-main-white border-b border-borda-cinza"
       >
         Alterar senha
         <img src="/icones/key.png" className=" w-7 h-7 mb-6"></img>
       </a>
       <a
         href="/"
-        className=" flex justify-between items-center mt-10 mx-6 text-main-white border-b border-borda-cinza"
+        className=" flex justify-between mt-10 mx-6 text-main-white border-b border-borda-cinza"
       >
         Termos de Utilização
         <img src="/icones/termos.png" className="mb-6"></img>
       </a>
       <a
         href="/"
-        className=" flex justify-between items-center mt-10 mx-6 text-main-white "
+        className=" flex justify-between  mt-10 mx-6 text-main-white "
       >
         Privacidade
         <img src="/icones/privacidade.png" className="mb-3"></img>
