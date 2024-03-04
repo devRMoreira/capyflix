@@ -42,9 +42,7 @@ export default async function handler(req, res) {
 
             return res.status(200).json(adicionado)
 
-        }
-
-        if (req.body.lista === "porVer") {
+        } else if (req.body.lista === "porVer") {
 
             if (!req.body.episodio) {
 
@@ -63,13 +61,15 @@ export default async function handler(req, res) {
             }
 
 
-        }
-
-        if (req.body.lista === "favorito") {
+        } else if (req.body.lista === "favorito") {
 
             const adicionado = await adicionarSerieFavorito(conteudo)
 
             return res.status(200).json(adicionado)
+
+        } else {
+
+            return res.status(404).json(undefined)
 
         }
 
@@ -96,9 +96,7 @@ export default async function handler(req, res) {
 
             return res.status(200).json(removido)
 
-        }
-
-        if (req.body.lista === "porVer") {
+        } else if (req.body.lista === "porVer") {
 
             if (!req.body.episodio) {
 
@@ -117,13 +115,15 @@ export default async function handler(req, res) {
             }
 
 
-        }
-
-        if (req.body.lista === "favorito") {
+        } else if (req.body.lista === "favorito") {
 
             const removido = await removerSerieFavorito(conteudo)
 
             return res.status(200).json(removido)
+
+        } else {
+
+            return res.status(404).json(undefined)
 
         }
 
