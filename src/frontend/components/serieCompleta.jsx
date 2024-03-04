@@ -26,11 +26,7 @@ export function SerieCompleta({ serie }) {
                 <p>{serie.elenco.nome}</p>
                 <h4>Realizador</h4>
                 <p>{serie.realizador.nome}</p>
-<<<<<<< HEAD
                {/*  <TemporadaSeries/>
-=======
-                {/* <TemporadaSeries/>
->>>>>>> f862360568b179dbb5b2715f796e67d766d7f72e
                 <TemporadaSeries/>
                 <TemporadaSeries/>
                 <TemporadaSeries/> */}
