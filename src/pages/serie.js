@@ -4,7 +4,7 @@ import Image from "next/image";
 export default function Serie() {
     return (
         <div>
-            <div><SerieCompleta serie={serie} /></div>
+            <div><SerieCompleta serie={serie.serie} /></div>
         </div>
     )
 }
