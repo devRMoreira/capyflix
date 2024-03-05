@@ -2,9 +2,9 @@ export function EpisodioSerie({nEpisodio, titulo, descricao}) {
 
     return (
         <div className="text-main-white">
-            <p>Episodio: {nEpisodio}</p>
-            <h3>Titulo: {titulo}</h3>
-            <p>Descrição: {descricao}</p>
+          <p>Episodio: {serie.nEpisodio}</p>
+          <h3>Titulo: {serie.titulo}</h3>
+          <p>Descrição: {serie.descricao}</p>
         </div>)
 }
 

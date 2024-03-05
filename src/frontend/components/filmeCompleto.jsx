@@ -127,7 +127,7 @@ export function FilmeCompleto({ filme }) {
         <h4 className="text-main-white mt-4 ml-5 font-semibold">Sinopse</h4>
         <p className="text-main-white mt-3 ml-5">{filme.sinopse}</p>
         <h4 className="text-main-white mt-3 ml-5 font-semibold">Elenco</h4>
-        <p className="text-main-white mt-3 ml-5">{filme.elenco.nome}</p>
+        <p className="text-main-white mt-3 ml-5">{filme.elenco.map((ele,i) => <span>{i < filme.elenco.length -1 ? `${ele.nome} /`:" " + ele.nome} </span>)}</p>
         <h4 className="text-main-white mt-6 ml-5 font-semibold">Realizador</h4>
         <p className="text-main-white mt-3 ml-5">{filme.realizador.nome}</p>
       </div>
