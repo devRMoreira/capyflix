@@ -31,6 +31,9 @@ module.exports = {
         6: "6px",
         8: "8px",
       },
+      fontSize: {
+        "xxs": '0.6rem', // Your custom font size smaller than xs
+      },
     },
   },
   plugins: [],

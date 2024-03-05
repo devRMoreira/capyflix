@@ -6,7 +6,7 @@ export function NavPrincipal({ home, pesquisar, perfil }) {
           <a href="/home">
             <img src="/icones/Home.png" alt="Home" className="  pr-24"></img>
           </a>
-          <a href="/">
+          <a href="/pesquisa">
             <img
               src="/icones/Search.png"
               alt="Pesquisar"
