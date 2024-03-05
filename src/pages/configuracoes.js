@@ -39,14 +39,14 @@ export default function Configuracoes() {
         <img src="/icones/key.png" className=" w-7 h-7 mb-6"></img>
       </a>
       <a
-        href="/"
+        href="/termos"
         className=" flex justify-between mt-10 mx-6 text-main-white border-b border-borda-cinza"
       >
         Termos de Utilização
         <img src="/icones/termos.png" className="mb-6"></img>
       </a>
       <a
-        href="/"
+        href="/privacidade"
         className=" flex justify-between  mt-10 mx-6 text-main-white "
       >
         Privacidade
