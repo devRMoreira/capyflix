@@ -1,12 +1,12 @@
 import { ObjectId } from "mongodb";
-import { findOneDocument, insertDocument } from "./mongodb";
+import { findDocuments, findOneDocument, insertDocument } from "./mongodb";
 import { adicionarComentarioHistoricoUtilizador, findUserInCollection } from "./utilizador";
-import { adicionarComentarioFilme } from "./filme";
-import { adicionarComentarioSerie } from "./serie";
+import { adicionarComentarioFilme, getComentariosFilme } from "./filme";
+import { adicionarComentarioSerie, getComentariosSerie } from "./serie";
 
 const defaultCollection = "comentarios"
 
-export async function findComentario(id) {
+export async function getComentario(id) {
     const filter = { _id: new ObjectId(id) }
     const comentario = await findOneDocument(filter, defaultCollection)
 
@@ -20,6 +20,32 @@ export async function findComentario(id) {
         mensagem: "Sucesso.",
         comentario
     }
+}
+
+export async function getTodosComentarios(conteudo) {
+
+    let filter = { _id: new ObjectId(conteudo.id) }
+    let arrayIdComentarios
+
+    if (conteudo.tipo === "filme") {
+        arrayIdComentarios = await getComentariosFilme(filter)
+
+    } else {
+        arrayIdComentarios = await getComentariosSerie(filter)
+
+
+    }
+    
+    filter = {
+        _id:{
+            $in: arrayIdComentarios.comentarios
+        }        
+    }
+
+    const comentarios = await findDocuments(filter, defaultCollection)
+
+    return comentarios
+
 }
 
 export async function adicionarNovoComentario(comentario) {
