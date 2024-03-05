@@ -18,7 +18,9 @@ const defaultCollection = "utilizadores"
 
 //}
 
-export async function atualizarEstatisticas(utilizador = null) {
+//* se passado um ID a função atualiza as estatisticas do utilizador
+
+export async function atualizarEstatisticasUtilizadores(utilizador = null) {
 
     let filter = {}
     const projection = {
