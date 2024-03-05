@@ -33,9 +33,7 @@ export async function adicionarComentarioSerie(idSerie, idComentario) {
     const atualizar = await updateOneDocument(filter, novoHistorico, defaultCollection)
 
     return atualizar
-
 }
-
 
 async function getComentariosSerie(filter) {
 
@@ -45,36 +43,19 @@ async function getComentariosSerie(filter) {
     return await collection?.findOne(filter, { projection })
 }
 
-
-export async function getDuracaoGeneroSerie(id) {
+export async function getDuracaoGenerosSerie(id) {
 
     const filter = { _id: new ObjectId(id) }
 
-
     const projection = {
         duracao: 1,
-        genero: 1,
+        generos: 1,
         temporadas: 1,
         _id: 0
     }
 
     const collection = await getMongoCollection(defaultCollection)
     return await collection?.findOne(filter, { projection })
-
-}
-
-export async function getGenerosFilmes(arrayIDs){
-
-    const filter = { _id: new ObjectId(id) }
-
-    const projection = {
-        genero: 1,
-        _id: 0
-    }
-
-    const collection = await getMongoCollection(defaultCollection)
-    return await collection?.findOne(filter, { projection })
-
 }
 
 export async function getSerieAleatoria() {
@@ -93,10 +74,6 @@ export async function getSerieAleatoria() {
             }
         ]).toArray()
     }
-
-    console.log("serie")
-    console.log(serie.serie[0])
-
 
     return serie.serie[0]
 }

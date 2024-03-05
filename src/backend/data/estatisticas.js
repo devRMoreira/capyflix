@@ -1,14 +1,13 @@
-import { getDuracaoGeneroFilme } from "./filme";
+import { ObjectId } from "mongodb";
+import { getDuracaoGenerosFilme } from "./filme";
 import { updateOneDocument } from "./mongodb";
-import { getDuracaoGeneroSerie } from "./serie";
-import { getEstatisticasUtilizador } from "./utilizador";
+import { getDuracaoGenerosSerie } from "./serie";
+import { getListaVistoUtilizador, getTodosUtilizadores } from "./utilizador";
 
 const defaultCollection = "utilizadores"
 
 
-// const timer = setTimeout(() => {
-//     someFunction()
-// }, 1000);
+
 
 
 // async function atualizarMediaAvaliacoes() {
@@ -19,152 +18,87 @@ const defaultCollection = "utilizadores"
 
 //}
 
-export async function incrementarEstatisticas(filter, conteudo) {
+export async function atualizarEstatisticas(utilizador = null) {
 
-    const estatisticasUtilizador = await getEstatisticasUtilizador(filter)
+    let filter = {}
+    const projection = {
+        _id: 1,
+        conteudoVisto: 1
+    }
 
-    const duracaoConteudo = conteudo.idFilme ? await getDuracaoGeneroFilme(conteudo.idFilme) : await getDuracaoGeneroSerie(conteudo.idSerie)
+    if (!utilizador) {
 
-    console.log(duracaoConteudo)
-    let novaEstatistica
+        utilizador = await getTodosUtilizadores(filter, projection)
 
-    if (conteudo.idFilme) {
-        novaEstatistica = {
-            $set:
+    } else {
+
+        filter = { _id: new ObjectId(utilizador) }
+
+        const conteudoVisto = await getListaVistoUtilizador(filter)
+
+        utilizador = [{
+            _id: new ObjectId(utilizador),
+            conteudoVisto: conteudoVisto.conteudoVisto
+        }]
+    }
+
+    for (let i = 0; i < utilizador.length; i++) {
+
+        let estatisticas = {
+            filmes:
             {
-                "estatisticas.filmes": incrementar(estatisticasUtilizador.estatisticas.filmes, duracaoConteudo.duracao, duracaoConteudo.genero)
+                quantidade: 0,
+                tempo: 0,
+                generos: []
+            },
+            series: {
+                quantidade: 0,
+                tempo: 0,
+                generos: []
             }
         }
 
-    }
+        for (let j = 0; j < utilizador[i].conteudoVisto.length; j++) {
 
-    if (conteudo.idSerie) {
+            if (utilizador[i].conteudoVisto[j].tipo === "filme") {
+                const duracaoGenero = await getDuracaoGenerosFilme(utilizador[i].conteudoVisto[j].id)
 
-        const episodios = getEpisodiosTotais(duracaoConteudo.temporadas)
-        console.log(episodios)
+                estatisticas.filmes.quantidade += 1
+                estatisticas.filmes.tempo += duracaoGenero.duracao
+                estatisticas.filmes.generos = verificaGeneros(estatisticas.filmes.generos, duracaoGenero.generos)
+            }
 
-        novaEstatistica = {
-            $set:
-            {
-                "estatisticas.series": incrementar(estatisticasUtilizador.estatisticas.series, duracaoConteudo.duracao, duracaoConteudo.genero, episodios)
+            if (utilizador[i].conteudoVisto[j].tipo === "serie") {
+                const duracaoGenero = await getDuracaoGenerosSerie(utilizador[i].conteudoVisto[j].id)
 
+                estatisticas.series.quantidade += 1
+                estatisticas.series.tempo += getEpisodiosTotais(duracaoGenero.temporadas) * duracaoGenero.duracao
+                estatisticas.series.generos = verificaGeneros(estatisticas.series.generos, duracaoGenero.generos)
             }
         }
 
-    }
-
-    const atualizar = await updateOneDocument(filter, novaEstatistica, defaultCollection)
-
-    return atualizar
-
-}
-
-function incrementar(utilizador, duracao, generos, episodios = 0) {
-
-    if (episodios != 0) {
-
-        const atualizarSeries = {
-            quantidade: utilizador.quantidade + 1,
-            tempo: utilizador.tempo + (duracao * episodios),
-            generos: verificaGenerosAdicionar(utilizador, generos)
-        }
-
-        return atualizarSeries
-
-    }
-
-    const atualizarFilmes = {
-        quantidade: utilizador.quantidade + 1,
-        tempo: utilizador.tempo + duracao,
-        generos: verificaGenerosAdicionar(utilizador, generos)
-    }
-
-    return atualizarFilmes
-
-}
-
-export async function decrementarEstatisticas(filter, conteudo) {
-
-    const estatisticasUtilizador = await getEstatisticasUtilizador(filter)
-
-    const duracaoConteudo = conteudo.idFilme ? await getDuracaoGeneroFilme(conteudo.idFilme) : await getDuracaoGeneroSerie(conteudo.idSerie)
-
-    let novaEstatistica
-
-    if (conteudo.idFilme) {
-        novaEstatistica = {
-            $set:
-            {
-                "estatisticas.filmes": decrementar(estatisticasUtilizador.estatisticas.filmes, duracaoConteudo.duracao, duracaoConteudo.genero)
+        let novaEstatistica = {
+            $set: {
+                estatisticas: estatisticas
             }
         }
 
+        filter = { _id: new ObjectId(utilizador[i]._id) }
+
+        await updateOneDocument(filter, novaEstatistica, defaultCollection)
     }
-
-    if (conteudo.idSerie) {
-
-        const episodios = getEpisodiosTotais(duracaoConteudo.temporadas)
-
-        novaEstatistica = {
-            $set:
-            {
-                "estatisticas.series": decrementar(estatisticasUtilizador.estatisticas.series, duracaoConteudo.duracao, duracaoConteudo.genero, episodios)
-
-            }
-        }
-
-    }
-
-    const atualizar = await updateOneDocument(filter, novaEstatistica, defaultCollection)
-
-    return atualizar
-
 }
 
-function decrementar(utilizador, duracao, generos, episodios = 0) {
-
-    if (episodios != 0) {
-
-        const atualizarSeries = {
-            quantidade: utilizador.quantidade - 1,
-            tempo: utilizador.tempo - (duracao * episodios),
-            generos: utilizador.generos
-        }
-
-        return atualizarSeries
-
-    }
-
-    const atualizarFilmes = {
-        quantidade: utilizador.quantidade - 1,
-        tempo: utilizador.tempo - duracao,
-        generos: utilizador.generos
-    }
-
-    return atualizarFilmes
-
-}
-
-function verificaGenerosAdicionar(utilizador, generos) {
-
+function verificaGeneros(generosUtilizador, generos) {
 
     for (let i = 0; i < generos.length; i++) {
-        if (!utilizador.generos.includes(generos[i])) {
-            utilizador.generos.push(generos[i])
+
+        if (!generosUtilizador.includes(generos[i])) {
+            generosUtilizador.push(generos[i])
         }
     }
 
-    return utilizador.generos
-
-}
-
-function verificaGenerosRemover(utilizador, generos) {
-
-
-
-
-    return
-
+    return generosUtilizador
 }
 
 function getEpisodiosTotais(temporadas) {
@@ -176,10 +110,7 @@ function getEpisodiosTotais(temporadas) {
         for (let j = 0; j < temporadas[i].length; j++) {
             nEpisodios++
         }
-
-
     }
 
     return nEpisodios
 }
-

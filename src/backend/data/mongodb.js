@@ -26,21 +26,18 @@ export async function insertDocument(document, collectionName, dbName = DEFAULT_
     const client = await connectToMongo()
     const database = await client.db(dbName)
     return await database.collection(collectionName).insertOne(document)
-
 }
 
 export async function replaceDocument(filter, document, collectionName, dbName = DEFAULT_DB_NAME) {
     const client = await connectToMongo()
     const database = await client.db(dbName)
     return await database.collection(collectionName).replaceOne(filter, document)
-
 }
 
 export async function updateOneDocument(filter, update, collectionName, dbName = DEFAULT_DB_NAME) {
     const client = await connectToMongo()
     const database = await client.db(dbName)
     return await database.collection(collectionName).updateOne(filter, update)
-
 }
 
 export async function findOneDocument(filter, collectionName) {
@@ -52,4 +49,3 @@ export async function findDocuments(filter, collectionName) {
     const collection = await getMongoCollection(collectionName)
     return await collection?.find(filter).toArray()
 }
-

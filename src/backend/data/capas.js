@@ -7,7 +7,6 @@ const colecaoSeries = "series"
 
 export async function getCapas(id, lista) {
 
-
     switch (lista) {
         case "visto":
             return await getCapasListaVisto(id)
@@ -50,6 +49,7 @@ async function getCapasListaVisto(id) {
 
     return capas
 }
+
 async function getCapasListaPorVer(id) {
 
     const filter = { _id: new ObjectId(id) }
@@ -77,6 +77,7 @@ async function getCapasListaPorVer(id) {
 
     return capas
 }
+
 async function getCapasListaFavoritos(id) {
 
     const filter = { _id: new ObjectId(id) }
@@ -105,12 +106,10 @@ async function getCapasListaFavoritos(id) {
     return capas
 }
 
-
 async function getCapaSerie(id) {
 
     const filter = { _id: new ObjectId(id) }
     const projection = { capa: 1 }
-
 
     const collection = await getMongoCollection(colecaoSeries)
     return await collection?.findOne(filter, { projection })
@@ -126,4 +125,3 @@ async function getCapaFilme(id) {
     return await collection?.findOne(filter, { projection })
 
 }
-
