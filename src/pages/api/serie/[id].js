@@ -1,10 +1,17 @@
 import { adicionarLista, removerLista } from "@/backend/data/listas"
-import { getSerie } from "@/backend/data/serie"
+import { getSerie, getSerieAleatoria } from "@/backend/data/serie"
 
 export default async function handler(req, res) {
 
     if (req.method === "GET") {
 
+
+        if(req.query.id === "random"){
+
+            const serie = await getSerieAleatoria()
+
+            return res.status(200).json(serie)
+        }
 
         const id = req.query.id
 

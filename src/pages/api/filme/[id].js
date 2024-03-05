@@ -1,9 +1,16 @@
 import { adicionarLista, removerLista } from "@/backend/data/listas"
-import { getFilme } from "@/backend/data/filme"
+import { getFilme, getFilmeAleatorio } from "@/backend/data/filme"
 
 export default async function handler(req, res) {
 
     if (req.method === "GET") {
+
+        if(req.query.id === "random"){
+
+            const filme = await getFilmeAleatorio()
+
+            return res.status(200).json(filme)
+        }
 
 
         const id = req.query.id

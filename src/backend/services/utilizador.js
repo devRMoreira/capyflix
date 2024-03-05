@@ -22,7 +22,3 @@ export function filtrarInformacaoPerfil(utilizador) {
 
     return utilizadorFiltrado
 }
-
-
-
-

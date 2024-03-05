@@ -1,7 +1,7 @@
 import { ObjectId } from "mongodb"
 import { updateOneDocument } from "./mongodb"
 import { encontrarIdArrayObjetos, filtrarArray, filtrarArrayObjetos } from "../services/util"
-import { getListaVistoUtilizador, getListaPorVerUtilizador, getListaFavoritosUtilizador } from "./utilizador"
+import { getListaVistoUtilizador, getListaPorVerUtilizador, getListaFavoritosUtilizador, getEstatisticasUtilizador } from "./utilizador"
 
 const defaultCollection = "utilizadores"
 
@@ -24,8 +24,6 @@ export async function adicionarLista(conteudo, lista) {
         default:
             return "Inválido"
     }
-
-
 }
 
 export async function removerLista(conteudo, lista) {
@@ -49,8 +47,6 @@ export async function removerLista(conteudo, lista) {
         default:
             return "Inválido"
     }
-
-
 }
 
 export async function adicionarListaVisto(conteudo) {
@@ -73,17 +69,13 @@ export async function adicionarListaVisto(conteudo) {
     const atualizar = await updateOneDocument(filter, novaLista, defaultCollection)
 
     return atualizar
-
 }
 
 export async function adicionarListaPorVer(conteudo) {
 
-
-
     const filter = { _id: new ObjectId(conteudo.idUtilizador) }
 
     const listaPorVer = await getListaPorVerUtilizador(filter)
-
 
     const conteudoParaAdicionar = {
         tipo: conteudo.idFilme ? "filme" : "serie",
@@ -110,7 +102,6 @@ export async function adicionarListaFavoritos(conteudo) {
 
     const listaFavoritos = await getListaFavoritosUtilizador(filter)
 
-
     const conteudoParaAdicionar = {
         tipo: conteudo.idFilme ? "filme" : "serie",
         id: conteudo.idFilme ?? conteudo.idSerie
@@ -124,8 +115,6 @@ export async function adicionarListaFavoritos(conteudo) {
     const atualizar = await updateOneDocument(filter, novaLista, defaultCollection)
 
     return atualizar
-
-
 }
 
 export async function removerListaVisto(conteudo) {
@@ -142,7 +131,6 @@ export async function removerListaVisto(conteudo) {
     const atualizar = await updateOneDocument(filter, novaLista, defaultCollection)
 
     return atualizar
-
 }
 
 export async function removerListaPorVer(conteudo) {
@@ -175,7 +163,6 @@ export async function removerListaFavoritos(conteudo) {
     const atualizar = await updateOneDocument(filter, novaLista, defaultCollection)
 
     return atualizar
-
 }
 
 export async function adicionarEpisodio(conteudo) {
@@ -218,4 +205,3 @@ export async function removerEpisodio(conteudo) {
 
     return atualizar
 }
-

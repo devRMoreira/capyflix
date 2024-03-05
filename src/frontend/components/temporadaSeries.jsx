@@ -6,12 +6,7 @@ import { SerieCard } from "./serieCard";
 export function TemporadaSeries({ serie }) {
     return (
         <div>
-            <div>
-                <SerieCard serie={serie } />
-            </div>
-            <div>
-               
-            </div>
+            <EpisodioSerie episodio={ (nEpisodio, titulo, descricao) } />
         </div>
     )
 }
