@@ -34,7 +34,8 @@ export default async function handler(req, res) {
 
         const conteudo = {
             idSerie: req.query.id,
-            idUtilizador: req.body.idUtilizador
+            idUtilizador: req.body.idUtilizador,
+            episodio: req.body.episodio??null
         }
 
         const adicionado = await adicionarLista(conteudo, lista)
@@ -56,7 +57,8 @@ export default async function handler(req, res) {
 
         const conteudo = {
             idSerie: req.query.id,
-            idUtilizador: req.body.idUtilizador
+            idUtilizador: req.body.idUtilizador,
+            episodio: req.body.episodio??null
         }
 
         const removido = await removerLista(conteudo, lista)
