@@ -7,8 +7,12 @@ const nextConfig = {
         protocol: "https",
         hostname: "**",
       },
+
     ],
-  }
+  },
+  experimental: {
+    instrumentationHook: true,
+  },
 };
 
 export default nextConfig;

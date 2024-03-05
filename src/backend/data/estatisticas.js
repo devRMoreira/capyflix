@@ -7,9 +7,7 @@ import { getListaVistoUtilizador, getTodosUtilizadores } from "./utilizador";
 const defaultCollection = "utilizadores"
 
 
-// const timer = setTimeout(() => {
-//     someFunction()
-// }, 1000);
+
 
 
 // async function atualizarMediaAvaliacoes() {
