@@ -1,6 +1,6 @@
 import { ObjectId } from "mongodb";
 import { findDocuments, findOneDocument, getMongoCollection, insertDocument } from "./mongodb";
-import { adicionarComentarioHistoricoUtilizador, findUserInCollection } from "./utilizador";
+import { adicionarComentarioHistoricoUtilizador, findUserInCollection, getUserAvatar } from "./utilizador";
 import { adicionarComentarioFilme, getComentariosFilme } from "./filme";
 import { adicionarComentarioSerie, getComentariosSerie } from "./serie";
 
@@ -44,7 +44,9 @@ export async function getTodosComentarios(conteudo) {
 
     const comentarios = await findDocuments(filter, defaultCollection)
 
-    return comentarios
+    const comentariosComImagem = await adicionarImagemPerfil(comentarios)
+
+    return comentariosComImagem
 
 }
 
@@ -103,6 +105,19 @@ export async function getTodasAvaliacoes(arrayIdComentarios) {
 
     const collection = await getMongoCollection(defaultCollection)
     return await collection?.find(filter, { projection }).toArray()
+}
+
+async function adicionarImagemPerfil(comentarios) {
+
+    let atualizar = []
+
+    for (let i = 0; i < comentarios.length; i++) {
+
+        const imagemPerfil = await getUserAvatar(comentarios[i].utilizador)
+        atualizar.push({ ...comentarios[i], imagemPerfil: imagemPerfil.imagemPerfil })
+    }
+
+    return atualizar
 }
 
 // * Modelo novo comentário
