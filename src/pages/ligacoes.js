@@ -13,7 +13,7 @@ export default function Ligacoes() {
   };
 
   return (
-    <div className="flex flex-col max-w-96 min-h-screen h-full bg-fundo-principal">
+    <div className="flex flex-col md:max-w-96 min-h-screen h-full bg-fundo-principal">
       <a href="/perfil">
         <img src="/icones/Back.png" className=" ml-4 mt-10"></img>
       </a>
