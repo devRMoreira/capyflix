@@ -45,7 +45,7 @@ async function getComentariosFilme(filter) {
     return await collection?.findOne(filter, { projection })
 }
 
-export async function getDuracaoFilme(id) {
+export async function getDuracaoGeneroFilme(id) {
 
     const filter = { _id: new ObjectId(id) }
 
@@ -59,4 +59,42 @@ export async function getDuracaoFilme(id) {
     const collection = await getMongoCollection(defaultCollection)
     return await collection?.findOne(filter, { projection })
 
+}
+
+export async function getGenerosFilmes(arrayIDs) {
+
+    const filter = { _id: new ObjectId(id) }
+
+    const projection = {
+        genero: 1,
+        _id: 0
+    }
+
+    const collection = await getMongoCollection(defaultCollection)
+    return await collection?.findOne(filter, { projection })
+
+}
+
+export async function getFilmeAleatorio() {
+
+    const collection = await getMongoCollection(defaultCollection)
+    const filme = {
+        filme: await collection?.aggregate([
+            {
+                $project: {
+                    _id: 1,
+                    capa: 1
+                }
+            },
+            {
+                $sample: { size: 1 }
+            }
+        ]).toArray()
+    }
+
+    console.log("filme")
+    console.log(filme.filme[0])
+
+
+    return filme.filme[0]
 }
