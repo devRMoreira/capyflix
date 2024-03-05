@@ -4,6 +4,7 @@ import { findOneDocument, getMongoCollection, updateOneDocument } from "./mongod
 const defaultCollection = "filmes"
 
 export async function getFilme(id) {
+
     const filter = { _id: new ObjectId(id) }
     const filme = await findOneDocument(filter, defaultCollection)
 
@@ -33,7 +34,6 @@ export async function adicionarComentarioFilme(idFilme, idComentario) {
     const atualizar = await updateOneDocument(filter, novoHistorico, defaultCollection)
 
     return atualizar
-
 }
 
 
@@ -49,7 +49,6 @@ export async function getDuracaoGenerosFilme(id) {
 
     const filter = { _id: new ObjectId(id) }
 
-
     const projection = {
         duracao: 1,
         generos: 1,
@@ -58,7 +57,6 @@ export async function getDuracaoGenerosFilme(id) {
 
     const collection = await getMongoCollection(defaultCollection)
     return await collection?.findOne(filter, { projection })
-
 }
 
 export async function getFilmeAleatorio() {

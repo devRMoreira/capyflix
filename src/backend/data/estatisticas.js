@@ -116,4 +116,3 @@ function getEpisodiosTotais(temporadas) {
 
     return nEpisodios
 }
-

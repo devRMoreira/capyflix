@@ -24,7 +24,6 @@ export async function removerSeguidor(pararSeguir) {
     }
 
     return atualizar
-
 }
 
 export async function adicionarSeguidor(seguir) {
@@ -51,5 +50,4 @@ export async function adicionarSeguidor(seguir) {
     }
 
     return atualizar
-
 }

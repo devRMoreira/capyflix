@@ -40,16 +40,15 @@ export async function adicionarNovoComentario(comentario) {
             idUtilizador: comentarioParaAdicionar.utilizador
         }
 
-
-        const historicoUtilizador = await adicionarComentarioHistoricoUtilizador(adicionarHistorico)
+        await adicionarComentarioHistoricoUtilizador(adicionarHistorico)
 
         if (comentario.tipo === "filme") {
 
-            const historicoFilme = await adicionarComentarioFilme(comentario.idConteudo, comentarioAdicionado.insertedId)
+            await adicionarComentarioFilme(comentario.idConteudo, comentarioAdicionado.insertedId)
 
         } else {
 
-            const historicoSerie = await adicionarComentarioSerie(comentario.idConteudo, comentarioAdicionado.insertedId)
+            await adicionarComentarioSerie(comentario.idConteudo, comentarioAdicionado.insertedId)
 
         }
 
@@ -59,14 +58,12 @@ export async function adicionarNovoComentario(comentario) {
         }
 
     } else {
+
         return {
             mensagem: "Pedido inválido."
         }
     }
 }
-
-
-
 
 // * Modelo novo comentário
 // {

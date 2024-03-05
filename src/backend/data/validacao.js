@@ -8,14 +8,12 @@ export async function signupValidation(user) {
         }
     }
 
-
     const addedUser = await addUserToCollection(user)
 
     return {
         mensagem: "Utilizador criado com sucesso!",
         id: addedUser.insertedId
     }
-
 }
 
 export async function loginValidation(user) {
