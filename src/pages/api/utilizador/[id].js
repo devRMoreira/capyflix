@@ -1,14 +1,15 @@
 import { getCapas } from "@/backend/data/capas"
+import { atualizarEstatisticas } from "@/backend/data/estatisticas"
 import { adicionarSeguidor, removerSeguidor } from "@/backend/data/seguidores"
-import { alterarPassword, alterarTipoPerfil, findUserInCollection} from "@/backend/data/utilizador"
+import { alterarPassword, alterarTipoPerfil, findUserInCollection } from "@/backend/data/utilizador"
 import { passwordEncryption } from "@/backend/services/utilizador"
 
 export default async function handler(req, res) {
 
     if (req.method === "GET") {
 
-
         const id = req.query.id
+        await atualizarEstatisticas(id)
 
         if (id.length !== 24) {
             return res.status(403).json({

@@ -81,7 +81,6 @@ export async function alterarTipoPerfil(utilizador) {
     }
 
     const atualizar = await updateOneDocument(filter, novoStatus, defaultCollection)
-    console.log(atualizar)
 
     return atualizar
 }
@@ -201,6 +200,10 @@ export async function getEstatisticasUtilizador(filter) {
 
 }
 
+export async function getTodosUtilizadores(filter, projection) {
+    const collection = await getMongoCollection(defaultCollection)
+    return await collection?.find(filter, { projection }).toArray()
+}
 
 
 //* Modelo adicionar user
