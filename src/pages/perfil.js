@@ -32,7 +32,7 @@ const filme = {
   capa: "https://upload.wikimedia.org/wikipedia/pt/d/dd/The_Secret_Life_of_Walter_Mitty.jpg",
   trailer: "https://www.youtube.com/watch?v=QD6cy4PBQPI",
   duracao: 114,
-  mediaAvaliacoes: 0,
+  mediaAvaliacoes: 1,
   dataLancamento: 1380927600000,
   visualizacoes: 0,
   comentarios: [],
@@ -45,7 +45,7 @@ export default function Perfil() {
         avatar="/icones/avatar.png"
         username="Carolina"
         comentarios="/icones/comentarios.png"
-        ligacoes="/icones/ligacoes.png"
+        ligacoes="/icones/followers.png"
         config="/icones/configuracoes.png"
       ></PerfilNav>
       <div className=" ml-4 mr-4">

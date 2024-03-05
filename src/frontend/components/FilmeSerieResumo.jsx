@@ -15,6 +15,10 @@ export function FilmeSerieResumo({ filme }) {
 
         <div>{filme.duracao}m</div>
         <div>{filme.classificacaoEtaria}</div>
+        {filme.mediaAvaliacoes && <div>{filme.mediaAvaliacoes} /10</div>}
+        {filme.temporadas && Object.keys(filme.temporadas).length && (
+          <div>{"Temporadas:" + Object.keys(filme.temporadas).length}</div>
+        )}
       </div>
     </div>
   );
