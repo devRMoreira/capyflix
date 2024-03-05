@@ -1,12 +1,12 @@
-import Link from 'next/link';
-
 
 export default function PesquisarConteudo({filme, serie}){
    return (
     <div className="min-h-screen md:max-w-96 h-full bg-fundo-principal flex flex-col ">
     <div className="border border-laranja-principal rounded-2xl mt-5 mx-1 h-13 flex items-center">
       <button className="mr-2 focus:outline-none">
+        <a href="/">
         <img src="/icones/Back.svg" alt="Back Arrow" width="50" height="50" />
+        </a>
       </button>
       <input
           className="bg-transparent border-none focus:outline-none text-main-white font-semibold text-xl text-start w-full px-3 py-2"
