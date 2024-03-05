@@ -17,8 +17,9 @@ export default async function handler(req, res) {
                 console.log("\nA atualizar estatisticas filmes e séries")
                 await atualizarEstatisticasConteudo()                
                 console.log("\nAtualizado - ", moment().format("HH:mm.ss"))
-                
-            }, 10000)
+                console.log("\nAtualização completa")
+
+            }, 15000)
 
         }
         timer()
