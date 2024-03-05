@@ -46,3 +46,19 @@ async function getComentariosSerie(filter) {
 }
 
 
+export async function getDuracaoSerie(id) {
+
+    const filter = { _id: new ObjectId(id) }
+
+
+    const projection = {
+        duracao: 1,
+        genero: 1,
+        temporadas: 1,
+        _id: 0
+    }
+
+    const collection = await getMongoCollection(defaultCollection)
+    return await collection?.findOne(filter, { projection })
+
+}

@@ -189,6 +189,17 @@ export async function getListaFavoritosUtilizador(filter) {
     return await collection.findOne(filter, { projection })
 }
 
+export async function getEstatisticasUtilizador(filter) {
+
+    const projection = {
+        estatisticas: 1,
+        _id: 0
+    }
+
+    const collection = await getMongoCollection(defaultCollection)
+    return await collection?.findOne(filter, { projection })
+
+}
 
 
 

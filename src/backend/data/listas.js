@@ -1,7 +1,8 @@
 import { ObjectId } from "mongodb"
 import { updateOneDocument } from "./mongodb"
 import { encontrarIdArrayObjetos, filtrarArray, filtrarArrayObjetos } from "../services/util"
-import { getListaVistoUtilizador, getListaPorVerUtilizador, getListaFavoritosUtilizador } from "./utilizador"
+import { getListaVistoUtilizador, getListaPorVerUtilizador, getListaFavoritosUtilizador, getEstatisticasUtilizador } from "./utilizador"
+import { incrementarEstatisticas } from "./estatisticas"
 
 const defaultCollection = "utilizadores"
 
@@ -58,6 +59,8 @@ export async function adicionarListaVisto(conteudo) {
     const filter = { _id: new ObjectId(conteudo.idUtilizador) }
 
     const listaVisto = await getListaVistoUtilizador(filter)
+
+    await incrementarEstatisticas(filter, conteudo)
 
     const conteudoParaAdicionar = {
         tipo: conteudo.idFilme ? "filme" : "serie",
