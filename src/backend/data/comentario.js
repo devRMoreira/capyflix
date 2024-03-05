@@ -1,5 +1,5 @@
 import { ObjectId } from "mongodb";
-import { findDocuments, findOneDocument, insertDocument } from "./mongodb";
+import { findDocuments, findOneDocument, getMongoCollection, insertDocument } from "./mongodb";
 import { adicionarComentarioHistoricoUtilizador, findUserInCollection } from "./utilizador";
 import { adicionarComentarioFilme, getComentariosFilme } from "./filme";
 import { adicionarComentarioSerie, getComentariosSerie } from "./serie";
@@ -35,11 +35,11 @@ export async function getTodosComentarios(conteudo) {
 
 
     }
-    
+
     filter = {
-        _id:{
+        _id: {
             $in: arrayIdComentarios.comentarios
-        }        
+        }
     }
 
     const comentarios = await findDocuments(filter, defaultCollection)
@@ -89,6 +89,20 @@ export async function adicionarNovoComentario(comentario) {
             mensagem: "Pedido inválido."
         }
     }
+}
+
+export async function getTodasAvaliacoes(arrayIdComentarios) {
+
+    let filter = {
+        _id: {
+            $in: arrayIdComentarios
+        }
+    }
+
+    const projection = { avaliacao: 1, _id: 0 }
+
+    const collection = await getMongoCollection(defaultCollection)
+    return await collection?.find(filter, { projection }).toArray()
 }
 
 // * Modelo novo comentário
