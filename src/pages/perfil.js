@@ -111,7 +111,7 @@ const serie = {
 
 export default function Perfil() {
   return (
-    <div className=" min-h-screen max-w-96 h-full bg-fundo-principal flex flex-col">
+    <div className=" min-h-screen md:max-w-96 h-full bg-fundo-principal flex flex-col">
       <PerfilNav
         avatar="/icones/avatar.png"
         username="Carolina"
@@ -160,7 +160,7 @@ export default function Perfil() {
         <h1 className=" mb-6 text-lg mt-6 font-semibold text-main-white">
           Favoritos
         </h1>
-        <div className=" flex gap-10">
+        <div className=" flex justify-center gap-10">
           {filme ? (
             <a href="/filme">
               <img className=" w-36" src={filme.capa}></img>

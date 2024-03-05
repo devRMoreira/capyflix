@@ -1,9 +1,21 @@
 import { NavPrincipal } from "@/frontend/components/NavPrincipal";
+import { useRouter } from 'next/router';
 import "@/styles/globals.css";
 
 export default function App({ Component, pageProps }) {
-  return <div>
-    <Component {...pageProps} />
-    <NavPrincipal />
-  </div>
+
+  const router = useRouter()
+  const { asPath, route, pathname } = router
+
+  if (asPath === "/login" || asPath === "/registar") {
+    return <div>
+      <Component {...pageProps} />
+    </div>
+  } else {
+
+    return <div>
+      <Component {...pageProps} />
+      <NavPrincipal />
+    </div>
+  }
 }
