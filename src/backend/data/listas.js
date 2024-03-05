@@ -15,10 +15,10 @@ export async function adicionarLista(conteudo, lista) {
         case "visto":
             return await adicionarListaVisto(conteudo)
 
-        case "porVer":
+        case "favorito":
             return await adicionarListaFavoritos(conteudo)
 
-        case "favorito":
+        case "porVer":
             return await adicionarListaPorVer(conteudo)
 
         default:
