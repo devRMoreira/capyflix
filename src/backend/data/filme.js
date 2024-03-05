@@ -28,7 +28,7 @@ export async function adicionarComentarioFilme(idFilme, idComentario) {
 
     const novoHistorico = {
         $set:
-            { comentarios: [...filme.comentarios, idComentario] }
+            { comentarios: [idComentario, ...filme.comentarios] }
     }
 
     const atualizar = await updateOneDocument(filter, novoHistorico, defaultCollection)
@@ -37,7 +37,7 @@ export async function adicionarComentarioFilme(idFilme, idComentario) {
 }
 
 
-async function getComentariosFilme(filter) {
+export async function getComentariosFilme(filter) {
 
     const projection = { comentarios: 1, _id: 0 }
 
@@ -77,4 +77,9 @@ export async function getFilmeAleatorio() {
     }
 
     return filme.filme[0]
+}
+
+export async function getComentariosTodosFilmes(filter, projection) {
+    const collection = await getMongoCollection(defaultCollection)
+    return await collection?.find(filter, { projection }).toArray()
 }

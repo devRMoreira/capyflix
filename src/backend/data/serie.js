@@ -27,7 +27,7 @@ export async function adicionarComentarioSerie(idSerie, idComentario) {
 
     const novoHistorico = {
         $set:
-            { comentarios: [...serie.comentarios, idComentario] }
+            { comentarios: [idComentario, ...serie.comentarios] }
     }
 
     const atualizar = await updateOneDocument(filter, novoHistorico, defaultCollection)
@@ -35,7 +35,7 @@ export async function adicionarComentarioSerie(idSerie, idComentario) {
     return atualizar
 }
 
-async function getComentariosSerie(filter) {
+export async function getComentariosSerie(filter) {
 
     const projection = { comentarios: 1, _id: 0 }
 
@@ -76,4 +76,9 @@ export async function getSerieAleatoria() {
     }
 
     return serie.serie[0]
+}
+
+export async function getComentariosTodasSeries(filter, projection) {
+    const collection = await getMongoCollection(defaultCollection)
+    return await collection?.find(filter, { projection }).toArray()
 }
