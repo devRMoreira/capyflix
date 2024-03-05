@@ -82,18 +82,23 @@ export async function adicionarListaPorVer(conteudo) {
         id: conteudo.idFilme ?? conteudo.idSerie,
     }
 
-    if (conteudo.idSerie) {
-        conteudoParaAdicionar.episodiosVistos = []
+    if (!listaPorVer.conteudoPorVer.find((ele) => ele.id === conteudoParaAdicionar.id)) {
+
+
+        if (conteudo.idSerie) {
+            conteudoParaAdicionar.episodiosVistos = []
+        }
+
+        const novaLista = {
+            $set:
+                { conteudoPorVer: [conteudoParaAdicionar, ...listaPorVer.conteudoPorVer] }
+        }
+
+        const atualizar = await updateOneDocument(filter, novaLista, defaultCollection)
+
+        return atualizar
     }
-
-    const novaLista = {
-        $set:
-            { conteudoPorVer: [conteudoParaAdicionar, ...listaPorVer.conteudoPorVer] }
-    }
-
-    const atualizar = await updateOneDocument(filter, novaLista, defaultCollection)
-
-    return atualizar
+    return
 }
 
 export async function adicionarListaFavoritos(conteudo) {
@@ -107,14 +112,19 @@ export async function adicionarListaFavoritos(conteudo) {
         id: conteudo.idFilme ?? conteudo.idSerie
     }
 
-    const novaLista = {
-        $set:
-            { conteudoFavorito: [conteudoParaAdicionar, ...listaFavoritos.conteudoFavorito] }
+    if (!listaFavoritos.conteudoFavorito.find((ele) => ele.id === conteudoParaAdicionar.id)) {
+
+        const novaLista = {
+            $set:
+                { conteudoFavorito: [conteudoParaAdicionar, ...listaFavoritos.conteudoFavorito] }
+        }
+
+        const atualizar = await updateOneDocument(filter, novaLista, defaultCollection)
+
+        return atualizar
     }
 
-    const atualizar = await updateOneDocument(filter, novaLista, defaultCollection)
-
-    return atualizar
+    return
 }
 
 export async function removerListaVisto(conteudo) {
@@ -173,16 +183,22 @@ export async function adicionarEpisodio(conteudo) {
 
     const serie = encontrarIdArrayObjetos(listaPorVer.conteudoPorVer, conteudo.idSerie)
 
-    serie.episodiosVistos = [...serie.episodiosVistos, conteudo.episodio].sort()
 
-    const novaLista = {
-        $set:
-            { conteudoPorVer: [serie, ...filtrarArrayObjetos(listaPorVer.conteudoPorVer, conteudo.idSerie)] }
+    if (!serie.episodiosVistos.includes(conteudo.episodio)) {
+        serie.episodiosVistos = [...serie.episodiosVistos, conteudo.episodio].sort()
+
+
+        const novaLista = {
+            $set:
+                { conteudoPorVer: [serie, ...filtrarArrayObjetos(listaPorVer.conteudoPorVer, conteudo.idSerie)] }
+        }
+
+        const atualizar = await updateOneDocument(filter, novaLista, defaultCollection)
+
+        return atualizar
     }
 
-    const atualizar = await updateOneDocument(filter, novaLista, defaultCollection)
-
-    return atualizar
+    return
 }
 
 
