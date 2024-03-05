@@ -2,7 +2,7 @@ import { ObjectId } from "mongodb"
 import { updateOneDocument } from "./mongodb"
 import { encontrarIdArrayObjetos, filtrarArray, filtrarArrayObjetos } from "../services/util"
 import { getListaVistoUtilizador, getListaPorVerUtilizador, getListaFavoritosUtilizador, getEstatisticasUtilizador } from "./utilizador"
-import { incrementarEstatisticas } from "./estatisticas"
+import { decrementarEstatisticas, incrementarEstatisticas } from "./estatisticas"
 
 const defaultCollection = "utilizadores"
 
@@ -136,6 +136,9 @@ export async function removerListaVisto(conteudo) {
     const filter = { _id: new ObjectId(conteudo.idUtilizador) }
 
     const listaVisto = await getListaVistoUtilizador(filter)
+
+    await decrementarEstatisticas(filter, conteudo)
+
 
     const novaLista = {
         $set:

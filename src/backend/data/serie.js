@@ -46,7 +46,7 @@ async function getComentariosSerie(filter) {
 }
 
 
-export async function getDuracaoSerie(id) {
+export async function getDuracaoGeneroSerie(id) {
 
     const filter = { _id: new ObjectId(id) }
 
@@ -55,6 +55,20 @@ export async function getDuracaoSerie(id) {
         duracao: 1,
         genero: 1,
         temporadas: 1,
+        _id: 0
+    }
+
+    const collection = await getMongoCollection(defaultCollection)
+    return await collection?.findOne(filter, { projection })
+
+}
+
+export async function getGenerosFilmes(arrayIDs){
+
+    const filter = { _id: new ObjectId(id) }
+
+    const projection = {
+        genero: 1,
         _id: 0
     }
 
