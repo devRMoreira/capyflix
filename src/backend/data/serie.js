@@ -82,3 +82,17 @@ export async function getComentariosTodasSeries(filter, projection) {
     const collection = await getMongoCollection(defaultCollection)
     return await collection?.find(filter, { projection }).toArray()
 }
+
+export async function atualizarAvaliacaoMediaSerie(idSerie, media) {
+    const filter = { _id: new ObjectId(idSerie) }
+
+    const novaAvaliacao = {
+        $set:
+            { mediaAvaliacoes: media }
+
+    }
+
+    const atualizar = await updateOneDocument(filter, novaAvaliacao, defaultCollection)
+
+    return atualizar
+}
