@@ -76,3 +76,27 @@ export async function getGenerosFilmes(arrayIDs){
     return await collection?.findOne(filter, { projection })
 
 }
+
+export async function getSerieAleatoria() {
+
+    const collection = await getMongoCollection(defaultCollection)
+    const serie = {
+        serie: await collection?.aggregate([
+            {
+                $project: {
+                    _id: 1,
+                    capa: 1
+                }
+            },
+            {
+                $sample: { size: 1 }
+            }
+        ]).toArray()
+    }
+
+    console.log("serie")
+    console.log(serie.serie[0])
+
+
+    return serie.serie[0]
+}
