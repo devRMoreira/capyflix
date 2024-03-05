@@ -56,7 +56,7 @@ export function FilmeCompleto({ filme }) {
 
   return (
     <div className="h-screen bg-fundo-principal relative mt-10">
-      <div className="flex ">
+      <div className="flex">
         <div className="mt-5 flex justify-center items-center gap-10 w-full max-w-sm">
           <Image
             className="ml-2 mt-2"
@@ -116,9 +116,9 @@ export function FilmeCompleto({ filme }) {
           </div>
         </div>
       </div>
-      <div className="flex items-center justify-start">
+      <div className="flex items-center justify-start gap-1">
         <p className="text-main-white ml-7 text-xs">Ver trailer</p>
-        <a>
+        <a href={filme.trailer}>
           <img src="/icones/YouTube.png" alt="Ver trailer"></img>
         </a>
       </div>
