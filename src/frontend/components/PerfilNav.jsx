@@ -3,14 +3,17 @@ export function PerfilNav({ avatar, username, comentarios, ligacoes, config }) {
     <div className=" flex w-full h-16 bg-navbar px-5">
       <div className=" w-full flex justify-between">
         <div className=" flex items-center">
-          <a href="/perfil">
+          <a
+            href="/perfil"
+            className=" flex items-center justify-center border-2 border-laranja-principal w-12 h-12 rounded-full"
+          >
             <img
               src={avatar}
               alt="Avatar do Usuário"
-              className=" h-10 w-10 pr-2"
+              className=" object-cover rounded-full max-w-full max-h-full w-12 h-12"
             ></img>
           </a>
-          <div className=" font-semibold text-laranja-principal">
+          <div className=" font-semibold text-laranja-principal pl-2">
             {username}
           </div>
         </div>
