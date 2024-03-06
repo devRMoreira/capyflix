@@ -1,9 +1,10 @@
 import { Inter } from "next/font/google";
-import Recomendacoes from "@/frontend/components/Recomendacoes";
+{/*import Recomendacoes from "@/frontend/components/Recomendacoes";
 import { FilmeCompleto } from "@/frontend/components/filmeCompleto";
 import { MovieCard } from "@/frontend/components/movieCard";
 import { SerieCard } from "@/frontend/components/serieCard";
-import { NavApp } from "@/frontend/components/NavApp";
+import { NavApp } from "@/frontend/components/NavApp"; */}
+import { TemporadaCard } from "@/frontend/components/TemporadaCard";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -118,9 +119,11 @@ export default function Home() {
   return (
     <main>
       <div className=" min-h-screen max-w-96 h-full bg-fundo-principal flex flex-col items-center ">
-		<FilmeCompleto filme={filme.filme}/> 
+		{/*<FilmeCompleto filme={filme.filme}/>  */}
 		{/* <MovieCard filme={filme.filme}/> */}
 		{/* <SerieCard serie={serie.serie}/> */}
+		<TemporadaCard />
+
       </div>
     </main>
   );
