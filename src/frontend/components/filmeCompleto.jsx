@@ -59,12 +59,7 @@ export function FilmeCompleto({ filme }) {
     <div className="h-full bg-fundo-principal relative ">
       <div className="flex">
         <div className="mt-24 flex justify-center">
-          <Image
-            className="ml-5"
-            src={filme.capa}
-            width="120"
-            height="100"
-          />
+          <Image className="ml-5" src={filme.capa} width="120" height="100" />
         </div>
         <div className="relative ml-5 mt-24 mr-1 ">
           <h2 className="text-sm leading-6 text-main-white font-semibold">
@@ -128,17 +123,22 @@ export function FilmeCompleto({ filme }) {
         <h4 className="text-main-white mt-3 font-semibold">Sinopse:</h4>
         <p className="text-main-white mt-3">{filme.sinopse}</p>
         <h4 className="text-main-white mt-3 font-semibold">Elenco:</h4>
-        <p className="text-main-white mt-3">{filme.elenco.map((ele,i) => <span>{i < filme.elenco.length -1 ? `${ele.nome} /`:" " + ele.nome} </span>)}</p>
+        <p className="text-main-white mt-3">
+          {filme.elenco.map((ele, i) => (
+            <span>
+              {i < filme.elenco.length - 1 ? `${ele.nome} /` : " " + ele.nome}{" "}
+            </span>
+          ))}
+        </p>
         <h4 className="text-main-white mt-3 font-semibold">Realizador:</h4>
         <p className="text-main-white mt-3">{filme.realizador.nome}</p>
       </div>
       <div className="flex justify-center mt-3">
         <div className="border-t-2 border-gray-200 w-4/5 mt-3"></div>
       </div>
-      //Não implementado ainda.
-      {/* <div>
-        <Comentario comentario={ avatar, username, conteudo }/>
-      </div> */}
+      <div>
+        <button className="text-main-white font-semibold ml-5 mt-3 border border-laranja-principal rounded-lg">Comentários</button>
+      </div>
     </div>
   );
 }
