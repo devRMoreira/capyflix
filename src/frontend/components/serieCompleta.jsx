@@ -21,12 +21,15 @@ export function SerieCompleta({ serie }) {
   };
 
   return (
-    <div className="h-full bg-fundo-principal text-main-white relative ">
-       <div className="flex">
-        <div className="mt-24 flex justify-center ">
-            <Image className="ml-5" src={serie.capa} width="120" height="100" />
+    <div className="flex flex-col md:max-w-96 min-h-screen h-full bg-fundo-principal">
+      <a href="/">
+        <img src="/icones/Back.png" className=" ml-4 mt-6"></img>
+      </a>
+       <div className="flex mt-12">
+        <div className="flex justify-center ">
+            <Image className="ml-5 object-cover w-40 h-60" src={serie.capa} width="80" height="80" />
             </div>
-            <div className="relative ml-5 mt-24 mr-1">
+            <div className="flex-grow ml-5 mt-24 mr-1">
             <h2 className="text-sm leading-6 text-main-white font-semibold">{serie.titulo}</h2>
             <h2 className="text-sm leading-6 text-main-white font-medium">{serie.tituloOriginal}</h2>
             <h3 className="text-sm leading-6 text-main-white">{serie.genero.map((ele, index) => index < serie.genero.length - 1 ? ele + "/" : ele)}</h3>
