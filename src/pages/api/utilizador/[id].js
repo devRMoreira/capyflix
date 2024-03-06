@@ -7,22 +7,36 @@ export default async function handler(req, res) {
 
     if (req.method === "GET") {
 
-        const id = req.query.id
+        const id = req.query.id.slice(0, 24)
+
+        if (req.query.id.includes("porVer")) {
+            const lista = "porVer"
+
+            const listaCapas = await getCapas(id, lista)
+
+            return res.status(200).json(listaCapas)
+        }
+
+        if (req.query.id.includes("visto")) {
+            const lista = "visto"
+
+            const listaCapas = await getCapas(id, lista)
+
+            return res.status(200).json(listaCapas)
+        }
+
+        if (req.query.id.includes("favorito")) {
+            const lista = "favorito"
+
+            const listaCapas = await getCapas(id, lista)
+
+            return res.status(200).json(listaCapas)
+        }
 
         if (id.length !== 24) {
             return res.status(403).json({
                 mensagem: "ID inválido."
             })
-        }
-
-
-        if (req.body.lista) {
-
-            const lista = req.body.lista
-
-            const listaCapas = await getCapas(id, lista)
-
-            return res.status(200).json(listaCapas)
         }
 
         const utilizador = await findUserInCollection(id)
