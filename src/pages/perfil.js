@@ -209,9 +209,9 @@ export default function Perfil() {
             )}
 
             <div className="flex justify-center">
-              <button className=" ">
+              <a href="/queroAssistir">
                 <img className=" mt-4" src="/icones/List.png"></img>
-              </button>
+              </a>
             </div>
 
             <h1 className=" mb-6 text-lg mt-6 font-semibold text-main-white">
@@ -225,9 +225,9 @@ export default function Perfil() {
             )}
 
             <div className="flex justify-center">
-              <button className=" ">
+              <a href="/assistidos" className=" ">
                 <img className=" mt-4" src="/icones/List.png"></img>
-              </button>
+              </a>
             </div>
 
             <h1 className=" mb-6 text-lg mt-6 font-semibold text-main-white">
@@ -241,9 +241,9 @@ export default function Perfil() {
             )}
 
             <div className="flex justify-center">
-              <button className=" ">
-                <img className=" mt-4" src="/icones/vermais.png"></img>
-              </button>
+              <a href="/favoritos">
+                <img className=" mt-4" src="/icones/List.png"></img>
+              </a>
             </div>
 
             <h1 className=" text-lg mt-6 font-semibold text-main-white">
