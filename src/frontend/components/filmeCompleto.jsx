@@ -1,6 +1,7 @@
 import moment from "moment";
 import Image from "next/image";
 import { useState } from "react";
+import { Comentario } from "./Comentario";
 
 const filme = {
   _id: "65de739be8cef6ce35e6ec23",
@@ -55,17 +56,17 @@ export function FilmeCompleto({ filme }) {
   };
 
   return (
-    <div className="h-screen bg-fundo-principal relative mt-10">
+    <div className="h-full bg-fundo-principal relative ">
       <div className="flex">
-        <div className="mt-5 flex justify-center items-center gap-10 w-full max-w-sm">
+        <div className="mt-24 flex justify-center">
           <Image
-            className="ml-2 mt-2"
+            className="ml-5"
             src={filme.capa}
-            width="100"
+            width="120"
             height="100"
           />
         </div>
-        <div className="relative ml-1 ">
+        <div className="relative ml-5 mt-24 mr-1 ">
           <h2 className="text-sm leading-6 text-main-white font-semibold">
             {filme.titulo}
           </h2>
@@ -91,26 +92,26 @@ export function FilmeCompleto({ filme }) {
           <div className="flex items-center justify-end gap-3 mr-10">
             <button onClick={iconeVistoIsClicked}>
               {vistoIsClicked ? (
-                <img src="/icones/visto-pintado.png" className="w-6 h-6"></img>
+                <img src="/icones/visto-pintado.png" className="w-7 h-7"></img>
               ) : (
-                <img src="/icones/visto.png" className=" w-6 h-6"></img>
+                <img src="/icones/visto.png" className=" w-7 h-7"></img>
               )}
             </button>
             <button onClick={iconeVerMaisIsClicked}>
               {verMaisIsClicked ? (
                 <img
                   src="/icones/ver-mais-pintado.png"
-                  className=" w-6 h-6"
+                  className=" w-7 h-7"
                 ></img>
               ) : (
-                <img src="/icones/vermais.png" className="w-6 h-6"></img>
+                <img src="/icones/vermais.png" className="w-7 h-7"></img>
               )}
             </button>
             <button onClick={iconeLikeIsClicked}>
               {likeIsClicked ? (
-                <img src="/icones/like-pintado.png" className=" w-6 h-6"></img>
+                <img src="/icones/like-pintado.png" className=" w-7 h-7"></img>
               ) : (
-                <img src="/icones/like.png" className="w-6 h-6"></img>
+                <img src="/icones/like.png" className="w-7 h-7"></img>
               )}
             </button>
           </div>
@@ -123,17 +124,21 @@ export function FilmeCompleto({ filme }) {
         </a>
       </div>
 
-      <div className="bg-fundo-principal flex flex-col items-left">
-        <h4 className="text-main-white mt-4 ml-5 font-semibold">Sinopse</h4>
-        <p className="text-main-white mt-3 ml-5">{filme.sinopse}</p>
-        <h4 className="text-main-white mt-3 ml-5 font-semibold">Elenco</h4>
-        <p className="text-main-white mt-3 ml-5">{filme.elenco.map((ele,i) => <span>{i < filme.elenco.length -1 ? `${ele.nome} /`:" " + ele.nome} </span>)}</p>
-        <h4 className="text-main-white mt-6 ml-5 font-semibold">Realizador</h4>
-        <p className="text-main-white mt-3 ml-5">{filme.realizador.nome}</p>
+      <div className="bg-fundo-principal flex flex-col items-left ml-5 mr-5">
+        <h4 className="text-main-white mt-3 font-semibold">Sinopse:</h4>
+        <p className="text-main-white mt-3">{filme.sinopse}</p>
+        <h4 className="text-main-white mt-3 font-semibold">Elenco:</h4>
+        <p className="text-main-white mt-3">{filme.elenco.map((ele,i) => <span>{i < filme.elenco.length -1 ? `${ele.nome} /`:" " + ele.nome} </span>)}</p>
+        <h4 className="text-main-white mt-3 font-semibold">Realizador:</h4>
+        <p className="text-main-white mt-3">{filme.realizador.nome}</p>
       </div>
-      <div className="flex justify-center">
-        <div className="border-t-2 border-gray-200 w-4/5 mt-4"></div>
+      <div className="flex justify-center mt-3">
+        <div className="border-t-2 border-gray-200 w-4/5 mt-3"></div>
       </div>
+      //Não implementado ainda.
+      {/* <div>
+        <Comentario comentario={ avatar, username, conteudo }/>
+      </div> */}
     </div>
   );
 }
