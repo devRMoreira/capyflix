@@ -6,6 +6,7 @@ export default function Serie() {
     <div>
       <div>
         <SerieCompleta serie={serie} />
+        
       </div>
     </div>
   );
