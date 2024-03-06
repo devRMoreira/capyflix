@@ -1,5 +1,6 @@
+import moment from "moment";
 import { EpisodioSerie } from "./episodioSerie";
-import { SerieCard } from "./serieCard";
+import Image from "next/image";
 
 export function SerieCompleta({ serie }) {
   return (
