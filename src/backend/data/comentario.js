@@ -16,39 +16,15 @@ export async function getComentario(id) {
         }
     }
 
+    const comentarioComAvatar = await adicionarImagemPerfil(comentario)
+
+
     return {
         mensagem: "Sucesso.",
-        comentario
+        comentarioComAvatar
     }
 }
 
-export async function getTodosComentarios(conteudo) {
-
-    let filter = { _id: new ObjectId(conteudo.id) }
-    let arrayIdComentarios
-
-    if (conteudo.tipo === "filme") {
-        arrayIdComentarios = await getComentariosFilme(filter)
-
-    } else {
-        arrayIdComentarios = await getComentariosSerie(filter)
-
-
-    }
-
-    filter = {
-        _id: {
-            $in: arrayIdComentarios.comentarios
-        }
-    }
-
-    const comentarios = await findDocuments(filter, defaultCollection)
-
-    const comentariosComImagem = await adicionarImagemPerfil(comentarios)
-
-    return comentariosComImagem
-
-}
 
 export async function adicionarNovoComentario(comentario) {
 
@@ -107,18 +83,16 @@ export async function getTodasAvaliacoes(arrayIdComentarios) {
     return await collection?.find(filter, { projection }).toArray()
 }
 
-async function adicionarImagemPerfil(comentarios) {
+async function adicionarImagemPerfil(comentario) {
 
-    let atualizar = []
+    const imagemPerfil = await getUserAvatar(comentario.utilizador)
 
-    for (let i = 0; i < comentarios.length; i++) {
-
-        const imagemPerfil = await getUserAvatar(comentarios[i].utilizador)
-        atualizar.push({ ...comentarios[i], imagemPerfil: imagemPerfil.imagemPerfil })
+    return {
+        ...comentario,
+        imagemPerfil: imagemPerfil.imagemPerfil
     }
-
-    return atualizar
 }
+
 
 // * Modelo novo comentário
 // {
@@ -127,3 +101,45 @@ async function adicionarImagemPerfil(comentarios) {
 //     utilizador : ""
 //     data: new Date().getTime()
 // }
+
+// async function adicionarImagemPerfil(comentarios) {
+
+//     let atualizar = []
+
+//     for (let i = 0; i < comentarios.length; i++) {
+
+//         const imagemPerfil = await getUserAvatar(comentarios[i].utilizador)
+//         atualizar.push({ ...comentarios[i], imagemPerfil: imagemPerfil.imagemPerfil })
+//     }
+
+//     return atualizar
+// }
+
+// export async function getTodosComentarios(conteudo) {
+
+//     let filter = { _id: new ObjectId(conteudo.id) }
+//     let arrayIdComentarios
+
+//     if (conteudo.tipo === "filme") {
+//         arrayIdComentarios = await getComentariosFilme(filter)
+
+//     } else {
+//         arrayIdComentarios = await getComentariosSerie(filter)
+
+
+//     }
+
+//     filter = {
+//         _id: {
+//             $in: arrayIdComentarios.comentarios
+//         }
+//     }
+
+//     const comentarios = await findDocuments(filter, defaultCollection)
+
+//     const comentariosComImagem = await adicionarImagemPerfil(comentarios)
+
+//     return comentariosComImagem
+
+// }
+

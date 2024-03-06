@@ -1,21 +1,8 @@
-import { adicionarNovoComentario, getComentario, getTodosComentarios } from "@/backend/data/comentario"
+import { adicionarNovoComentario, getComentario } from "@/backend/data/comentario"
 
 export default async function handler(req, res) {
 
     if (req.method === "GET") {
-
-        if (req.query.id === "todos") {
-
-            const conteudo = {
-                tipo: req.body.tipo,
-                id: req.body.id
-            }
-
-            const comentarios = await getTodosComentarios(conteudo)
-
-            return res.status(200).json(comentarios)
-
-        }
 
         const id = req.query.id
 
