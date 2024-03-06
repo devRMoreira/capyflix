@@ -225,9 +225,9 @@ export default function Perfil() {
             )}
 
             <div className="flex justify-center">
-              <button className=" ">
+              <a href="/assistidos" className=" ">
                 <img className=" mt-4" src="/icones/List.png"></img>
-              </button>
+              </a>
             </div>
 
             <h1 className=" mb-6 text-lg mt-6 font-semibold text-main-white">
