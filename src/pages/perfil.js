@@ -253,32 +253,36 @@ export default function Perfil() {
             <h2 className=" mb-3 text-base mt-6 text-main-white">Filmes</h2>
             <div className=" mb-8 flex">
               <Estatisticas
-                numero="50"
+                numero={data.estatisticas.filmes.quantidade}
                 titulo="Filmes Diferentes"
               ></Estatisticas>
               <Estatisticas
-                numero="1000"
+                numero={data.estatisticas.filmes.tempo}
                 titulo="Minutos Assistidos"
               ></Estatisticas>
-              <Estatisticas
-                numero="10"
-                titulo="Gêneros Diferentes"
-              ></Estatisticas>
+              {data.estatisticas.filmes.generos?.length && (
+                <Estatisticas
+                  numero={data.estatisticas.filmes.generos.length}
+                  titulo="Gêneros Diferentes"
+                ></Estatisticas>
+              )}
             </div>
             <h2 className=" mb-3 text-base text-main-white">Séries</h2>
             <div className=" mb-20 flex">
               <Estatisticas
-                numero="50"
-                titulo="Filmes Diferentes"
+                numero={data.estatisticas.series.quantidade}
+                titulo="Séries Diferentes"
               ></Estatisticas>
               <Estatisticas
-                numero="1000"
+                numero={data.estatisticas.series.tempo}
                 titulo="Minutos Assistidos"
               ></Estatisticas>
-              <Estatisticas
-                numero="10"
-                titulo="Gêneros Diferentes"
-              ></Estatisticas>
+              {data.estatisticas.series.generos?.length && (
+                <Estatisticas
+                  numero={data.estatisticas.series.generos.length}
+                  titulo="Gêneros Diferentes"
+                ></Estatisticas>
+              )}
             </div>
           </div>
         </div>
