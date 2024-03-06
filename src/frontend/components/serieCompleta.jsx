@@ -25,12 +25,12 @@ export function SerieCompleta({ serie }) {
             <div key={i}>
               <p>Temporada {i + 1}</p>
               {temporada.map((episodio, index2) => (
-                <EpisodioSerie
+                <div><EpisodioSerie
                   key={index2}
                   numero={index2 + 1}
                   titulo={episodio.titulo}
                   descricao={episodio.descricao}
-                />
+                /></div>
               ))}
             </div>
           ))}
