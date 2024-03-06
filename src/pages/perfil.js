@@ -117,22 +117,7 @@ export default function Perfil() {
   const [queroAssistir, setQueroAssistir] = useState(null);
 
   useEffect(() => {
-    // const fetchQueroAssistir = async () => {
-    //   try {
-    //     const response = await fetch(
-    //       "http://localhost:3000/api/utilizador/" + id
-    //     );
-    //     if (!response.ok) {
-    //       throw new Error("Erro ao buscar os dados");
-    //     }
-    //     const jsonData = await response.json();
-    //     await setData(jsonData.utilizadorFiltrado);
-    //   } catch (error) {
-    //     console.error("Erro ao buscar os dados:", error);
-    //   }
-    // };
-
-    const fetchData = async () => {
+    const fetchDataUser = async () => {
       try {
         const response = await fetch(
           `http://localhost:3000/api/utilizador/${id}`
@@ -148,9 +133,23 @@ export default function Perfil() {
       }
     };
 
-    //localhost:3000/api/utilizador/65e5a01cde0f619624348e79
+    const fetchDataPorVer = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:3000/api/utilizador/${id}porVer`
+        );
+        if (!response.ok) {
+          throw new Error("Erro ao buscar os dados");
+        }
+        const jsonData = await response.json();
+        await setQueroAssistir(jsonData);
+      } catch (error) {
+        console.error("Erro ao buscar os dados:", error);
+      }
+    };
 
-    http: fetchData();
+    fetchDataUser();
+    fetchDataPorVer();
   }, []);
 
   return (
@@ -168,15 +167,13 @@ export default function Perfil() {
             <h1 className=" mb-6 text-lg mt-10 font-semibold text-main-white">
               Quero Assistir
             </h1>
-            {filme ? (
-              <a href="/filme">
-                <FilmeSerieResumo filme={filme}></FilmeSerieResumo>
-              </a>
-            ) : (
-              <a href="/serie">
-                <FilmeSerieResumo filme={serie}></FilmeSerieResumo>
+            {queroAssistir?.length && (
+              <a href="/filme" className=" flex justify-center gap-10">
+                <img className=" w-36" src={queroAssistir[0]?.capa}></img>
+                <img className=" w-36" src={queroAssistir[1]?.capa}></img>
               </a>
             )}
+
             <div className="flex justify-center">
               <button className=" ">
                 <img className=" mt-4" src="/icones/List.png"></img>
@@ -261,12 +258,6 @@ export default function Perfil() {
               ></Estatisticas>
             </div>
           </div>
-
-          {/* <NavPrincipal
-        home="/icones/Home.png"
-        pesquisar="/icones/Search.png"
-        perfil="/icones/avatar.png"
-      ></NavPrincipal> */}
         </div>
       )}
     </>

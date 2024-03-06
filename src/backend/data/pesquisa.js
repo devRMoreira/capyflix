@@ -14,13 +14,13 @@ export async function procurarConteudo(pesquisa) {
         ]
     }
 
-    let projection = { titulo: 1, tipo: "filme" }
+    let projection = { titulo: 1, capa: 1, tipo: "filme" }
 
 
     const collectionFilmes = await getMongoCollection(colecaoFilmes)
     const filmesEncontrados = await collectionFilmes?.find(filter, { projection }).toArray()
 
-    projection = { titulo: 1, tipo: "serie" }
+    projection = { titulo: 1, capa: 1, tipo: "serie" }
 
 
     const collectionSeries = await getMongoCollection(colecaoSeries)
