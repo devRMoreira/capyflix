@@ -5,7 +5,6 @@ export default async function handler(req, res) {
 
     if (req.method === "GET") {
 
-
         if(req.query.id === "random"){
 
             const serie = await getSerieAleatoria()
