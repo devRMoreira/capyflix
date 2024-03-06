@@ -5,7 +5,7 @@ import { getPesquisa } from "../services/pesquisa"
 
 
 
-export default function PesquisarConteudo({ filme, serie }) {
+export default function PesquisarConteudo() {
 
   const [pesquisa, setPesquisa] = useState([])
 
