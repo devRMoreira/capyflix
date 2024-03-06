@@ -70,9 +70,9 @@ export function SerieCompleta({ serie }) {
       </div>
 
       <div className="bg-fundo-principal flex flex-col items-left ml-5 mr-5">
-        <h4 className="text-main-white mt-4 font-semibold">Sinopse:</h4>
+        <h4 className="text-main-white mt-3 font-semibold">Sinopse:</h4>
         <p className="text-main-white mt-3">{serie.sinopse}</p>
-        <h4 className="text-main-white mt-4 font-semibold">Elenco:</h4>
+        <h4 className="text-main-white mt-3 font-semibold">Elenco:</h4>
         <p className="text-main-white mt-3">
           {serie.elenco.map((ator, i) => (
             <span key={i}>
@@ -81,19 +81,21 @@ export function SerieCompleta({ serie }) {
             </span>
           ))}
         </p>
-        <h4 className="text-main-white mt-6 font-semibold">Realizador:</h4>
+        <h4 className="text-main-white mt-3 font-semibold">Realizador:</h4>
         <p className="text-main-white mt-3">{serie.realizador.nome}</p>
         <div className="mt-3">
           {serie.temporadas.map((temporada, i) => (
             <div key={i}>
               <p className="font-semibold text-main-white">Temporada {i + 1}</p>
               {temporada.map((episodio, index2) => (
-                <div><EpisodioSerie
+                <div className="flex flex-wrap">
+                  <div><EpisodioSerie
                   key={index2}
                   numero={index2 + 1}
                   titulo={episodio.titulo}
                   descricao={episodio.descricao}
                 /></div>
+                </div>
               ))}
             </div>
           ))}
