@@ -2,6 +2,7 @@ import moment from "moment";
 import { EpisodioSerie } from "./episodioSerie";
 import Image from "next/image";
 import { useState } from "react";
+import { TemporadaCard } from "./TemporadaCard";
 
 export function SerieCompleta({ serie }) {
   const [vistoIsClicked, setvistoIsClicked] = useState(false);
@@ -25,19 +26,41 @@ export function SerieCompleta({ serie }) {
       <a href="/">
         <img src="/icones/Back.png" className=" ml-4 mt-6"></img>
       </a>
-       <div className="flex mt-12">
+      <div className="flex mt-12">
         <div className="flex justify-center ">
-            <Image className="ml-5 object-cover w-40 h-60" src={serie.capa} width="80" height="80" />
-            </div>
-            <div className="flex-grow ml-5 mt-24 mr-1">
-            <h2 className="text-sm leading-6 text-main-white font-semibold">{serie.titulo}</h2>
-            <h2 className="text-sm leading-6 text-main-white font-medium">{serie.tituloOriginal}</h2>
-            <h3 className="text-sm leading-6 text-main-white">{serie.genero.map((ele, index) => index < serie.genero.length - 1 ? ele + "/" : ele)}</h3>
-            <h3 className="text-sm leading-6 text-main-white">Data de Lançamento: {moment(serie.dataLancamento).format('DD/MM/YYYY')}</h3>
-            <p className="text-sm leading-6 text-main-white">{Object.keys(serie.temporadas).length}</p>
-            <p className="text-sm leading-6 text-main-white">{serie.classificacaoEtaria}</p>
-            <p className="text-sm leading-6 text-main-white">{serie.mediaAvaliacoes}</p>
-            <div className="flex items-center justify-end gap-3 mr-10">
+          <Image
+            className="ml-5 object-cover w-40 h-60"
+            src={serie.capa}
+            width="80"
+            height="80"
+          />
+        </div>
+        <div className="flex-grow ml-5 mt-24 mr-1">
+          <h2 className="text-sm leading-6 text-main-white font-semibold">
+            {serie.titulo}
+          </h2>
+          <h2 className="text-sm leading-6 text-main-white font-medium">
+            {serie.tituloOriginal}
+          </h2>
+          <h3 className="text-sm leading-6 text-main-white">
+            {serie.genero.map((ele, index) =>
+              index < serie.genero.length - 1 ? ele + "/" : ele
+            )}
+          </h3>
+          <h3 className="text-sm leading-6 text-main-white">
+            Data de Lançamento:{" "}
+            {moment(serie.dataLancamento).format("DD/MM/YYYY")}
+          </h3>
+          <p className="text-sm leading-6 text-main-white">
+            {Object.keys(serie.temporadas).length}
+          </p>
+          <p className="text-sm leading-6 text-main-white">
+            {serie.classificacaoEtaria}
+          </p>
+          <p className="text-sm leading-6 text-main-white">
+            {serie.mediaAvaliacoes}
+          </p>
+          <div className="flex items-center justify-end gap-3 mr-10">
             <button onClick={iconeVistoIsClicked}>
               {vistoIsClicked ? (
                 <img src="/icones/visto-pintado.png" className="w-7 h-7"></img>
@@ -63,9 +86,9 @@ export function SerieCompleta({ serie }) {
               )}
             </button>
           </div>
-            </div>
         </div>
-        <div className="flex items-center justify-start gap-1">
+      </div>
+      <div className="flex items-center justify-start gap-1">
         <p className="text-main-white ml-7 text-xs">Ver trailer</p>
         <a href={serie.trailer}>
           <img src="/icones/YouTube.png" alt="Ver trailer"></img>
@@ -87,17 +110,22 @@ export function SerieCompleta({ serie }) {
         <h4 className="text-main-white mt-3 font-semibold">Realizador:</h4>
         <p className="text-main-white mt-3">{serie.realizador.nome}</p>
         <div className="mt-3">
+          <TemporadaCard />
           {serie.temporadas.map((temporada, i) => (
-            <div key={i}>
-              <p className="font-semibold text-main-white">Temporada {i + 1}</p>
+            <div className="" key={i}>
+              <p className="font-semibold text-main-white mt-1">
+                Temporada {i + 1}
+              </p>
               {temporada.map((episodio, index2) => (
                 <div className="flex flex-wrap">
-                  <div><EpisodioSerie
-                  key={index2}
-                  numero={index2 + 1}
-                  titulo={episodio.titulo}
-                  descricao={episodio.descricao}
-                /></div>
+                  <div>
+                    <EpisodioSerie
+                      key={index2}
+                      numero={index2 + 1}
+                      titulo={episodio.titulo}
+                      descricao={episodio.descricao}
+                    />
+                  </div>
                 </div>
               ))}
             </div>
