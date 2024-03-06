@@ -2,6 +2,7 @@ import { NavPrincipal } from "@/frontend/components/NavPrincipal";
 import { PerfilNav } from "@/frontend/components/PerfilNav";
 import { Estatisticas } from "@/frontend/components/Estatisticas";
 import { FilmeSerieResumo } from "@/frontend/components/FilmeSerieResumo";
+import { useState, useEffect } from "react";
 
 const filme = {
   _id: "65de739be8cef6ce35e6ec23",
@@ -109,107 +110,164 @@ const serie = {
   },
 };
 
+const id = "65e5a01cde0f619624348e79";
+
 export default function Perfil() {
+  const [data, setData] = useState(null);
+  const [queroAssistir, setQueroAssistir] = useState(null);
+
+  useEffect(() => {
+    // const fetchQueroAssistir = async () => {
+    //   try {
+    //     const response = await fetch(
+    //       "http://localhost:3000/api/utilizador/" + id
+    //     );
+    //     if (!response.ok) {
+    //       throw new Error("Erro ao buscar os dados");
+    //     }
+    //     const jsonData = await response.json();
+    //     await setData(jsonData.utilizadorFiltrado);
+    //   } catch (error) {
+    //     console.error("Erro ao buscar os dados:", error);
+    //   }
+    // };
+
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:3000/api/utilizador/" + id
+        );
+        if (!response.ok) {
+          throw new Error("Erro ao buscar os dados");
+        }
+        const jsonData = await response.json();
+        await setData(jsonData.utilizadorFiltrado);
+      } catch (error) {
+        console.error("Erro ao buscar os dados:", error);
+      }
+    };
+
+    //localhost:3000/api/utilizador/65e5a01cde0f619624348e79
+
+    http: fetchData();
+  }, []);
+
   return (
-    <div className=" min-h-screen md:max-w-96 h-full bg-fundo-principal flex flex-col">
-      <PerfilNav
-        avatar="/icones/avatar.png"
-        username="Carolina"
-        comentarios="/icones/comentarios.png"
-        ligacoes="/icones/followers.png"
-        config="/icones/configuracoes.png"
-      ></PerfilNav>
-      <div className=" ml-4 mr-4">
-        <h1 className=" mb-6 text-lg mt-10 font-semibold text-main-white">
-          Quero Assistir
-        </h1>
-        {filme ? (
-          <a href="/filme">
-            <FilmeSerieResumo filme={filme}></FilmeSerieResumo>
-          </a>
-        ) : (
-          <a href="/serie">
-            <FilmeSerieResumo filme={serie}></FilmeSerieResumo>
-          </a>
-        )}
-        <div className="flex justify-center">
-          <button className=" ">
-            <img className=" mt-4" src="/icones/List.png"></img>
-          </button>
-        </div>
+    <>
+      {data && (
+        <div className=" min-h-screen md:max-w-96 h-full bg-fundo-principal flex flex-col">
+          <PerfilNav
+            avatar={data.imagemPerfil}
+            username={data.nome}
+            comentarios="/icones/comentarios.png"
+            ligacoes="/icones/followers.png"
+            config="/icones/configuracoes.png"
+          ></PerfilNav>
+          <div className=" ml-4 mr-4">
+            <h1 className=" mb-6 text-lg mt-10 font-semibold text-main-white">
+              Quero Assistir
+            </h1>
+            {filme ? (
+              <a href="/filme">
+                <FilmeSerieResumo filme={filme}></FilmeSerieResumo>
+              </a>
+            ) : (
+              <a href="/serie">
+                <FilmeSerieResumo filme={serie}></FilmeSerieResumo>
+              </a>
+            )}
+            <div className="flex justify-center">
+              <button className=" ">
+                <img className=" mt-4" src="/icones/List.png"></img>
+              </button>
+            </div>
 
-        <h1 className=" mb-6 text-lg mt-6 font-semibold text-main-white">
-          Assistidos
-        </h1>
-        {filme ? (
-          <a href="/filme">
-            <FilmeSerieResumo filme={filme}></FilmeSerieResumo>
-          </a>
-        ) : (
-          <a href="/serie">
-            <FilmeSerieResumo filme={serie}></FilmeSerieResumo>
-          </a>
-        )}
+            <h1 className=" mb-6 text-lg mt-6 font-semibold text-main-white">
+              Assistidos
+            </h1>
+            {filme ? (
+              <a href="/filme">
+                <FilmeSerieResumo filme={filme}></FilmeSerieResumo>
+              </a>
+            ) : (
+              <a href="/serie">
+                <FilmeSerieResumo filme={serie}></FilmeSerieResumo>
+              </a>
+            )}
 
-        <div className="flex justify-center">
-          <button className=" ">
-            <img className=" mt-4" src="/icones/List.png"></img>
-          </button>
-        </div>
+            <div className="flex justify-center">
+              <button className=" ">
+                <img className=" mt-4" src="/icones/List.png"></img>
+              </button>
+            </div>
 
-        <h1 className=" mb-6 text-lg mt-6 font-semibold text-main-white">
-          Favoritos
-        </h1>
-        <div className=" flex justify-center gap-10">
-          {filme ? (
-            <a href="/filme">
-              <img className=" w-36" src={filme.capa}></img>
-            </a>
-          ) : (
-            <a href="/serie">
-              <img className=" w-36" src={serie.capa}></img>
-            </a>
-          )}
+            <h1 className=" mb-6 text-lg mt-6 font-semibold text-main-white">
+              Favoritos
+            </h1>
+            <div className=" flex justify-center gap-10">
+              {filme ? (
+                <a href="/filme">
+                  <img className=" w-36" src={filme.capa}></img>
+                </a>
+              ) : (
+                <a href="/serie">
+                  <img className=" w-36" src={serie.capa}></img>
+                </a>
+              )}
 
-          <a href="/filme">
-            <img className=" w-36" src={filme.capa}></img>
-          </a>
-        </div>
-        <div className="flex justify-center">
-          <button className=" ">
-            <img className=" mt-4" src="/icones/vermais.png"></img>
-          </button>
-        </div>
+              <a href="/filme">
+                <img className=" w-36" src={filme.capa}></img>
+              </a>
+            </div>
+            <div className="flex justify-center">
+              <button className=" ">
+                <img className=" mt-4" src="/icones/vermais.png"></img>
+              </button>
+            </div>
 
-        <h1 className=" text-lg mt-6 font-semibold text-main-white">
-          Estatísticas
-        </h1>
+            <h1 className=" text-lg mt-6 font-semibold text-main-white">
+              Estatísticas
+            </h1>
 
-        <h2 className=" mb-3 text-base mt-6 text-main-white">Filmes</h2>
-        <div className=" mb-8 flex">
-          <Estatisticas numero="50" titulo="Filmes Diferentes"></Estatisticas>
-          <Estatisticas
-            numero="1000"
-            titulo="Minutos Assistidos"
-          ></Estatisticas>
-          <Estatisticas numero="10" titulo="Gêneros Diferentes"></Estatisticas>
-        </div>
-        <h2 className=" mb-3 text-base text-main-white">Séries</h2>
-        <div className=" mb-20 flex">
-          <Estatisticas numero="50" titulo="Filmes Diferentes"></Estatisticas>
-          <Estatisticas
-            numero="1000"
-            titulo="Minutos Assistidos"
-          ></Estatisticas>
-          <Estatisticas numero="10" titulo="Gêneros Diferentes"></Estatisticas>
-        </div>
-      </div>
+            <h2 className=" mb-3 text-base mt-6 text-main-white">Filmes</h2>
+            <div className=" mb-8 flex">
+              <Estatisticas
+                numero="50"
+                titulo="Filmes Diferentes"
+              ></Estatisticas>
+              <Estatisticas
+                numero="1000"
+                titulo="Minutos Assistidos"
+              ></Estatisticas>
+              <Estatisticas
+                numero="10"
+                titulo="Gêneros Diferentes"
+              ></Estatisticas>
+            </div>
+            <h2 className=" mb-3 text-base text-main-white">Séries</h2>
+            <div className=" mb-20 flex">
+              <Estatisticas
+                numero="50"
+                titulo="Filmes Diferentes"
+              ></Estatisticas>
+              <Estatisticas
+                numero="1000"
+                titulo="Minutos Assistidos"
+              ></Estatisticas>
+              <Estatisticas
+                numero="10"
+                titulo="Gêneros Diferentes"
+              ></Estatisticas>
+            </div>
+          </div>
 
-      {/* <NavPrincipal
+          {/* <NavPrincipal
         home="/icones/Home.png"
         pesquisar="/icones/Search.png"
         perfil="/icones/avatar.png"
       ></NavPrincipal> */}
-    </div>
+        </div>
+      )}
+    </>
   );
 }
