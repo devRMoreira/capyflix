@@ -115,6 +115,8 @@ const id = "65e5a01cde0f619624348e79";
 export default function Perfil() {
   const [data, setData] = useState(null);
   const [queroAssistir, setQueroAssistir] = useState(null);
+  const [assistidos, setAssistidos] = useState(null);
+  const [favoritos, setFavoritos] = useState(null);
 
   useEffect(() => {
     const fetchDataUser = async () => {
@@ -148,8 +150,40 @@ export default function Perfil() {
       }
     };
 
+    const fetchDataVistos = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:3000/api/utilizador/${id}visto`
+        );
+        if (!response.ok) {
+          throw new Error("Erro ao buscar os dados");
+        }
+        const jsonData = await response.json();
+        await setAssistidos(jsonData);
+      } catch (error) {
+        console.error("Erro ao buscar os dados:", error);
+      }
+    };
+
+    const fetchFavoritos = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:3000/api/utilizador/${id}favorito`
+        );
+        if (!response.ok) {
+          throw new Error("Erro ao buscar os dados");
+        }
+        const jsonData = await response.json();
+        await setFavoritos(jsonData);
+      } catch (error) {
+        console.error("Erro ao buscar os dados:", error);
+      }
+    };
+
     fetchDataUser();
     fetchDataPorVer();
+    fetchDataVistos();
+    fetchFavoritos();
   }, []);
 
   return (
@@ -183,13 +217,10 @@ export default function Perfil() {
             <h1 className=" mb-6 text-lg mt-6 font-semibold text-main-white">
               Assistidos
             </h1>
-            {filme ? (
-              <a href="/filme">
-                <FilmeSerieResumo filme={filme}></FilmeSerieResumo>
-              </a>
-            ) : (
-              <a href="/serie">
-                <FilmeSerieResumo filme={serie}></FilmeSerieResumo>
+            {assistidos?.length && (
+              <a href="/filme" className=" flex justify-center gap-10">
+                <img className=" w-36" src={assistidos[0]?.capa}></img>
+                <img className=" w-36" src={assistidos[1]?.capa}></img>
               </a>
             )}
 
@@ -202,21 +233,13 @@ export default function Perfil() {
             <h1 className=" mb-6 text-lg mt-6 font-semibold text-main-white">
               Favoritos
             </h1>
-            <div className=" flex justify-center gap-10">
-              {filme ? (
-                <a href="/filme">
-                  <img className=" w-36" src={filme.capa}></img>
-                </a>
-              ) : (
-                <a href="/serie">
-                  <img className=" w-36" src={serie.capa}></img>
-                </a>
-              )}
-
-              <a href="/filme">
-                <img className=" w-36" src={filme.capa}></img>
+            {favoritos?.length && (
+              <a href="/filme" className=" flex justify-center gap-10">
+                <img className=" w-36" src={favoritos[0]?.capa}></img>
+                <img className=" w-36" src={favoritos[1]?.capa}></img>
               </a>
-            </div>
+            )}
+
             <div className="flex justify-center">
               <button className=" ">
                 <img className=" mt-4" src="/icones/vermais.png"></img>
