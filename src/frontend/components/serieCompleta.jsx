@@ -21,12 +21,12 @@ export function SerieCompleta({ serie }) {
   };
 
   return (
-    <div className="md:h-screen md:w-screen bg-fundo-principal text-main-white relative ">
+    <div className="h-full bg-fundo-principal text-main-white relative ">
        <div className="flex">
-        <div className="mt-5 flex justify-center items-center gap-10 w-full max-w-sm">
-            <Image className="ml-2 mt-2" src={serie.capa} width="100" height="100" />
+        <div className="mt-24 flex justify-center ">
+            <Image className="ml-5" src={serie.capa} width="120" height="100" />
             </div>
-            <div className="relative ml-1">
+            <div className="relative ml-5 mt-24 mr-1">
             <h2 className="text-sm leading-6 text-main-white font-semibold">{serie.titulo}</h2>
             <h2 className="text-sm leading-6 text-main-white font-medium">{serie.tituloOriginal}</h2>
             <h3 className="text-sm leading-6 text-main-white">{serie.genero.map((ele, index) => index < serie.genero.length - 1 ? ele + "/" : ele)}</h3>
@@ -37,26 +37,26 @@ export function SerieCompleta({ serie }) {
             <div className="flex items-center justify-end gap-3 mr-10">
             <button onClick={iconeVistoIsClicked}>
               {vistoIsClicked ? (
-                <img src="/icones/visto-pintado.png" className="w-6 h-6"></img>
+                <img src="/icones/visto-pintado.png" className="w-7 h-7"></img>
               ) : (
-                <img src="/icones/visto.png" className=" w-6 h-6"></img>
+                <img src="/icones/visto.png" className=" w-7 h-7"></img>
               )}
             </button>
             <button onClick={iconeVerMaisIsClicked}>
               {verMaisIsClicked ? (
                 <img
                   src="/icones/ver-mais-pintado.png"
-                  className=" w-6 h-6"
+                  className=" w-7 h-7"
                 ></img>
               ) : (
-                <img src="/icones/vermais.png" className="w-6 h-6"></img>
+                <img src="/icones/vermais.png" className="w-7 h-7"></img>
               )}
             </button>
             <button onClick={iconeLikeIsClicked}>
               {likeIsClicked ? (
-                <img src="/icones/like-pintado.png" className=" w-6 h-6"></img>
+                <img src="/icones/like-pintado.png" className=" w-7 h-7"></img>
               ) : (
-                <img src="/icones/like.png" className="w-6 h-6"></img>
+                <img src="/icones/like.png" className="w-7 h-7"></img>
               )}
             </button>
           </div>
@@ -69,11 +69,11 @@ export function SerieCompleta({ serie }) {
         </a>
       </div>
 
-      <div className="bg-fundo-principal flex flex-col items-left">
-        <h4 className="text-main-white mt-4 ml-5 font-semibold">Sinopse</h4>
-        <p className="text-main-white mt-3 ml-5">{serie.sinopse}</p>
-        <h4 className="text-main-white mt-4 ml-5 font-semibold">Elenco:</h4>
-        <p className="text-main-white mt-3 ml-5">
+      <div className="bg-fundo-principal flex flex-col items-left ml-5 mr-5">
+        <h4 className="text-main-white mt-4 font-semibold">Sinopse:</h4>
+        <p className="text-main-white mt-3">{serie.sinopse}</p>
+        <h4 className="text-main-white mt-4 font-semibold">Elenco:</h4>
+        <p className="text-main-white mt-3">
           {serie.elenco.map((ator, i) => (
             <span key={i}>
               {ator.nome}
@@ -81,9 +81,9 @@ export function SerieCompleta({ serie }) {
             </span>
           ))}
         </p>
-        <h4 className="text-main-white mt-6 ml-5 font-semibold">Realizador:</h4>
-        <p className="text-main-white mt-3 ml-5">{serie.realizador.nome}</p>
-        <div className="mt-3 ml-5">
+        <h4 className="text-main-white mt-6 font-semibold">Realizador:</h4>
+        <p className="text-main-white mt-3">{serie.realizador.nome}</p>
+        <div className="mt-3">
           {serie.temporadas.map((temporada, i) => (
             <div key={i}>
               <p className="font-semibold text-main-white">Temporada {i + 1}</p>
