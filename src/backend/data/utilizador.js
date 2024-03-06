@@ -96,7 +96,7 @@ export async function findUserInCollection(id) {
         }
     }
 
-    const utilizadorFiltrado = filtrarInformacaoPerfil(utilizador)
+    const utilizadorFiltrado = await filtrarInformacaoPerfil(utilizador)
 
     return {
         mensagem: "Sucesso.",

@@ -106,7 +106,7 @@ async function getCapasListaFavoritos(id) {
     return capas
 }
 
-async function getCapaSerie(id) {
+export async function getCapaSerie(id) {
 
     const filter = { _id: new ObjectId(id) }
     const projection = { capa: 1 }
@@ -116,7 +116,7 @@ async function getCapaSerie(id) {
 
 }
 
-async function getCapaFilme(id) {
+export async function getCapaFilme(id) {
 
     const filter = { _id: new ObjectId(id) }
     const projection = { capa: 1 }

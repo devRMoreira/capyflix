@@ -4,7 +4,11 @@ export function PerfilNav({ avatar, username, comentarios, ligacoes, config }) {
       <div className=" w-full flex justify-between">
         <div className=" flex items-center">
           <a href="/perfil">
-            <img src={avatar} alt="Avatar do Usuário" className=" pr-2"></img>
+            <img
+              src={avatar}
+              alt="Avatar do Usuário"
+              className=" h-10 w-10 pr-2"
+            ></img>
           </a>
           <div className=" font-semibold text-laranja-principal">
             {username}
