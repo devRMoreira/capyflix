@@ -1,11 +1,11 @@
-import { SerieCompleta } from "@/frontend/components/SerieCompleta";
 import { fetchSerie } from "@/frontend/services/serie";
 import { useEffect, useState } from "react";
-import { router } from "../_app";
+import { SerieCompleta } from "@/frontend/components/serieCompleta";
+import { useRouter } from "next/router";
 
 
 export default function Serie() {
-
+    const router = useRouter()
     const [serie, setSerie] = useState({})
 
     useEffect(() => {

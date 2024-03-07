@@ -4,13 +4,13 @@ import { fetchUltimosCinco } from "@/frontend/services/pesquisa";
 import { fetchSerieAleatoria } from "@/frontend/services/serie";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { userStore } from "./_app";
+import Link from "next/link";
 
 
 
 export default function home() {
 
-    const [conteudo, setConteudo] = useState({
+  const [conteudo, setConteudo] = useState({
     filmeAleatorio: {},
     serieAleatoria: {},
     ultimosCinco: []
@@ -42,11 +42,12 @@ export default function home() {
         Recomendações
       </h1>
       <div className=" mt-5 flex justify-center items-center gap-10 w-full max-w-sm">
-
-        {conteudo.filmeAleatorio ? <Image width={360} height={0} className="w-36" src={conteudo.filmeAleatorio.capa} /> : undefined}
-
-        {conteudo.serieAleatoria ? <Image width={360} height={0} className="w-36" src={conteudo.serieAleatoria.capa} /> : undefined}
-
+        <Link href="cenas">
+          {conteudo.filmeAleatorio ? <Image width={360} height={0} className="w-36" src={conteudo.filmeAleatorio.capa} /> : undefined}
+        </Link>
+        <Link href={`/serie/${conteudo.serieAleatoria._id}`}>
+          {conteudo.serieAleatoria ? <Image width={360} height={0} className="w-36" src={conteudo.serieAleatoria.capa} /> : undefined}
+        </Link>
       </div>
       <h1 className=" ml-10 text-left text-2xl font-semibold mt-10 text-main-white">
         Últimos Lançamentos

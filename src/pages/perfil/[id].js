@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { fetchDadosUtilizador } from "@/frontend/services/utilizador";
 import { userStore } from "../_app";
+import { fetchListaFavoritos, fetchListaPorVer, fetchListaVisto } from "@/frontend/services/listas";
 
 
 export default function perfil() {
@@ -11,7 +12,11 @@ export default function perfil() {
     const { userLogado } = userStore((state) => state)
 
     const [utilizador, setUtilizador] = useState({})
-    const [listas, setListas] = useState({})
+    const [listas, setListas] = useState({
+        assistidos: [],
+        favoritos: [],
+        queroAssistir: []
+    })
     const router = useRouter()
 
     useEffect(() => {
@@ -19,7 +24,7 @@ export default function perfil() {
 
         const { id } = router.query
 
-        async function setUser() {
+        async function getUser() {
             if (id === "user") {
                 setUtilizador({ ...userLogado })
 
@@ -29,81 +34,36 @@ export default function perfil() {
             }
         }
 
-        setUser()
+        async function getListas() {
+
+            if (id !== "user") {
+                const listaAssistidos = await fetchListaVisto(id)
+                setListas((ps) => ({ ...ps, assistidos: listaAssistidos }))
+
+                const listaQueroAssistir = await fetchListaPorVer(id)
+                setListas((ps) => ({ ...ps, queroAssistir: listaQueroAssistir }))
+
+                const listaFavoritos = await fetchListaFavoritos(id)
+                setListas((ps) => ({ ...ps, favoritos: listaFavoritos }))
+
+            } else {
+                const listaAssistidos = await fetchListaVisto(utilizador._id)
+                setListas((ps) => ({ ...ps, assistidos: listaAssistidos }))
+
+                const listaQueroAssistir = await fetchListaPorVer(utilizador._id)
+                setListas((ps) => ({ ...ps, queroAssistir: listaQueroAssistir }))
+
+                const listaFavoritos = await fetchListaFavoritos(utilizador._id)
+                setListas((ps) => ({ ...ps, favoritos: listaFavoritos }))
+
+            }
+
+        }
+        getUser()
+        getListas()
 
     }, [router.isReady]);
 
-    // const [data, setData] = useState(null);
-    // const [queroAssistir, setQueroAssistir] = useState(null);
-    // const [assistidos, setAssistidos] = useState(null);
-    // const [favoritos, setFavoritos] = useState(null);
-
-    // useEffect(() => {
-    //     const fetchDataUser = async () => {
-    //         try {
-    //             const response = await fetch(
-    //                 `http://localhost:3000/api/utilizador/${id}`
-    //             );
-    //             if (!response.ok) {
-    //                 throw new Error("Erro ao buscar os dados");
-    //             }
-    //             const jsonData = await response.json();
-    //             await setData(jsonData.utilizadorFiltrado);
-    //         } catch (error) {
-    //             console.error("Erro ao buscar os dados:", error);
-    //         }
-    //     };
-
-    //     const fetchDataPorVer = async () => {
-    //         try {
-    //             const response = await fetch(
-    //                 `http://localhost:3000/api/utilizador/${id}porVer`
-    //             );
-    //             if (!response.ok) {
-    //                 throw new Error("Erro ao buscar os dados");
-    //             }
-    //             const jsonData = await response.json();
-    //             await setQueroAssistir(jsonData);
-    //         } catch (error) {
-    //             console.error("Erro ao buscar os dados:", error);
-    //         }
-    //     };
-
-    //     const fetchDataVistos = async () => {
-    //         try {
-    //             const response = await fetch(
-    //                 `http://localhost:3000/api/utilizador/${id}visto`
-    //             );
-    //             if (!response.ok) {
-    //                 throw new Error("Erro ao buscar os dados");
-    //             }
-    //             const jsonData = await response.json();
-    //             await setAssistidos(jsonData);
-    //         } catch (error) {
-    //             console.error("Erro ao buscar os dados:", error);
-    //         }
-    //     };
-
-    //     const fetchFavoritos = async () => {
-    //         try {
-    //             const response = await fetch(
-    //                 `http://localhost:3000/api/utilizador/${id}favorito`
-    //             );
-    //             if (!response.ok) {
-    //                 throw new Error("Erro ao buscar os dados");
-    //             }
-    //             const jsonData = await response.json();
-    //             await setFavoritos(jsonData);
-    //         } catch (error) {
-    //             console.error("Erro ao buscar os dados:", error);
-    //         }
-    //     };
-
-    //     fetchDataUser();
-    //     fetchDataPorVer();
-    //     fetchDataVistos();
-    //     fetchFavoritos();
-    // }, []);
 
     return (
         <div>
@@ -116,12 +76,12 @@ export default function perfil() {
                         comentarios="/icones/comentarios.png"
                         ligacoes="/icones/followers.png"
                         config="/icones/configuracoes.png"
-                    ></PerfilNav>
+                    />
                     <div className=" ml-4 mr-4">
                         <h1 className=" mb-6 text-lg mt-10 font-semibold text-main-white">
                             Quero Assistir
                         </h1>
-                        {queroAssistir?.length && (
+                        {listas.queroAssistir?.length && (
                             <a href="/filme" className=" flex justify-center gap-10">
                                 <img className=" w-36" src={queroAssistir[0]?.capa}></img>
                                 <img className=" w-36" src={queroAssistir[1]?.capa}></img>
@@ -137,7 +97,7 @@ export default function perfil() {
                         <h1 className=" mb-6 text-lg mt-6 font-semibold text-main-white">
                             Assistidos
                         </h1>
-                        {assistidos?.length && (
+                        {listas.assistidos?.length && (
                             <a href="/filme" className=" flex justify-center gap-10">
                                 <img className=" w-36" src={assistidos[0]?.capa}></img>
                                 <img className=" w-36" src={assistidos[1]?.capa}></img>
@@ -153,7 +113,7 @@ export default function perfil() {
                         <h1 className=" mb-6 text-lg mt-6 font-semibold text-main-white">
                             Favoritos
                         </h1>
-                        {favoritos?.length && (
+                        {listas.favoritos?.length && (
                             <a href="/filme" className=" flex justify-center gap-10">
                                 <img className=" w-36" src={favoritos[0]?.capa}></img>
                                 <img className=" w-36" src={favoritos[1]?.capa}></img>

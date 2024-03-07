@@ -8,7 +8,37 @@ export const toastSuccess = (string) => toast.success(string)
 export const toastError = (string) => toast.error(string)
 
 export const userStore = create((set) => ({
-  userLogado: {},
+  userLogado: {
+    "_id": "65e5a023de0f619624348e7a",
+    "nome": "Gandalf, O Grande",
+    "conteudoVisto": [],
+    "conteudoPorVer": [],
+    "conteudoFavorito": [
+        {
+            "tipo": "serie",
+            "id": "65de739fe8cef6ce35e6ec30"
+        }
+    ],
+    "seguidores": [
+        "65e5a01cde0f619624348e79"
+    ],
+    "quemSegue": [],
+    "privado": false,
+    "estatisticas": {
+        "filmes": {
+            "quantidade": 0,
+            "tempo": 0,
+            "generos": []
+        },
+        "series": {
+            "quantidade": 0,
+            "tempo": 0,
+            "generos": []
+        }
+    },
+    "imagemPerfil": "https://i.imgur.com/eOtKaB8.jpeg",
+    "dataRegisto": 1709547555398
+},
   setUserLogado: (user) => set(() => ({ userLogado: user }))
 }))
 

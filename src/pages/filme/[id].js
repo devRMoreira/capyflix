@@ -14,9 +14,7 @@ export default function Filme({conteudo}) {
 
         const { id } = router.query
 
-        if(!id){
-            setFilme(conteudo)
-        }
+        setFilme(id ? fetchDadosUtilizador(id) : { ...conteudo })
 
         async function fetchDadosFilme(id) {
             const dados = await fetchFilme(id)
