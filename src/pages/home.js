@@ -10,10 +10,7 @@ import { userStore } from "./_app";
 
 export default function home() {
 
-  const { user, setUser } = userStore((state) => state)
-
-
-  const [conteudo, setConteudo] = useState({
+    const [conteudo, setConteudo] = useState({
     filmeAleatorio: {},
     serieAleatoria: {},
     ultimosCinco: []

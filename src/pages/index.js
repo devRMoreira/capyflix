@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 import { fetchDadosUtilizador } from "@/frontend/services/utilizador";
 
 export default function index() {
-  const { user, setUser } = userStore((state) => state)
+  const { userLogado, setUserLogado } = userStore((state) => state)
 
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
@@ -38,7 +38,7 @@ export default function index() {
       toastError("Dados inválidos.")
     } else {
       const fetchUtilizador = await fetchDadosUtilizador(login)
-      setUser(fetchUtilizador)
+      setUserLogado(fetchUtilizador)
 
 
       router.push("/home")
