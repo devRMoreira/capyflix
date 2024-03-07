@@ -42,7 +42,7 @@ export default function home() {
         Recomendações
       </h1>
       <div className=" mt-5 flex justify-center items-center gap-10 w-full max-w-sm">
-        <Link href="cenas">
+        <Link href={`/filme/${conteudo.filmeAleatorio._id}`}>
           {conteudo.filmeAleatorio ? <Image width={360} height={0} className="w-36" src={conteudo.filmeAleatorio.capa} /> : undefined}
         </Link>
         <Link href={`/serie/${conteudo.serieAleatoria._id}`}>

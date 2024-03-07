@@ -1,5 +1,5 @@
 import { FilmeCompleto } from "@/frontend/components/FilmeCompleto";
-import { fetchFilme } from "@/frontend/services/filme";
+import { getFilme } from "@/frontend/services/filme";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -14,15 +14,17 @@ export default function Filme({conteudo}) {
 
         const { id } = router.query
 
-        setFilme(id ? fetchDadosUtilizador(id) : { ...conteudo })
+        if(!id){
+            setFilme(conteudo)
+        }
 
-        async function fetchDadosFilme(id) {
-            const dados = await fetchFilme(id)
+        async function getDadosFilme(id) {
+            const dados = await getFilme(id)
 
             setFilme(dados)
         }
 
-        fetchDadosFilme(id)
+        getDadosFilme(id)
     }, [router.isReady]);
 
     return (
