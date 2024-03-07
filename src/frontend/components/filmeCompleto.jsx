@@ -45,8 +45,8 @@ export function FilmeCompleto({ filme }) {
             {filme.tituloOriginal}
           </h2>
           <h3 className="text-xs leading-6 text-main-white">
-            {filme.genero.map((ele, index) =>
-              index < filme.genero.length - 1 ? ele + "/" : ele
+            {filme.generos.map((ele, index) =>
+              index < filme.generos.length - 1 ? ele + "/" : ele
             )}
           </h3>
           <h3 className="text-sm leading-6 text-main-white">
