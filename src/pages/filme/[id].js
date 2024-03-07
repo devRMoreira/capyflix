@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 
-export default function Filme() {
+export default function Filme({conteudo}) {
 
     const [filme, setFilme] = useState({})
     const router = useRouter()
@@ -13,6 +13,10 @@ export default function Filme() {
         if (!router.isReady) return;
 
         const { id } = router.query
+
+        if(!id){
+            setFilme(conteudo)
+        }
 
         async function getDadosFilme(id) {
             const dados = await getFilme(id)

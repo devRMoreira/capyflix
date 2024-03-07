@@ -33,6 +33,7 @@ export default function index() {
     if (!sucesso) {
       toastError("Dados inválidos.")
     } else {
+      
       router.push("/home")
     }
     console.log("Email:", email);
