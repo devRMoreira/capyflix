@@ -30,6 +30,7 @@ export default function App({ Component, pageProps }) {
       <Component {...pageProps} />
       <ToastContainer />
       <NavPrincipal />
+      <div className=" h-[35px]" />
     </div>
   }
 }

@@ -26,7 +26,7 @@ export default function home() {
       setConteudo((ps) => ({ ...ps, serieAleatoria: serieAleatoria }))
 
       const ultimosCinco = await getUltimosCinco()
-      setConteudo((ps) => ({...ps, ultimosCinco:ultimosCinco}))
+      setConteudo((ps) => ({ ...ps, ultimosCinco: ultimosCinco }))
 
     }
 
@@ -40,22 +40,21 @@ export default function home() {
         Recomendações
       </h1>
       <div className=" mt-5 flex justify-center items-center gap-10 w-full max-w-sm">
-        {conteudo.filmeAleatorio ? <img className="w-36" src={conteudo.filmeAleatorio.capa} /> : undefined}
-        {conteudo.serieAleatoria ? <img className="w-36" src={conteudo.serieAleatoria.capa} /> : undefined}
+
+        {conteudo.filmeAleatorio ? <Image width={360} height={0} className="w-36" src={conteudo.filmeAleatorio.capa} /> : undefined}
+
+        {conteudo.serieAleatoria ? <Image width={360} height={0} className="w-36" src={conteudo.serieAleatoria.capa} /> : undefined}
+
       </div>
       <h1 className=" ml-10 text-left text-2xl font-semibold mt-10 text-main-white">
         Últimos Lançamentos
       </h1>
-      <div className=" mt-4 ml-4 mr-4 mb-2 md:mt-4 md:ml-2 md:mr-2 md:mb-2">
-      {/* <div className=" ml-4 mr-4 md:ml-2 md:mr-2"> */}
+      <div className="mt-4 ml-4 mr-4 mb-2 md:mt-4 md:ml-2 md:mr-2 md:mb-2">
 
-        {conteudo.ultimosCinco.length > 0 ? conteudo.ultimosCinco.map((ele) => <HomeFilmeSerieResumo conteudo={ele} />):undefined}
-        {/* <HomeFilmeSerieResumo filme={filme}></HomeFilmeSerieResumo> */}
+        {conteudo.ultimosCinco.length > 0 ? conteudo.ultimosCinco.map((ele) => <HomeFilmeSerieResumo conteudo={ele} />) : undefined}
+
       </div>
-      {/* <div className=" ml-4 mr-4 md:ml-2 md:mr-2"> */}
-        {/* <HomeFilmeSerieResumo filme={filme}></HomeFilmeSerieResumo> */}
-      {/* </div> */}
-      <div className=" h-[50px]"></div>
+      <div className=" h-[50px]" />
     </div>
   );
 }

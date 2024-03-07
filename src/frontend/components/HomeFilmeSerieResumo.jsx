@@ -2,7 +2,7 @@ import moment from "moment/moment";
 
 export function HomeFilmeSerieResumo({ conteudo }) {
   return (
-    <div className="p-4 text-sm text-main-white border-2 border-laranja-principal rounded-lg flex">
+    <div className="p-4 ml-4 mr-4 mb-2 md:mt-4 md:ml-2 md:mr-2 md:mb-2 text-sm text-main-white border-2 border-laranja-principal rounded-lg flex">
       <div className="sm:w-1/2 ">
         <img src={conteudo.capa} className="h-36 w-25 object-cover"></img>
       </div>
