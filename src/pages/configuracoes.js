@@ -1,5 +1,5 @@
 import { Botao } from "@/frontend/components/botao";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Configuracoes() {
   const [istToggled, setIsToggled] = useState(false);

@@ -1,7 +1,6 @@
 import { NavPrincipal } from "@/frontend/components/NavPrincipal";
 import { PerfilNav } from "@/frontend/components/PerfilNav";
 import { Estatisticas } from "@/frontend/components/Estatisticas";
-import { FilmeSerieResumo } from "@/frontend/components/FilmeSerieResumo";
 import { useState, useEffect } from "react";
 
 const filme = {
