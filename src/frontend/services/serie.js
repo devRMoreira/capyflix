@@ -1,9 +1,9 @@
-export async function getSerie(id) {
+export async function fetchSerie(id) {
     const res = (await fetch(`http://localhost:3000/api/serie/${id}`))
     return await res.json()
 }
 
-export async function getSerieAleatoria() {
+export async function fetchSerieAleatoria() {
     const res = (await fetch(`http://localhost:3000/api/serie/random`))
     return await res.json()
 }
