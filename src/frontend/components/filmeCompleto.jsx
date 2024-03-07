@@ -2,6 +2,7 @@ import moment from "moment";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { getFilme } from "../services/filme";
+import { Comentario } from "./Comentario";
 
 
 export function FilmeCompleto({ filme }) {
@@ -44,8 +45,8 @@ export function FilmeCompleto({ filme }) {
             {filme.tituloOriginal}
           </h2>
           <h3 className="text-xs leading-6 text-main-white">
-            {filme.generos.map((ele, index) =>
-              index < filme.generos.length - 1 ? ele + "/" : ele
+            {filme.genero.map((ele, index) =>
+              index < filme.genero.length - 1 ? ele + "/" : ele
             )}
           </h3>
           <h3 className="text-sm leading-6 text-main-white">
