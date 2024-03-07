@@ -54,7 +54,7 @@ export default function Login() {
           ></Input>
         </div>
         <div className=" flex space-x-12 mb-8">
-          <Botao title="LOGIN" />
+          <Botao title="LOGIN" on />
         </div>
         <div className=" mb-10">
           <Link href="/registar">
