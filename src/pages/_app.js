@@ -8,8 +8,8 @@ export const toastSuccess = (string) => toast.success(string)
 export const toastError = (string) => toast.error(string)
 
 export const userStore = create((set) => ({
-  user: undefined,
-  setUser: (user) => set(() => ({ user: user }))
+  user: {},
+  setUser: (args) => set(() => ({ user: args }))
 }))
 
 
