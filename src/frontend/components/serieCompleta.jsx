@@ -26,7 +26,7 @@ export function SerieCompleta({ serie }) {
       <a href="/">
         <img src="/icones/Back.png" className=" ml-4 mt-6"></img>
       </a>
-      <div className="flex mt-12">
+      <div className="flex mt-5">
         <div className="flex justify-center ">
           <Image
             className="ml-5 object-cover w-40 h-60"
@@ -35,7 +35,7 @@ export function SerieCompleta({ serie }) {
             height="80"
           />
         </div>
-        <div className="flex-grow ml-5 mt-24 mr-1">
+        <div className="flex-grow ml-5 mr-1">
           <h2 className="text-sm leading-6 text-main-white font-semibold">
             {serie.titulo}
           </h2>
@@ -97,9 +97,9 @@ export function SerieCompleta({ serie }) {
 
       <div className="bg-fundo-principal flex flex-col items-left ml-5 mr-5">
         <h4 className="text-main-white mt-3 font-semibold">Sinopse:</h4>
-        <p className="text-main-white mt-3">{serie.sinopse}</p>
+        <p className="text-main-white mt-1">{serie.sinopse}</p>
         <h4 className="text-main-white mt-3 font-semibold">Elenco:</h4>
-        <p className="text-main-white mt-3">
+        <p className="text-main-white mt-1">
           {serie.elenco.map((ator, i) => (
             <span key={i}>
               {ator.nome}
@@ -108,7 +108,7 @@ export function SerieCompleta({ serie }) {
           ))}
         </p>
         <h4 className="text-main-white mt-3 font-semibold">Realizador:</h4>
-        <p className="text-main-white mt-3">{serie.realizador.nome}</p>
+        <p className="text-main-white mt-1">{serie.realizador.nome}</p>
         <div className="mt-3">
           <TemporadaCard />
           {serie.temporadas.map((temporada, i) => (
@@ -116,18 +116,12 @@ export function SerieCompleta({ serie }) {
               <p className="font-semibold text-main-white mt-1">
                 Temporada {i + 1}
               </p>
-              {temporada.map((episodio, index2) => (
-                <div className="flex flex-wrap">
-                  <div>
-                    <EpisodioSerie
-                      key={index2}
-                      numero={index2 + 1}
-                      titulo={episodio.titulo}
-                      descricao={episodio.descricao}
-                    />
-                  </div>
+              <div className="flex flex-wrap">{temporada.map((episodio, index2) => (
+                <div>
+                  <EpisodioSerie key={index2} numero={index2 + 1} titulo={episodio.titulo} descricao={episodio.descricao}/>
                 </div>
               ))}
+               </div>
             </div>
           ))}
         </div>
