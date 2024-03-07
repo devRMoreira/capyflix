@@ -15,11 +15,9 @@ export default function Filme() {
         const { id } = router.query
 
         async function getDadosFilme(id) {
-            console.log("id")
             const dados = await getFilme(id)
 
             setFilme(dados)
-            console.log(filme)
         }
 
         getDadosFilme(id)

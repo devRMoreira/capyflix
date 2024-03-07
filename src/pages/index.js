@@ -1,25 +1,41 @@
 import { Botao } from "@/frontend/components/Botao";
 import { Input } from "@/frontend/components/Input";
+import { loginUtilizador } from "@/frontend/services/autenticacao";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { toastError } from "./_app";
+import { useRouter } from "next/router";
 
 export default function Login() {
-  const [nome, setNome] = useState("");
+  const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
 
-  const handleChangeNome = (event) => {
-    setNome(event.target.value);
+  const router = useRouter()
+
+  const handleChangeEmail = (event) => {
+    setEmail(event.target.value);
   };
 
   const handleChangeSenha = (event) => {
     setSenha(event.target.value);
   };
 
-  function handleClick(e) {
+  async function handleClick(e) {
     e.preventDefault();
 
-    console.log("Nome:", nome);
+    if(!email || !senha){
+      return toastError("Por favor preenche todos os campos.")
+    }
+
+    const sucesso = await loginUtilizador(email, senha)
+
+    if (!sucesso) {
+      toastError("Dados inválidos.")
+    } else {
+      router.push("/home")
+    }
+    console.log("Email:", email);
     console.log("Senha:", senha);
   }
 
@@ -34,12 +50,12 @@ export default function Login() {
         <div className="mb-6">
           <Input
             icone="/icones/User.png"
-            placeholder="Insere o teu nome de utilizador"
+            placeholder="Insere o teu email"
             type="text"
             name="username"
             id="username"
-            value={nome}
-            onChange={handleChangeNome}
+            value={email}
+            onChange={handleChangeEmail}
           ></Input>
         </div>
         <div className=" mb-10">

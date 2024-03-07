@@ -29,12 +29,12 @@ export function FilmeCompleto({ filme }) {
       </a>
       <div className="flex mt-5">
         <div className="flex justify-center">
-            <Image
-              className="ml-5 object-cover w-40 h-60"
-              src={filme.capa}
-              width="80"
-              height="80"
-            />
+          <Image
+            className="ml-5 object-cover w-40 h-60"
+            src={filme.capa}
+            width="80"
+            height="80"
+          />
         </div>
         <div className="relative ml-5 mr-1 ">
           <h2 className="text-sm leading-6 text-main-white font-semibold ">
