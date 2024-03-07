@@ -1,5 +1,5 @@
 import moment from "moment";
-import { EpisodioSerie } from "./episodioSerie";
+import { EpisodioSerie } from "./EpisodioSerie";
 import Image from "next/image";
 import { useState } from "react";
 import { TemporadaCard } from "./TemporadaCard";

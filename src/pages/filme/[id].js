@@ -1,4 +1,4 @@
-import { FilmeCompleto } from "@/frontend/components/filmeCompleto";
+import { FilmeCompleto } from "@/frontend/components/FilmeCompleto";
 import { getFilme } from "@/frontend/services/filme";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -6,8 +6,8 @@ import { useEffect, useState } from "react";
 
 export default function Filme() {
 
-    const router = useRouter()
     const [filme, setFilme] = useState({})
+    const router = useRouter()
 
     useEffect(() => {
         if (!router.isReady) return;
@@ -15,7 +15,7 @@ export default function Filme() {
         const { id } = router.query
 
         async function getDadosFilme(id) {
-
+            console.log("id")
             const dados = await getFilme(id)
 
             setFilme(dados)

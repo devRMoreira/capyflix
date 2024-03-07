@@ -1,7 +1,6 @@
 import moment from "moment";
 import Image from "next/image";
-import { useEffect, useState } from "react";
-import { getFilme } from "../services/filme";
+import { useState } from "react";
 import { Comentario } from "./Comentario";
 
 

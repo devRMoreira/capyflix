@@ -1,11 +1,11 @@
-import { Botao } from "@/frontend/components/botao";
+import { Botao } from "@/frontend/components/Botao";
 import { Input } from "@/frontend/components/Input";
 import { registarUtilizador } from "@/frontend/services/utilizador";
 import { useState } from "react";
 import Image from "next/image";
-import { useRouter } from "next/router";
 import 'react-toastify/dist/ReactToastify.css';
 import { toastError, toastSuccess } from "./_app";
+import { useRouter } from "next/router";
 
 
 

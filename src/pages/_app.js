@@ -1,8 +1,7 @@
 import { NavPrincipal } from "@/frontend/components/NavPrincipal";
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 import "@/styles/globals.css";
 import { ToastContainer, toast } from "react-toastify";
-import { createContext, useState } from "react";
 import { create } from "zustand";
 
 export const userStore = create((set) => ({

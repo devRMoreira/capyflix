@@ -1,4 +1,4 @@
-import { Botao } from "@/frontend/components/botao";
+import { Botao } from "@/frontend/components/Botao";
 import { useState, useEffect } from "react";
 
 export default function Configuracoes() {
