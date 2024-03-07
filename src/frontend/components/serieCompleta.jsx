@@ -52,15 +52,15 @@ export function SerieCompleta({ serie }) {
             {moment(serie.dataLancamento).format("DD/MM/YYYY")}
           </h3>
           <p className="text-sm leading-6 text-main-white">
-            {Object.keys(serie.temporadas).length}
+            Temporadas: {Object.keys(serie.temporadas).length}
           </p>
           <p className="text-sm leading-6 text-main-white">
             {serie.classificacaoEtaria}
           </p>
           <p className="text-sm leading-6 text-main-white">
-            {serie.mediaAvaliacoes}
+            Classificação: {serie.mediaAvaliacoes}
           </p>
-          <div className="flex items-center justify-end gap-3 mr-10">
+          <div className="flex items-center justify-end gap-3 mr-10 mt-3">
             <button onClick={iconeVistoIsClicked}>
               {vistoIsClicked ? (
                 <img src="/icones/visto-pintado.png" className="w-7 h-7"></img>
@@ -112,16 +112,22 @@ export function SerieCompleta({ serie }) {
         <div className="mt-3">
           <TemporadaCard />
           {serie.temporadas.map((temporada, i) => (
-            <div className="" key={i}>
-              <p className="font-semibold text-main-white mt-1">
+            <div key={i}>
+              <p className="font-semibold text-main-white mt-1 ml-2">
                 Temporada {i + 1}
               </p>
-              <div className="flex flex-wrap">{temporada.map((episodio, index2) => (
-                <div>
-                  <EpisodioSerie key={index2} numero={index2 + 1} titulo={episodio.titulo} descricao={episodio.descricao}/>
-                </div>
-              ))}
-               </div>
+              <div className="flex flex-wrap gap-2 ml-2">
+                {temporada.map((episodio, index2) => (
+                  <div>
+                    <EpisodioSerie
+                      key={index2}
+                      numero={index2 + 1}
+                      titulo={episodio.titulo}
+                      descricao={episodio.descricao}
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
           ))}
         </div>
