@@ -16,7 +16,7 @@ export function NavPrincipal({ home, pesquisar, perfil }) {
               className=" pr-24"
             ></img>
           </Link>
-          <Link href="/perfil">
+          <Link href="/perfil/user">
             <img src="/icones/avatar.png" alt="Perfil" className=""></img>
           </Link>
         </div>
