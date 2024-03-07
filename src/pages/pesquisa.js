@@ -5,7 +5,7 @@ import { getPesquisa } from "@/frontend/services/pesquisa"
 
 
 
-export default function PesquisarConteudo() {
+export default function pesquisarConteudo() {
 
     const [pesquisa, setPesquisa] = useState([])
 

@@ -1,7 +1,7 @@
 import { Botao } from "@/frontend/components/Botao";
 import { useState, useEffect } from "react";
 
-export default function Configuracoes() {
+export default function configuracoes() {
   const [istToggled, setIsToggled] = useState(false);
 
   const toggleImage = () => {

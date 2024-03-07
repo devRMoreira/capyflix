@@ -1,6 +1,6 @@
 import { Comentario } from "@/frontend/components/Comentario";
 
-export default function Comentarios() {
+export default function comentarios() {
   return (
     <div className="flex flex-col md:max-w-96 min-h-screen h-full bg-fundo-principal">
       <a href="/perfil">

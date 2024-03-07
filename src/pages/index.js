@@ -7,7 +7,7 @@ import { useState } from "react";
 import { toastError } from "./_app";
 import { useRouter } from "next/router";
 
-export default function Login() {
+export default function index() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
 

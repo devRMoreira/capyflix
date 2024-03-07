@@ -9,7 +9,7 @@ import { registarUtilizador } from "@/frontend/services/autenticacao";
 
 
 
-export default function Registar() {
+export default function registar() {
 
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");

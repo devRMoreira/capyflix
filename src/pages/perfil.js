@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 
 const id = "65e5a01cde0f619624348e79";
 
-export default function Perfil() {
+export default function perfil() {
   const [data, setData] = useState(null);
   const [queroAssistir, setQueroAssistir] = useState(null);
   const [assistidos, setAssistidos] = useState(null);

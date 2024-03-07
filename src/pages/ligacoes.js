@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 const id = "65e5a01cde0f619624348e79";
 
-export default function Ligacoes() {
+export default function ligacoes() {
   const [followingIsClicked, setFollowingIsClicked] = useState(false);
   const [followersIsClicked, setFollowersIsClicked] = useState(false);
   const [data, setData] = useState(null);
