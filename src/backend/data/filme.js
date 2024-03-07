@@ -1,5 +1,7 @@
 import { ObjectId } from "mongodb";
 import { findOneDocument, getMongoCollection, updateOneDocument } from "./mongodb";
+import { adicionarImagemPerfilNome, getComentario, obterComentario } from "./comentario";
+import { adicionarInfoUtilizador } from "./utilizador";
 
 const defaultCollection = "filmes"
 
@@ -96,4 +98,15 @@ export async function atualizarAvaliacaoMediaFilme(idFilme, media) {
     const atualizar = await updateOneDocument(filter, novaAvaliacao, defaultCollection)
 
     return atualizar
+}
+
+export async function getListaComentariosFilmeInfo(id) {
+    const filter = { _id: new ObjectId(id) }
+
+    const arrayIdComentarios = await getComentariosFilme(filter)
+
+
+    const novaLista = await adicionarInfoUtilizador(arrayIdComentarios.comentarios)
+
+    return novaLista
 }

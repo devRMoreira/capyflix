@@ -1,18 +1,24 @@
 import { adicionarLista, removerLista } from "@/backend/data/listas"
-import { getSerie, getSerieAleatoria } from "@/backend/data/serie"
+import { getListaComentariosSerieInfo, getSerie, getSerieAleatoria } from "@/backend/data/serie"
 
 export default async function handler(req, res) {
 
     if (req.method === "GET") {
 
-        if(req.query.id === "random"){
+        if (req.query.id === "random") {
 
             const serie = await getSerieAleatoria()
 
             return res.status(200).json(serie)
         }
 
-        const id = req.query.id
+        const id = req.query.id.slice(0, 24)
+
+        if (req.query.id.includes("comentarios")) {
+
+            const lista = await getListaComentariosSerieInfo(id)
+            return res.status(200).json(lista)
+        }
 
         if (id.length !== 24) {
             return res.status(403).json({
@@ -41,7 +47,7 @@ export default async function handler(req, res) {
         const conteudo = {
             idSerie: req.query.id,
             idUtilizador: req.body.idUtilizador,
-            episodio: req.body.episodio??null
+            episodio: req.body.episodio ?? null
         }
 
         const adicionado = await adicionarLista(conteudo, lista)
@@ -64,7 +70,7 @@ export default async function handler(req, res) {
         const conteudo = {
             idSerie: req.query.id,
             idUtilizador: req.body.idUtilizador,
-            episodio: req.body.episodio??null
+            episodio: req.body.episodio ?? null
         }
 
         const removido = await removerLista(conteudo, lista)
