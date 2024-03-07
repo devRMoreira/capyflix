@@ -1,5 +1,5 @@
 import { SerieCompleta } from "@/frontend/components/SerieCompleta";
-import { getSerie } from "@/frontend/services/serie";
+import { fetchSerie } from "@/frontend/services/serie";
 import { useEffect, useState } from "react";
 import { router } from "../_app";
 
@@ -13,14 +13,14 @@ export default function Serie() {
 
         const { id } = router.query
 
-        async function getDadosSerie(id) {
+        async function fetchDadosSerie(id) {
 
-            const dados = await getSerie(id)
+            const dados = await fetchSerie(id)
 
             setSerie(dados)
         }
 
-        getDadosSerie(id)
+        fetchDadosSerie(id)
     }, [router.isReady]);
 
     return (

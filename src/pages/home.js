@@ -1,13 +1,17 @@
 import { HomeFilmeSerieResumo } from "@/frontend/components/HomeFilmeSerieResumo";
-import { getFilmeAleatorio } from "@/frontend/services/filme";
-import { getUltimosCinco } from "@/frontend/services/pesquisa";
-import { getSerieAleatoria } from "@/frontend/services/serie";
+import { fetchFilmeAleatorio } from "@/frontend/services/filme";
+import { fetchUltimosCinco } from "@/frontend/services/pesquisa";
+import { fetchSerieAleatoria } from "@/frontend/services/serie";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { userStore } from "./_app";
 
 
 
 export default function home() {
+
+  const { user, setUser } = userStore((state) => state)
+
 
   const [conteudo, setConteudo] = useState({
     filmeAleatorio: {},
@@ -17,20 +21,21 @@ export default function home() {
 
   useEffect(() => {
 
-    async function getDados() {
-      const filmeAleatorio = await getFilmeAleatorio()
+
+    async function fetchDados() {
+      const filmeAleatorio = await fetchFilmeAleatorio()
       setConteudo((ps) => ({ ...ps, filmeAleatorio: filmeAleatorio }))
 
 
-      const serieAleatoria = await getSerieAleatoria()
+      const serieAleatoria = await fetchSerieAleatoria()
       setConteudo((ps) => ({ ...ps, serieAleatoria: serieAleatoria }))
 
-      const ultimosCinco = await getUltimosCinco()
+      const ultimosCinco = await fetchUltimosCinco()
       setConteudo((ps) => ({ ...ps, ultimosCinco: ultimosCinco }))
 
     }
 
-    getDados()
+    fetchDados()
 
   }, [])
 

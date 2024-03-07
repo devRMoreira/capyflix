@@ -4,10 +4,13 @@ import { loginUtilizador } from "@/frontend/services/autenticacao";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { toastError } from "./_app";
+import { toastError, userStore } from "./_app";
 import { useRouter } from "next/router";
+import { fetchDadosUtilizador } from "@/frontend/services/utilizador";
 
 export default function index() {
+  const { user, setUser } = userStore((state) => state)
+
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
 
@@ -24,20 +27,23 @@ export default function index() {
   async function handleClick(e) {
     e.preventDefault();
 
-    if(!email || !senha){
+    if (!email || !senha) {
       return toastError("Por favor preenche todos os campos.")
     }
 
-    const sucesso = await loginUtilizador(email, senha)
+    const login = await loginUtilizador(email, senha)
 
-    if (!sucesso) {
+
+    if (!login) {
       toastError("Dados inválidos.")
     } else {
-      
+      const fetchUtilizador = await fetchDadosUtilizador(login)
+      setUser(fetchUtilizador)
+
+
       router.push("/home")
     }
-    console.log("Email:", email);
-    console.log("Senha:", senha);
+
   }
 
   return (
