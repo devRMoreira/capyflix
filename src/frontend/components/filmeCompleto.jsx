@@ -56,20 +56,18 @@ export function FilmeCompleto({ filme }) {
   };
 
   return (
-    <div className="h-full bg-fundo-principal relative ">
+    <div className="flex flex-col md:max-w-96 min-h-screen h-full bg-fundo-principal">
       <a href="/">
         <img src="/icones/Back.png" className=" ml-4 mt-6"></img>
       </a>
       <div className="flex mt-5">
         <div className="flex justify-center">
-        <div className="flex justify-center ">
-          <Image
-            className="ml-5 object-cover w-40 h-60"
-            src={filme.capa}
-            width="80"
-            height="80"
-          />
-        </div>
+            <Image
+              className="ml-5 object-cover w-40 h-60"
+              src={filme.capa}
+              width="80"
+              height="80"
+            />
         </div>
         <div className="relative ml-5 mr-1 ">
           <h2 className="text-sm leading-6 text-main-white font-semibold ">
@@ -87,11 +85,14 @@ export function FilmeCompleto({ filme }) {
             Data de Lançamento:{" "}
             {moment(filme.dataLancamento).format("DD/MM/YYYY")}
           </h3>
-          <p className="text-sm leading-6 text-main-white">Duração: {filme.duracao}min.</p>
+          <p className="text-sm leading-6 text-main-white">
+            Duração: {filme.duracao}min.
+          </p>
           <p className="text-sm leading-6 text-main-white">
             {filme.classificacaoEtaria}
           </p>
-          <p className="text-sm leading-6 text-main-white">Classificação:  {filme.mediaAvaliacoes}
+          <p className="text-sm leading-6 text-main-white">
+            Classificação: {filme.mediaAvaliacoes}
           </p>
           <div className="flex items-center justify-end gap-3 mr-10 mt-3">
             <button onClick={iconeVistoIsClicked}>
@@ -143,16 +144,41 @@ export function FilmeCompleto({ filme }) {
         <p className="text-main-white mt-1">{filme.realizador.nome}</p>
       </div>
       <div className="mt-5">
-        <div className="flex items-center flex-grow mt-3 border border-laranja-principal rounded-lg w-96 content-center mx-auto" >
-        <button className=" w-96 h-10 text-main-white font-semibold ml-5 text-left">Comentários:
-        </button>
-         <img src="/icones/dropdown.png" className="mr-2 h-6"></img>
+        <div className="flex items-center flex-grow mt-3 border border-laranja-principal rounded-lg w-96 content-center mx-auto">
+          <button className=" w-96 h-10 text-main-white font-semibold ml-5 text-left">
+            Comentários:
+          </button>
+          <img src="/icones/dropdown.png" className="mr-2 h-6"></img>
         </div>
-        <div>
-          <div className="border border-laranja-principal"><Comentario avatar="/icones/avatar.png" username="Carolina" conteudo="Gostei muito." /></div>
-          <div><Comentario avatar="/icones/avatar.png" username="Ricardo" conteudo="Razoável." /></div>
-          <div><Comentario avatar="/icones/avatar.png" username="Eduardo" conteudo="Filme bastante bom." /></div>
-          <div><Comentario avatar="/icones/avatar.png" username="Nuno" conteudo="Péssimo." /></div>
+        <div className="">
+          <div className="border border-laranja-principal rounded-xl w-80 h-12 ml-10 mb-4 mt-4">
+            <Comentario
+              avatar="/icones/avatar.png"
+              username="Carolina"
+              conteudo="Gostei muito."
+            />
+          </div>
+          <div className="border border-laranja-principal rounded-xl w-80 h-12 ml-10 mb-4">
+            <Comentario
+              avatar="/icones/avatar.png"
+              username="Ricardo"
+              conteudo="Razoável."
+            />
+          </div>
+          <div className="border border-laranja-principal rounded-xl w-80 h-12 ml-10 mb-4">
+            <Comentario
+              avatar="/icones/avatar.png"
+              username="Eduardo"
+              conteudo="Filme bastante bom."
+            />
+          </div>
+          <div className="border border-laranja-principal rounded-xl w-80 h-12 ml-10 mb-4">
+            <Comentario
+              avatar="/icones/avatar.png"
+              username="Nuno"
+              conteudo="Péssimo."
+            />
+          </div>
         </div>
       </div>
     </div>
