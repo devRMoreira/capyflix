@@ -1,6 +1,7 @@
 import { ObjectId } from "mongodb";
 import { findOneDocument, getMongoCollection, insertDocument, replaceDocument, updateOneDocument } from "./mongodb"
 import { filtrarInformacaoPerfil } from "../services/utilizador";
+import { obterComentario } from "./comentario";
 
 const defaultCollection = "utilizadores"
 
@@ -229,6 +230,19 @@ export async function getUserAvatarName(idUtilizador) {
 
     const collection = await getMongoCollection(defaultCollection)
     return await collection?.findOne(filter, { projection })
+
+}
+
+export async function adicionarInfoUtilizador(arrayId) {
+
+    let novoArray = []
+
+    for (let i = 0; i < arrayId.length; i++) {
+        novoArray.push(await obterComentario(arrayId[i]))
+    }
+
+    return novoArray
+
 
 }
 

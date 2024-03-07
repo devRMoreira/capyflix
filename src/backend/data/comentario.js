@@ -1,6 +1,6 @@
 import { ObjectId } from "mongodb";
 import { findDocuments, findOneDocument, getMongoCollection, insertDocument } from "./mongodb";
-import { adicionarComentarioHistoricoUtilizador, findUserInCollection, getUserAvatar } from "./utilizador";
+import { adicionarComentarioHistoricoUtilizador, findUserInCollection, getUserAvatar, getUserAvatarName } from "./utilizador";
 import { adicionarComentarioFilme, getComentariosFilme } from "./filme";
 import { adicionarComentarioSerie, getComentariosSerie } from "./serie";
 
@@ -16,12 +16,12 @@ export async function getComentario(id) {
         }
     }
 
-    const comentarioComAvatar = await adicionarImagemPerfil(comentario)
+    const comentarioComInfo = await adicionarImagemPerfilNome(comentario)
 
 
     return {
         mensagem: "Sucesso.",
-        comentarioComAvatar
+        comentarioComInfo
     }
 }
 
@@ -83,16 +83,29 @@ export async function getTodasAvaliacoes(arrayIdComentarios) {
     return await collection?.find(filter, { projection }).toArray()
 }
 
-async function adicionarImagemPerfil(comentario) {
+export async function adicionarImagemPerfilNome(comentario) {
 
-    const imagemPerfil = await getUserAvatar(comentario.utilizador)
+    const imagemPerfilNome = await getUserAvatarName(comentario.utilizador)
 
     return {
         ...comentario,
-        imagemPerfil: imagemPerfil.imagemPerfil
+        imagemPerfil: imagemPerfilNome.imagemPerfil,
+        nome: imagemPerfilNome.nome
     }
 }
 
+
+export async function obterComentario(id) {
+
+    const filter = id
+    const comentario = await findOneDocument(filter, defaultCollection)
+
+    const comentarioComInfo = await adicionarImagemPerfilNome(comentario)
+
+
+    return comentarioComInfo
+
+}
 
 // * Modelo novo comentário
 // {

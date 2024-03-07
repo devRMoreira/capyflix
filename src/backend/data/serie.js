@@ -1,5 +1,6 @@
 import { ObjectId } from "mongodb";
 import { findOneDocument, getMongoCollection, updateOneDocument } from "./mongodb";
+import { adicionarInfoUtilizador } from "./utilizador";
 
 const defaultCollection = "series"
 
@@ -95,4 +96,15 @@ export async function atualizarAvaliacaoMediaSerie(idSerie, media) {
     const atualizar = await updateOneDocument(filter, novaAvaliacao, defaultCollection)
 
     return atualizar
+}
+
+export async function getListaComentariosSerieInfo(id) {
+    const filter = { _id: new ObjectId(id) }
+
+    const arrayIdComentarios = await getComentariosSerie(filter)
+
+
+    const novaLista = await adicionarInfoUtilizador(arrayIdComentarios.comentarios)
+
+    return novaLista
 }

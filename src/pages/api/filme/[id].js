@@ -1,18 +1,26 @@
 import { adicionarLista, removerLista } from "@/backend/data/listas"
-import { getFilme, getFilmeAleatorio } from "@/backend/data/filme"
+import { getListaComentariosFilmeInfo, getFilme, getFilmeAleatorio } from "@/backend/data/filme"
+import { getComentario } from "@/backend/data/comentario"
 
 export default async function handler(req, res) {
 
     if (req.method === "GET") {
 
-        if(req.query.id === "random"){
+        if (req.query.id === "random") {
 
             const filme = await getFilmeAleatorio()
 
             return res.status(200).json(filme)
         }
 
-        const id = req.query.id
+        const id = req.query.id.slice(0, 24)
+
+        if (req.query.id.includes("comentarios")) {
+
+            const lista = await getListaComentariosFilmeInfo(id)
+            return res.status(200).json(lista)
+        }
+
 
         if (id.length !== 24) {
             return res.status(403).json({
