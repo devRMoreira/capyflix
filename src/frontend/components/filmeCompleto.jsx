@@ -148,6 +148,12 @@ export function FilmeCompleto({ filme }) {
         </button>
          <img src="/icones/dropdown.png" className="mr-2 h-6"></img>
         </div>
+        <div>
+          <div className="border border-laranja-principal"><Comentario avatar="/icones/avatar.png" username="Carolina" conteudo="Gostei muito." /></div>
+          <div><Comentario avatar="/icones/avatar.png" username="Ricardo" conteudo="Razoável." /></div>
+          <div><Comentario avatar="/icones/avatar.png" username="Eduardo" conteudo="Filme bastante bom." /></div>
+          <div><Comentario avatar="/icones/avatar.png" username="Nuno" conteudo="Péssimo." /></div>
+        </div>
       </div>
     </div>
   );
