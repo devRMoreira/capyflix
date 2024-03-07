@@ -123,7 +123,6 @@ export default function Perfil() {
       try {
         const response = await fetch(
           `http://localhost:3000/api/utilizador/${id}`
-          // { body: { lista: "visto" } }
         );
         if (!response.ok) {
           throw new Error("Erro ao buscar os dados");
