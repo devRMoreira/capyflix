@@ -1,42 +1,8 @@
 import moment from "moment";
 import Image from "next/image";
-import { useState } from "react";
-import { Comentario } from "./Comentario";
+import { useEffect, useState } from "react";
+import { getFilme } from "../services/filme";
 
-const filme = {
-  _id: "65de739be8cef6ce35e6ec23",
-  titulo: "A Vida Secreta de Walter Mitty",
-  tituloOriginal: "The Secret Life of Walter Mitty",
-  genero: ["Aventura", "Comédia", "Drama", "Fantasia", "Romance"],
-  sinopse:
-    "Quando seu trabalho junto com o de seu colega é ameaçado, Walter entra em ação no mundo real se embarcando numa jornada global que se transforma em a aventura mais extraordinária do que qualquer coisa que ele poderia ter imaginado.",
-  realizador: {
-    nome: "Ben Stiller",
-    id: "65de73a5e8cef6ce35e6ec32",
-  },
-  elenco: [
-    {
-      nome: "Ben Stiller",
-      id: "65de73a5e8cef6ce35e6ec32",
-    },
-    {
-      nome: "Kristen Wiig",
-      id: "65de73a5e8cef6ce35e6ec33",
-    },
-    {
-      nome: "Jon Daly",
-      id: "65de73a5e8cef6ce35e6ec34",
-    },
-  ],
-  classificacaoEtaria: "+10",
-  capa: "https://upload.wikimedia.org/wikipedia/pt/d/dd/The_Secret_Life_of_Walter_Mitty.jpg",
-  trailer: "https://www.youtube.com/watch?v=QD6cy4PBQPI",
-  duracao: 114,
-  mediaAvaliacoes: 0,
-  dataLancamento: 1380927600000,
-  visualizacoes: 0,
-  comentarios: [],
-};
 
 export function FilmeCompleto({ filme }) {
   const [vistoIsClicked, setvistoIsClicked] = useState(false);
@@ -54,6 +20,7 @@ export function FilmeCompleto({ filme }) {
   const iconeLikeIsClicked = () => {
     setLikeIsClicked(!likeIsClicked);
   };
+
 
   return (
     <div className="flex flex-col md:max-w-96 min-h-screen h-full bg-fundo-principal">
@@ -77,8 +44,8 @@ export function FilmeCompleto({ filme }) {
             {filme.tituloOriginal}
           </h2>
           <h3 className="text-xs leading-6 text-main-white">
-            {filme.genero.map((ele, index) =>
-              index < filme.genero.length - 1 ? ele + "/" : ele
+            {filme.generos.map((ele, index) =>
+              index < filme.generos.length - 1 ? ele + "/" : ele
             )}
           </h3>
           <h3 className="text-sm leading-6 text-main-white">

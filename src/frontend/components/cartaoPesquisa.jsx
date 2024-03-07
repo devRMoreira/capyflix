@@ -1,10 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 
+
 export function CartãoPesquisa({ conteudo }) {
-    
+
     return (
-        <Link href={conteudo.tipo === "filme" ? "/filme" : "/serie"} onClick={() => handleClick()}>
+        <Link href={conteudo.tipo === "filme" ? `/testeFilme/${conteudo._id}` : `/serie/${conteudo._id}`}>
             <div className="border border-laranja-principal rounded-xl mt-3 mx-1 h-13 flex items-center h-10" >
                 <Image src={conteudo.capa} alt={conteudo.titulo} width="20" height="20" className="ml-2" />
                 <div className="flex flex-col">

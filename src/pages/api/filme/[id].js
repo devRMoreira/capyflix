@@ -31,7 +31,7 @@ export default async function handler(req, res) {
         const filme = await getFilme(id)
 
         if (filme.mensagem.includes("Sucesso")) {
-            return res.status(200).json(filme)
+            return res.status(200).json(filme.filme)
         } else {
             return res.status(403).json(filme)
         }

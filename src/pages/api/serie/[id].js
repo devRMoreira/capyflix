@@ -29,7 +29,7 @@ export default async function handler(req, res) {
         const serie = await getSerie(id)
 
         if (serie.mensagem.includes("Sucesso")) {
-            return res.status(200).json(serie)
+            return res.status(200).json(serie.serie)
         } else {
             return res.status(403).json(serie)
         }
