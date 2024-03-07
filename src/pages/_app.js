@@ -11,34 +11,76 @@ export const userStore = create((set) => ({
   userLogado: {
     "_id": "65e5a023de0f619624348e7a",
     "nome": "Gandalf, O Grande",
-    "conteudoVisto": [],
-    "conteudoPorVer": [],
+    "conteudoVisto": [
+      {
+        "tipo": "filme",
+        "id": "65de739be8cef6ce35e6ec23",
+        "visualizado": 1709669104047
+      },
+      {
+        "tipo": "serie",
+        "id": "65de739fe8cef6ce35e6ec2d",
+        "visualizado": 1709635083584
+      }
+    ],
+    "conteudoPorVer": [
+      {
+        "tipo": "serie",
+        "id": "65de739fe8cef6ce35e6ec2d",
+        "episodiosVistos": [
+          4
+        ]
+      },
+      {
+        "tipo": "filme",
+        "id": "65de739be8cef6ce35e6ec23"
+      },
+      {
+        "tipo": "serie",
+        "id": "65de739fe8cef6ce35e6ec30",
+        "episodiosVistos": []
+      },
+      {
+        "tipo": "serie",
+        "id": "65de739fe8cef6ce35e6ec2f",
+        "episodiosVistos": []
+      },
+      {
+        "tipo": "serie",
+        "id": "65de739fe8cef6ce35e6ec2e",
+        "episodiosVistos": []
+      }
+    ],
     "conteudoFavorito": [
-        {
-            "tipo": "serie",
-            "id": "65de739fe8cef6ce35e6ec30"
-        }
+      {
+        "tipo": "filme",
+        "id": "65de739be8cef6ce35e6ec23"
+      },
+      {
+        "tipo": "serie",
+        "id": "65de739fe8cef6ce35e6ec2d"
+      }
     ],
     "seguidores": [
-        "65e5a01cde0f619624348e79"
+      "65e5a01cde0f619624348e79"
     ],
     "quemSegue": [],
     "privado": false,
     "estatisticas": {
-        "filmes": {
-            "quantidade": 0,
-            "tempo": 0,
-            "generos": []
-        },
-        "series": {
-            "quantidade": 0,
-            "tempo": 0,
-            "generos": []
-        }
+      "filmes": {
+        "quantidade": 0,
+        "tempo": 0,
+        "generos": []
+      },
+      "series": {
+        "quantidade": 0,
+        "tempo": 0,
+        "generos": []
+      }
     },
     "imagemPerfil": "https://i.imgur.com/eOtKaB8.jpeg",
     "dataRegisto": 1709547555398
-},
+  },
   setUserLogado: (user) => set(() => ({ userLogado: user }))
 }))
 
