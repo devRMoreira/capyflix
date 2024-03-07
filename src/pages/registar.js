@@ -2,22 +2,22 @@ import { Botao } from "@/frontend/components/botao";
 import { Input } from "@/frontend/components/Input";
 import { registarUtilizador } from "@/frontend/services/utilizador";
 import { useState } from "react";
-import { toast, ToastContainer } from "react-toastify";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import 'react-toastify/dist/ReactToastify.css';
+import { toastError, toastSuccess } from "./_app";
 
 
 
 export default function Registar() {
-  
+
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [confirmarSenha, setConfirmarSenha] = useState("");
-  
+
   const router = useRouter()
-  
+
   const handleChangeNome = (event) => {
     setNome(event.target.value);
   };
@@ -38,7 +38,7 @@ export default function Registar() {
     event.preventDefault();
 
     if (senha !== confirmarSenha) {
-      toast.error("Dados inválidos")
+      toastError("Dados inválidos")
     }
 
     const sucesso = await registarUtilizador(nome, email, senha)
@@ -48,9 +48,9 @@ export default function Registar() {
     console.log("Senha Confirmada:", confirmarSenha);
 
     if (!sucesso) {
-      toast.error("O email já se enncontra registado")
+      toastError("O email já se encontra registado")
     } else {
-      toast.success("Registado com sucesso, por favor verifique o email")
+      toastSuccess("Registado com sucesso, por favor valide no email.")
       router.push("/")
     }
   }
@@ -106,7 +106,6 @@ export default function Registar() {
           <Botao title="REGISTAR"></Botao>
         </div>
       </form>
-      <ToastContainer />
     </div>
   );
 }
