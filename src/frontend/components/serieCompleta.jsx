@@ -43,8 +43,8 @@ export function SerieCompleta({ serie }) {
             {serie.tituloOriginal}
           </h2>
           <h3 className="text-sm leading-6 text-main-white">
-            {serie.genero.map((ele, index) =>
-              index < serie.genero.length - 1 ? ele + "/" : ele
+            {serie.generos.map((ele, index) =>
+              index < serie.generos.length - 1 ? ele + "/" : ele
             )}
           </h3>
           <h3 className="text-sm leading-6 text-main-white">
