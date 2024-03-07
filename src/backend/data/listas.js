@@ -1,7 +1,7 @@
 import { ObjectId } from "mongodb"
 import { updateOneDocument } from "./mongodb"
 import { encontrarIdArrayObjetos, filtrarArray, filtrarArrayObjetos } from "../services/util"
-import { getListaVistoUtilizador, getListaPorVerUtilizador, getListaFavoritosUtilizador, getEstatisticasUtilizador } from "./utilizador"
+import { getListaVistoUtilizador, getListaPorVerUtilizador, getListaFavoritosUtilizador } from "./utilizador"
 
 const defaultCollection = "utilizadores"
 
@@ -221,3 +221,4 @@ export async function removerEpisodio(conteudo) {
 
     return atualizar
 }
+

@@ -203,13 +203,28 @@ export async function getTodosUtilizadores(filter, projection) {
     return await collection?.find(filter, { projection }).toArray()
 }
 
-export async function getUserAvatar(idUtilizador){
+export async function getUserAvatar(idUtilizador) {
 
-    const filter = {_id: new ObjectId(idUtilizador)}
+    const filter = { _id: new ObjectId(idUtilizador) }
 
     const projection = {
         imagemPerfil: 1,
         _id: 0
+    }
+
+    const collection = await getMongoCollection(defaultCollection)
+    return await collection?.findOne(filter, { projection })
+
+}
+
+export async function getUserAvatarName(idUtilizador) {
+
+    const filter = { _id: new ObjectId(idUtilizador) }
+
+    const projection = {
+        imagemPerfil: 1,
+        nome: 1,
+        _id: 1
     }
 
     const collection = await getMongoCollection(defaultCollection)

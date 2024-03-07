@@ -1,5 +1,5 @@
 import { getCapas } from "@/backend/data/capas"
-import { adicionarSeguidor, removerSeguidor } from "@/backend/data/seguidores"
+import { adicionarSeguidor, getListaQuemSegue, getListaSeguidores, removerSeguidor } from "@/backend/data/seguidores"
 import { alterarPassword, alterarTipoPerfil, findUserInCollection } from "@/backend/data/utilizador"
 import { passwordEncryption } from "@/backend/services/utilizador"
 
@@ -31,6 +31,20 @@ export default async function handler(req, res) {
             const listaCapas = await getCapas(id, lista)
 
             return res.status(200).json(listaCapas)
+        }
+
+        if (req.query.id.includes("seguidores")) {
+
+            const listaSeguidores = await getListaSeguidores(id)
+
+            return res.status(200).json(listaSeguidores)
+        }
+
+        if (req.query.id.includes("quemSegue")) {
+
+            const listaQuemSegue = await getListaQuemSegue(id)
+
+            return res.status(200).json(listaQuemSegue)
         }
 
         if (id.length !== 24) {

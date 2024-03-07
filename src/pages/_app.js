@@ -7,7 +7,7 @@ export default function App({ Component, pageProps }) {
   const router = useRouter()
   const { asPath, route, pathname } = router
 
-  if (asPath === "/login" || asPath === "/registar") {
+  if (asPath === "/" || asPath === "/registar") {
     return <div>
       <Component {...pageProps} />
     </div>

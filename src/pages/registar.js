@@ -51,7 +51,7 @@ export default function Registar() {
         </div>
         <div className="mt-6">
           <Input
-            icone="/icones/At Sign.png"
+            icone="/icones/At sign.png"
             placeholder="Insere o teu endereço de email"
             type="email"
             id="email"
