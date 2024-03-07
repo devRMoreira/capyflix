@@ -42,7 +42,7 @@ export default function Login() {
             onChange={handleChangeNome}
           ></Input>
         </div>
-        <div className=" mb-20">
+        <div className=" mb-10">
           <Input
             icone="/icones/Password Key.png"
             placeholder="Insere a tua palavra-passe"

@@ -1,13 +1,23 @@
 import { Botao } from "@/frontend/components/botao";
 import { Input } from "@/frontend/components/Input";
+import { registarUtilizador } from "@/frontend/services/utilizador";
 import { useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
+import Image from "next/image";
+import { useRouter } from "next/router";
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 export default function Registar() {
+  
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [confirmarSenha, setConfirmarSenha] = useState("");
-
+  
+  const router = useRouter()
+  
   const handleChangeNome = (event) => {
     setNome(event.target.value);
   };
@@ -24,22 +34,35 @@ export default function Registar() {
     setConfirmarSenha(event.target.value);
   };
 
-  function handleClick(event) {
+  async function handleClick(event) {
     event.preventDefault();
 
+    if (senha !== confirmarSenha) {
+      toast.error("Dados inválidos")
+    }
+
+    const sucesso = await registarUtilizador(nome, email, senha)
     console.log("Nome:", nome);
     console.log("Email:", email);
     console.log("Senha:", senha);
     console.log("Senha Confirmada:", confirmarSenha);
+
+    if (!sucesso) {
+      toast.error("O email já se enncontra registado")
+    } else {
+      toast.success("Registado com sucesso, por favor verifique o email")
+      router.push("/")
+    }
   }
 
   return (
     <div className="flex flex-col items-center max-w-96 min-h-screen h-full bg-fundo-principal">
-      <h1 className=" mb-10 text-2xl mt-16 font-semibold text-main-white">
+      <Image src="/logo.png" width="300" height="50" />
+      <h1 className=" mb-10 text-2xl font-semibold text-main-white">
         REGISTA-TE
       </h1>
       <form onSubmit={handleClick} className=" flex flex-col items-center">
-        <div className="mt-6">
+        <div >
           <Input
             icone="/icones/User.png"
             placeholder="Insere o teu nome de utilizador"
@@ -79,10 +102,11 @@ export default function Registar() {
             onChange={handleChangeConfirmarSenha}
           ></Input>
         </div>
-        <div className="mt-20 mb-28">
+        <div className="mt-10">
           <Botao title="REGISTAR"></Botao>
         </div>
       </form>
+      <ToastContainer />
     </div>
   );
 }
