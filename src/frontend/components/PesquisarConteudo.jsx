@@ -19,7 +19,7 @@ export default function PesquisarConteudo() {
 
   return (
     <div className="min-h-screen md:max-w-96 h-full bg-fundo-principal flex flex-col ">
-      <div className="border border-laranja-principal rounded-2xl mt-5 mx-1 h-13 flex items-center">
+      <div className="border border-laranja-principal rounded-2xl mt-5 mx-1 h-20 items-center flex ">
         <button className="mr-2 focus:outline-none">
           <a href="/">
             <img src="/icones/Back.svg" alt="Back Arrow" width="50" height="50" />
