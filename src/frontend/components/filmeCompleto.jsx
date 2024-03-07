@@ -57,18 +57,28 @@ export function FilmeCompleto({ filme }) {
 
   return (
     <div className="h-full bg-fundo-principal relative ">
-      <div className="flex">
-        <div className="mt-24 flex justify-center">
-          <Image className="ml-5" src={filme.capa} width="120" height="100" />
+      <a href="/">
+        <img src="/icones/Back.png" className=" ml-4 mt-6"></img>
+      </a>
+      <div className="flex mt-5">
+        <div className="flex justify-center">
+        <div className="flex justify-center ">
+          <Image
+            className="ml-5 object-cover w-40 h-60"
+            src={filme.capa}
+            width="80"
+            height="80"
+          />
         </div>
-        <div className="relative ml-5 mt-24 mr-1 ">
-          <h2 className="text-sm leading-6 text-main-white font-semibold">
+        </div>
+        <div className="relative ml-5 mr-1 ">
+          <h2 className="text-sm leading-6 text-main-white font-semibold ">
             {filme.titulo}
           </h2>
           <h2 className="text-sm leading-6 text-main-white font-medium">
             {filme.tituloOriginal}
           </h2>
-          <h3 className="text-sm leading-6 text-main-white">
+          <h3 className="text-xs leading-6 text-main-white">
             {filme.genero.map((ele, index) =>
               index < filme.genero.length - 1 ? ele + "/" : ele
             )}
@@ -77,14 +87,13 @@ export function FilmeCompleto({ filme }) {
             Data de Lançamento:{" "}
             {moment(filme.dataLancamento).format("DD/MM/YYYY")}
           </h3>
-          <p className="text-sm leading-6 text-main-white">{filme.duracao}</p>
+          <p className="text-sm leading-6 text-main-white">Duração: {filme.duracao}min.</p>
           <p className="text-sm leading-6 text-main-white">
             {filme.classificacaoEtaria}
           </p>
-          <p className="text-sm leading-6 text-main-white">
-            {filme.mediaAvaliacoes}
+          <p className="text-sm leading-6 text-main-white">Classificação:  {filme.mediaAvaliacoes}
           </p>
-          <div className="flex items-center justify-end gap-3 mr-10">
+          <div className="flex items-center justify-end gap-3 mr-10 mt-3">
             <button onClick={iconeVistoIsClicked}>
               {vistoIsClicked ? (
                 <img src="/icones/visto-pintado.png" className="w-7 h-7"></img>
@@ -121,9 +130,9 @@ export function FilmeCompleto({ filme }) {
 
       <div className="bg-fundo-principal flex flex-col items-left ml-5 mr-5">
         <h4 className="text-main-white mt-3 font-semibold">Sinopse:</h4>
-        <p className="text-main-white mt-3">{filme.sinopse}</p>
+        <p className="text-main-white mt-1">{filme.sinopse}</p>
         <h4 className="text-main-white mt-3 font-semibold">Elenco:</h4>
-        <p className="text-main-white mt-3">
+        <p className="text-main-white mt-1">
           {filme.elenco.map((ele, i) => (
             <span>
               {i < filme.elenco.length - 1 ? `${ele.nome} /` : " " + ele.nome}{" "}
@@ -131,13 +140,14 @@ export function FilmeCompleto({ filme }) {
           ))}
         </p>
         <h4 className="text-main-white mt-3 font-semibold">Realizador:</h4>
-        <p className="text-main-white mt-3">{filme.realizador.nome}</p>
+        <p className="text-main-white mt-1">{filme.realizador.nome}</p>
       </div>
-      <div className="flex justify-center mt-3">
-        <div className="border-t-2 border-gray-200 w-4/5 mt-3"></div>
-      </div>
-      <div>
-        <button className="text-main-white font-semibold ml-5 mt-3 border border-laranja-principal rounded-lg">Comentários</button>
+      <div className="mt-5">
+        <div className="flex items-center flex-grow mt-3 border border-laranja-principal rounded-lg w-96 content-center mx-auto" >
+        <button className=" w-96 h-10 text-main-white font-semibold ml-5 text-left">Comentários:
+        </button>
+         <img src="/icones/dropdown.png" className="mr-2 h-6"></img>
+        </div>
       </div>
     </div>
   );
