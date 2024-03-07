@@ -91,10 +91,17 @@ export default function Ligacoes() {
             <>
               {quemSegue.map((item, index) => (
                 <div key={index} className=" flex items-center gap-2 ml-6 mt-2">
-                  <img
-                    src={item?.imagemPerfil}
-                    className=" border-2 border-laranja-principal object-cover rounded-full max-w-full max-h-full w-12 h-12"
-                  ></img>
+                  {item?.imagemPerfil ? (
+                    <img
+                      src={item?.imagemPerfil}
+                      className=" border-2 border-laranja-principal object-cover rounded-full max-w-full max-h-full w-12 h-12"
+                    ></img>
+                  ) : (
+                    <img
+                      src="/icones/avatar.png"
+                      className=" border-2 border-laranja-principal object-cover rounded-full max-w-full max-h-full w-12 h-12"
+                    ></img>
+                  )}
                   <p className=" text-laranja-principal font-medium">
                     {item?.nome}
                   </p>
@@ -118,10 +125,17 @@ export default function Ligacoes() {
             <>
               {seguidores.map((item, index) => (
                 <div key={index} className=" flex items-center gap-2 ml-6 mt-2">
-                  <img
-                    src={item?.imagemPerfil}
-                    className=" border-2 border-laranja-principal object-cover rounded-full max-w-full max-h-full w-12 h-12"
-                  ></img>
+                  {item?.imagemPerfil ? (
+                    <img
+                      src={item?.imagemPerfil}
+                      className=" border-2 border-laranja-principal object-cover rounded-full max-w-full max-h-full w-12 h-12"
+                    ></img>
+                  ) : (
+                    <img
+                      src="/icones/avatar.png"
+                      className=" border-2 border-laranja-principal object-cover rounded-full max-w-full max-h-full w-12 h-12"
+                    ></img>
+                  )}
                   <p className=" text-laranja-principal font-medium">
                     {item?.nome}
                   </p>
