@@ -19,10 +19,8 @@ export default function perfiluserLogado() {
 
     useEffect(() => {
         async function getListas() {
-            console.log("ola")
             const listaAssistidos = await fetchListaVisto(userLogado._id)
             setListas((ps) => ({ ...ps, assistidos: listaAssistidos }))
-            console.log(listaAssistidos)
             const listaQueroAssistir = await fetchListaPorVer(userLogado._id)
             setListas((ps) => ({ ...ps, queroAssistir: listaQueroAssistir }))
 
@@ -45,7 +43,6 @@ export default function perfiluserLogado() {
             {Object.keys(userLogado).length > 0 && (
 
                 <div className=" min-h-screen md:max-w-96 h-full bg-fundo-principal flex flex-col">
-                    {console.log(listas)}
                     <PerfilNav
                         avatar={userLogado.imagemPerfil}
                         username={userLogado.nome}

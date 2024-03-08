@@ -22,7 +22,6 @@ export default function comentarios() {
 
         async function getComentarios() {
             const dados = await fetchComentariosUtilizador(id)
-            console.log(dados)
             setComentarios(dados)
 
         }

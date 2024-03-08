@@ -64,7 +64,6 @@ export default function perfil() {
             {Object.keys(utilizador).length > 0 && (
 
                 <div className=" min-h-screen md:max-w-96 h-full bg-fundo-principal flex flex-col">
-                    {console.log(listas)}
                     <PerfilNav
                         avatar={utilizador.imagemPerfil}
                         username={utilizador.nome}
