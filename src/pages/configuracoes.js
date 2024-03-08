@@ -16,7 +16,7 @@ export default function configuracoes() {
     const res = await togglePrivado(booleano, userLogado._id)
 
     if (res.ok) {
-      setUserLogado((ps) => ({...ps, privado:booleano}))
+      setUserLogado((ps) => ({ ...ps, privado: booleano??false }))
       toast.success("Alterado com sucesso.")
     } else {
       toast.error("Algo correu mal!")
