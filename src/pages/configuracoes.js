@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import Link from "next/link";
 
 export default function configuracoes() {
-  const { userLogado } = userStore((state) => state)
+  const { userLogado, setUserLogado } = userStore((state) => state)
   const [isToggled, setIsToggled] = useState(userLogado.privado);
   const [desativar, setDesativar] = useState(false)
 
@@ -16,6 +16,7 @@ export default function configuracoes() {
     const res = await togglePrivado(booleano, userLogado._id)
 
     if (res.ok) {
+      setUserLogado((ps) => ({ ...ps, privado: booleano ?? false }))
       toast.success("Alterado com sucesso.")
     } else {
       toast.error("Algo correu mal!")
@@ -48,7 +49,8 @@ export default function configuracoes() {
         className=" flex justify-between  mt-12 mx-6 text-main-white border-b border-borda-cinza"
       >
         Perfil Privado
-        <img src={`/icones/toggle-${isToggled ? "on" : "off"}.png`} className="mb-3" />
+        <img src={`/icones/toggle-${isToggled ? "on" : "off"}.png`}
+          className="mb-3" />
 
       </button>
       <a
