@@ -11,15 +11,15 @@ export function Comentario({ comentario }) {
   }
 
   return (
-    <div className=" flex flex-col gap-1 ml-8 text-xs text-main-white">
-      <div className=" flex items-center ">
+    <div className=" flex flex-col ml-4 text-xs text-main-white ">
+      <div className=" flex ">
         <a onClick={handleClick}>
-          <img src={comentario.imagemPerfil} className=" w-4 h-4 mt-1" />
-          <div className=" ml-2">Comentário de {comentario.nome}:</div>
+          <img src={comentario.imagemPerfil} alt="Avatar do utilizador" className=" w-5 h-5 mt-1" />
+          <div className=" ml-6">Comentário de {comentario.nome}:</div>
         </a>
       </div>
-      <div className=" flex justify-start ml-8 font-light">{comentario.comentario}<span className="pl-3">Nota: {comentario.avaliacao}</span> </div>
-
+<div className=" flex justify-start ml-8 font-light">{comentario.comentario}<span className="pl-3">Nota: {comentario.avaliacao}</span> </div>
+   
     </div>
   );
 }

@@ -56,7 +56,7 @@ export function SerieCompleta({ serie }) {
   return (
     <div className="flex flex-col md:max-w-96 min-h-screen h-full bg-fundo-principal">
       <a href="/">
-        <img src="/icones/Back.png" className=" ml-4 mt-6"></img>
+        <img src="/icones/Back.png" className=" ml-4 mt-10"></img>
       </a>
       <div className="flex mt-5">
         <div className="flex justify-center ">
@@ -177,12 +177,12 @@ export function SerieCompleta({ serie }) {
               comentarios.comentarios.length > 0 ?
 
                 comentarios.comentarios.map((ele) =>
-                  <div className="border border-laranja-principal rounded-xl w-80 h-12 ml-10 mb-4 mt-4">
+                  <div className="border border-laranja-principal rounded-xl w-80 h-16 ml-10 mb-4 mt-4">
                     {/* <div className="border border-laranja-principal rounded-xl w-80 h-12 ml-10 mb-4"> */}
                     <Comentario comentario={ele} />
                   </div>)
 
-                : <div className="border border-laranja-principal rounded-xl w-80 h-12 ml-10 mb-4 mt-4">
+                : <div className="border border-laranja-principal rounded-xl w-80 h-14 ml-10 mb-4 mt-4">
                   <h1 className="text-main-white text-center pt-3">Esta série ainda não tem comentários!</h1>
                 </div>
 
