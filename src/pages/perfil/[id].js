@@ -2,14 +2,11 @@ import { PerfilNav } from "@/frontend/components/PerfilNav";
 import { Estatisticas } from "@/frontend/components/Estatisticas";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { fetchDadosUtilizador } from "@/frontend/services/utilizador";
-import { userStore } from "../_app";
+import { fetchDadosUtilizador, fetchPrivado } from "@/frontend/services/utilizador";
 import { fetchListaFavoritos, fetchListaPorVer, fetchListaVisto } from "@/frontend/services/listas";
 
 
 export default function perfil() {
-
-    const { userLogado } = userStore((state) => state)
 
     const [utilizador, setUtilizador] = useState({})
     const [listas, setListas] = useState({
@@ -24,10 +21,21 @@ export default function perfil() {
 
         const { id } = router.query
 
+
+
         async function getUser() {
 
-            const dados = await fetchDadosUtilizador(id)
-            setUtilizador(dados)
+            const privado = await fetchPrivado(id)
+
+            if (!privado.privado) {
+
+                const dados = await fetchDadosUtilizador(id)
+                setUtilizador(dados)
+                
+            } else {
+                
+                router.push(`/perfil/privado/${id}`)
+            }
 
         }
 

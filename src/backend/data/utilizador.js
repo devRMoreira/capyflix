@@ -127,9 +127,11 @@ export async function getHistoricoComentariosUtilizador(filter) {
     return await collection?.findOne(filter, { projection })
 }
 
-async function getPrivado(filter) {
+export async function getPrivado(id) {
 
-    const projection = { privado: 1, _id: 0 }
+    const filter = { _id: new ObjectId(id) }
+
+    const projection = { privado: 1 }
 
     const collection = await getMongoCollection(defaultCollection)
     return await collection?.findOne(filter, { projection })

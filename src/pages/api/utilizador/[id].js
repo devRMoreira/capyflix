@@ -1,6 +1,6 @@
 import { getCapas } from "@/backend/data/capas"
 import { adicionarSeguidor, getListaQuemSegue, getListaSeguidores, removerSeguidor } from "@/backend/data/seguidores"
-import { alterarPassword, alterarTipoPerfil, findUserInCollection, getHistoricoComentariosUtilizador } from "@/backend/data/utilizador"
+import { alterarPassword, alterarTipoPerfil, findUserInCollection, getHistoricoComentariosUtilizador, getPrivado } from "@/backend/data/utilizador"
 import { passwordEncryption } from "@/backend/services/utilizador"
 import { ObjectId } from "mongodb"
 
@@ -9,6 +9,12 @@ export default async function handler(req, res) {
     if (req.method === "GET") {
 
         const id = req.query.id.slice(0, 24)
+
+        if (req.query.id.includes("privado")) {
+            const estado = await getPrivado(id)
+
+            return res.status(200).json(estado)
+        }
 
         if (req.query.id.includes("porVer")) {
             const lista = "porVer"

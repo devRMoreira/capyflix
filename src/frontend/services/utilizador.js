@@ -50,3 +50,26 @@ export async function togglePrivado(booleano, id) {
 
     }
 }
+
+export async function fetchPrivado(id) {
+
+    const response = await fetch(`http://localhost:3000/api/utilizador/${id}privado`)
+
+    return await response.json()
+}
+
+export async function fetchDadosUtilizadorPrivado(id) {
+
+    const response = await fetch(
+        `http://localhost:3000/api/utilizador/${id}`
+    );
+    if (!response.ok) {
+        throw new Error("Erro ao buscar os dados");
+    }
+    const jsonData = await response.json();
+
+    return {
+        nome: jsonData.utilizadorFiltrado.nome,
+        imagemPerfil: jsonData.utilizadorFiltrado.imagemPerfil
+    }
+}
