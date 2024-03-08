@@ -210,7 +210,7 @@ export function SerieCompleta({ serie }) {
           ))}
         </div>
         <div className="mt-5">
-          <div className="flex items-center flex-grow mt-3 border border-laranja-principal rounded-lg w-96 content-center mx-auto">
+          <div className="flex items-center mt-3 border border-laranja-principal rounded-lg  content-center">
             <button className=" w-96 h-10 text-main-white font-semibold ml-5 text-left" onClick={handleComentarios}>
               Comentários
             </button>
@@ -222,7 +222,7 @@ export function SerieCompleta({ serie }) {
               comentarios.comentarios.length > 0 ?
 
                 comentarios.comentarios.map((ele) =>
-                  <div className="border border-laranja-principal rounded-xl w-80 h-16 ml-10 mb-4 mt-4">
+                  <div className="border border-laranja-principal rounded-xl w-80 h-16 ml-7 mb-4 mt-4">
                     {/* <div className="border border-laranja-principal rounded-xl w-80 h-12 ml-10 mb-4"> */}
                     <Comentario comentario={ele} />
                   </div>)
