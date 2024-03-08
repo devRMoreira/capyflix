@@ -26,7 +26,7 @@ export async function togglePrivado(booleano, id) {
         const res = await fetch(`http://localhost:3000/api/utilizador/${id}`, {
             method: "PATCH",
             body: JSON.stringify({
-                "priv": true
+                "priv": booleano
             }),
             headers: {
                 'content-type': 'application/json'
@@ -39,7 +39,7 @@ export async function togglePrivado(booleano, id) {
         const res = await fetch(`http://localhost:3000/api/utilizador/${id}`, {
             method: "PATCH",
             body: JSON.stringify({
-                "priv": false
+                "priv": booleano
             }),
             headers: {
                 'content-type': 'application/json'
