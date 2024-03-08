@@ -10,3 +10,10 @@ export async function fetchDadosUtilizador(id) {
 
     return jsonData.utilizadorFiltrado
 }
+
+
+export function podeVerPerfil(id, quemSegue, seguidores){
+    if(quemSegue.length == 0 || seguidores.length == 0 )
+    return false
+    return quemSegue.filter(id) && seguidores.filter(id)
+}

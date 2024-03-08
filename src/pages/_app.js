@@ -65,7 +65,7 @@ export const userStore = create((set) => ({
       "65e5a01cde0f619624348e79"
     ],
     "quemSegue": [],
-    "privado": false,
+    "privado": true,
     "estatisticas": {
       "filmes": {
         "quantidade": 0,

@@ -1,12 +1,19 @@
 import { Botao } from "@/frontend/components/Botao";
 import { useState, useEffect } from "react";
+import { userStore } from "./_app";
 
 export default function configuracoes() {
-  const [istToggled, setIsToggled] = useState(false);
+  const { userLogado } = userStore((state) => state)
+  const [istToggled, setIsToggled] = useState(userLogado.privado);
+
 
   const toggleImage = () => {
     setIsToggled(!istToggled);
   };
+
+  useEffect(() => {
+
+  },[])
 
   return (
     <div className="flex flex-col md:max-w-96 min-h-screen h-full bg-fundo-principal">

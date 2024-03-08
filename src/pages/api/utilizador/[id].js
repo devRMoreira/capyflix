@@ -1,7 +1,8 @@
 import { getCapas } from "@/backend/data/capas"
 import { adicionarSeguidor, getListaQuemSegue, getListaSeguidores, removerSeguidor } from "@/backend/data/seguidores"
-import { alterarPassword, alterarTipoPerfil, findUserInCollection } from "@/backend/data/utilizador"
+import { alterarPassword, alterarTipoPerfil, findUserInCollection, getHistoricoComentariosUtilizador } from "@/backend/data/utilizador"
 import { passwordEncryption } from "@/backend/services/utilizador"
+import { ObjectId } from "mongodb"
 
 export default async function handler(req, res) {
 
@@ -45,6 +46,13 @@ export default async function handler(req, res) {
             const listaQuemSegue = await getListaQuemSegue(id)
 
             return res.status(200).json(listaQuemSegue)
+        }
+
+        if (req.query.id.includes("comentarios")) {
+
+            const listaComentarios = await getHistoricoComentariosUtilizador({_id: new ObjectId(id)})
+
+            return res.status(200).json(listaComentarios)
         }
 
         if (id.length !== 24) {

@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { Comentario } from "./Comentario";
 import { userStore } from "@/pages/_app";
 import { fetchComentariosFilme } from "../services/filme";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 
 export function FilmeCompleto({ filme }) {
@@ -11,6 +13,7 @@ export function FilmeCompleto({ filme }) {
   const [verMaisIsClicked, setverMaisIsClicked] = useState(false);
   const [likeIsClicked, setLikeIsClicked] = useState(false);
 
+  const router = useRouter()
   const [comentarios, setComentarios] = useState({
     ver: false,
     comentarios: []
@@ -35,6 +38,10 @@ export function FilmeCompleto({ filme }) {
     setComentarios((ps) => ({ ...ps, ver: !ps.ver }))
   }
 
+  function handleClick(){
+    router.back()
+  }
+
   useEffect(() => {
 
     function handleBotoes() {
@@ -56,9 +63,9 @@ export function FilmeCompleto({ filme }) {
 
   return (
     <div className="flex flex-col md:max-w-96 min-h-screen h-full bg-fundo-principal">
-      <a href="/">
+      <Link href={""} onClick={handleClick}>
         <img src="/icones/Back.png" className=" ml-4 mt-6"></img>
-      </a>
+      </Link>
       <div className="flex mt-5">
         <div className="flex justify-center">
           <Image

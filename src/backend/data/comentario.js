@@ -19,10 +19,12 @@ export async function getComentario(id) {
     const comentarioComInfo = await adicionarImagemPerfilNome(comentario)
 
 
-    return {
-        mensagem: "Sucesso.",
-        comentarioComInfo
-    }
+    // return {
+    //     mensagem: "Sucesso.",
+    //     comentarioComInfo
+    // }
+
+    return comentarioComInfo
 }
 
 

@@ -121,7 +121,7 @@ export async function adicionarComentarioHistoricoUtilizador(comentario) {
     return atualizar
 }
 
-async function getHistoricoComentariosUtilizador(filter) {
+export async function getHistoricoComentariosUtilizador(filter) {
 
     const projection = { historicoComentarios: 1, _id: 0 }
 

@@ -14,11 +14,11 @@ export default async function handler(req, res) {
 
         const comentario = await getComentario(id)
 
-        if (comentario.mensagem.includes("Sucesso")) {
+        // if (comentario.mensagem.includes("Sucesso")) {
             return res.status(200).json(comentario)
-        } else {
+        // } else {
             return res.status(403).json(comentario)
-        }
+        // }
 
     } else if (req.method === "POST" && req.query.id === "novo") {
 
