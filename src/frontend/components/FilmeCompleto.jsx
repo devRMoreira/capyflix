@@ -171,9 +171,11 @@ export function FilmeCompleto({ filme }) {
         <h4 className="text-main-white mt-3 font-semibold">Elenco:</h4>
         <p className="text-main-white mt-1">
           {filme.elenco.map((ele, i) => (
-            <span>
-              {i < filme.elenco.length - 1 ? `${ele.nome} /` : " " + ele.nome}{" "}
-            </span>
+            <Link href={`/elenco/${ele.id}`}>
+              <span>
+                {i < filme.elenco.length - 1 ? `${ele.nome} /` : " " + ele.nome}{" "}
+              </span>
+            </Link>
           ))}
         </p>
         <h4 className="text-main-white mt-3 font-semibold">Realizador:</h4>
@@ -198,8 +200,8 @@ export function FilmeCompleto({ filme }) {
                 </div>)
 
               : <div className="border border-laranja-principal rounded-xl w-80 h-14 ml-10 mb-4 mt-4">
-              <h1 className="text-main-white text-center pt-3">Este filme ainda não tem comentários!</h1>
-            </div>
+                <h1 className="text-main-white text-center pt-3">Este filme ainda não tem comentários!</h1>
+              </div>
             : undefined}
         </div>
       </div>
