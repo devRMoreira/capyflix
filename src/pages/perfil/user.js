@@ -2,72 +2,53 @@ import { PerfilNav } from "@/frontend/components/PerfilNav";
 import { Estatisticas } from "@/frontend/components/Estatisticas";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { fetchDadosUtilizador } from "@/frontend/services/utilizador";
 import { userStore } from "../_app";
 import { fetchListaFavoritos, fetchListaPorVer, fetchListaVisto } from "@/frontend/services/listas";
 
 
-export default function perfil() {
+export default function perfiluserLogado() {
 
     const { userLogado } = userStore((state) => state)
 
-    const [utilizador, setUtilizador] = useState({})
     const [listas, setListas] = useState({
         assistidos: [],
         favoritos: [],
         queroAssistir: []
     })
-    const router = useRouter()
 
-    useEffect(() => {
-        if (!router.isReady) return;
-
-        const { id } = router.query
-
-        async function getUser() {
-
-            const dados = await fetchDadosUtilizador(id)
-            setUtilizador(dados)
-
-        }
-
-        getUser()
-
-    }, [router.isReady]);
 
     useEffect(() => {
         async function getListas() {
-
-            const listaAssistidos = await fetchListaVisto(utilizador._id)
+            console.log("ola")
+            const listaAssistidos = await fetchListaVisto(userLogado._id)
             setListas((ps) => ({ ...ps, assistidos: listaAssistidos }))
-
-            const listaQueroAssistir = await fetchListaPorVer(utilizador._id)
+            console.log(listaAssistidos)
+            const listaQueroAssistir = await fetchListaPorVer(userLogado._id)
             setListas((ps) => ({ ...ps, queroAssistir: listaQueroAssistir }))
 
-            const listaFavoritos = await fetchListaFavoritos(utilizador._id)
+            const listaFavoritos = await fetchListaFavoritos(userLogado._id)
             setListas((ps) => ({ ...ps, favoritos: listaFavoritos }))
-
 
         }
 
-        if (utilizador._id) {
+        if (userLogado._id) {
             getListas()
         }
 
-    }, [utilizador._id])
+    }, [])
 
 
 
 
     return (
         <div>
-            {Object.keys(utilizador).length > 0 && (
+            {Object.keys(userLogado).length > 0 && (
 
                 <div className=" min-h-screen md:max-w-96 h-full bg-fundo-principal flex flex-col">
                     {console.log(listas)}
                     <PerfilNav
-                        avatar={utilizador.imagemPerfil}
-                        username={utilizador.nome}
+                        avatar={userLogado.imagemPerfil}
+                        username={userLogado.nome}
                         comentarios="/icones/comentarios.png"
                         ligacoes="/icones/followers.png"
                         config="/icones/configuracoes.png"
@@ -128,16 +109,16 @@ export default function perfil() {
                         <h2 className=" mb-3 text-base mt-6 text-main-white">Filmes</h2>
                         <div className=" mb-8 flex">
                             <Estatisticas
-                                numero={utilizador.estatisticas.filmes.quantidade}
+                                numero={userLogado.estatisticas.filmes.quantidade}
                                 titulo="Filmes Diferentes"
                             ></Estatisticas>
                             <Estatisticas
-                                numero={utilizador.estatisticas.filmes.tempo}
+                                numero={userLogado.estatisticas.filmes.tempo}
                                 titulo="Minutos Assistidos"
                             ></Estatisticas>
-                            {utilizador.estatisticas.filmes.generos.length > 0 && (
+                            {userLogado.estatisticas.filmes.generos.length > 0 && (
                                 <Estatisticas
-                                    numero={utilizador.estatisticas.filmes.generos.length}
+                                    numero={userLogado.estatisticas.filmes.generos.length}
                                     titulo="Gêneros Diferentes"
                                 ></Estatisticas>
                             )}
@@ -145,16 +126,16 @@ export default function perfil() {
                         <h2 className=" mb-3 text-base text-main-white">Séries</h2>
                         <div className=" mb-20 flex">
                             <Estatisticas
-                                numero={utilizador.estatisticas.series.quantidade}
+                                numero={userLogado.estatisticas.series.quantidade}
                                 titulo="Séries Diferentes"
                             ></Estatisticas>
                             <Estatisticas
-                                numero={utilizador.estatisticas.series.tempo}
+                                numero={userLogado.estatisticas.series.tempo}
                                 titulo="Minutos Assistidos"
                             ></Estatisticas>
-                            {utilizador.estatisticas.series.generos.length > 0 && (
+                            {userLogado.estatisticas.series.generos.length > 0 && (
                                 <Estatisticas
-                                    numero={utilizador.estatisticas.series.generos.length}
+                                    numero={userLogado.estatisticas.series.generos.length}
                                     titulo="Gêneros Diferentes"
                                 ></Estatisticas>
                             )}
