@@ -103,7 +103,7 @@ export default function App({ Component, pageProps }) {
       <ToastContainer autoClose={2500} />
       <Component {...pageProps} />
       <NavPrincipal />
-      <div className=" h-[150px]" />
+      <div className=" h-[35px]" />
     </div>
   }
 }
