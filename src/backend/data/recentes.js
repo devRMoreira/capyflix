@@ -11,7 +11,8 @@ export async function ultimosCinco() {
         duracao: 1,
         classificaoEtaria: 1,
         mediaAvaliacoes: 1,
-        capa:1,
+        capa: 1,
+        dataLancamento: 1,
         tipo: "filme"
     }
 
