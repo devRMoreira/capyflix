@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState, useEffect, useReducer } from "react";
+import { useState, useEffect } from "react";
 
 export default function ligacoes() {
     const [followingIsClicked, setFollowingIsClicked] = useState(false);
@@ -19,7 +19,7 @@ export default function ligacoes() {
         setFollowersIsClicked(!followersIsClicked);
     };
 
-    function handleClick(){
+    function handleClick() {
         router.back()
     }
 
@@ -103,24 +103,24 @@ export default function ligacoes() {
                     {followingIsClicked && quemSegue?.length && (
                         <>
                             {quemSegue.map((item, index) => (
-                                    <Link href={`/perfil/${item._id}`}>
-                                <div key={index} className=" flex items-center gap-2 ml-6 mt-2">
-                                    {item?.imagemPerfil ? (
-                                        <img
-                                            src={item?.imagemPerfil}
-                                            className=" border-2 border-laranja-principal object-cover rounded-full max-w-full max-h-full w-12 h-12"
-                                        ></img>
-                                    ) : (
-                                        <img
-                                            src="/icones/avatar.png"
-                                            className=" border-2 border-laranja-principal object-cover rounded-full max-w-full max-h-full w-12 h-12"
-                                        ></img>
-                                    )}
-                                    <p className=" text-laranja-principal font-medium">
-                                        {item?.nome}
-                                    </p>
-                                </div>
-                                    </Link>
+                                <Link href={`/perfil/${item._id}`}>
+                                    <div key={index} className=" flex items-center gap-2 ml-6 mt-2">
+                                        {item?.imagemPerfil ? (
+                                            <img
+                                                src={item?.imagemPerfil}
+                                                className=" border-2 border-laranja-principal object-cover rounded-full max-w-full max-h-full w-12 h-12"
+                                            ></img>
+                                        ) : (
+                                            <img
+                                                src="/icones/avatar.png"
+                                                className=" border-2 border-laranja-principal object-cover rounded-full max-w-full max-h-full w-12 h-12"
+                                            ></img>
+                                        )}
+                                        <p className=" text-laranja-principal font-medium">
+                                            {item?.nome}
+                                        </p>
+                                    </div>
+                                </Link>
                             ))}
                         </>
                     )}

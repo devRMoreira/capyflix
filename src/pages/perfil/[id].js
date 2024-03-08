@@ -69,7 +69,7 @@ export default function perfil() {
                         username={utilizador.nome}
                         comentarios="/icones/comentarios.png"
                         ligacoes="/icones/followers.png"
-                        config="/icones/configuracoes.png"
+                        id={utilizador._id}
                     />
                     <div className=" ml-4 mr-4">
                         <h1 className=" mb-6 text-lg mt-10 font-semibold text-main-white">

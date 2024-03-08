@@ -48,6 +48,7 @@ export default function perfiluserLogado() {
                         username={userLogado.nome}
                         comentarios="/icones/comentarios.png"
                         ligacoes="/icones/followers.png"
+                        id={userLogado._id}
                         config="/icones/configuracoes.png"
                     />
                     <div className=" ml-4 mr-4">

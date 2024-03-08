@@ -10,7 +10,7 @@ export default function comentarios() {
 
     const [comentarios, setComentarios] = useState([])
 
-    function handleClick(){
+    function handleClick() {
         router.back()
     }
 
@@ -23,7 +23,6 @@ export default function comentarios() {
         async function getComentarios() {
             const dados = await fetchComentariosUtilizador(id)
             setComentarios(dados)
-
         }
 
         getComentarios()

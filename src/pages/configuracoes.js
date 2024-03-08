@@ -4,16 +4,16 @@ import { userStore } from "./_app";
 
 export default function configuracoes() {
   const { userLogado } = userStore((state) => state)
-  const [istToggled, setIsToggled] = useState(userLogado.privado);
+  const [isToggled, setIsToggled] = useState(userLogado.privado);
 
 
   const toggleImage = () => {
-    setIsToggled(!istToggled);
+    setIsToggled(!isToggled);
   };
 
   useEffect(() => {
 
-  },[])
+  }, [])
 
   return (
     <div className="flex flex-col md:max-w-96 min-h-screen h-full bg-fundo-principal">
@@ -25,10 +25,10 @@ export default function configuracoes() {
         className=" flex justify-between  mt-12 mx-6 text-main-white border-b border-borda-cinza"
       >
         Perfil Privado
-        {istToggled ? (
-          <img src="/icones/toggle-on.png" className=" mb-3"></img>
+        {isToggled ? (
+          <img src="/icones/toggle-on.png" className=" mb-3" />
         ) : (
-          <img src="/icones/toggle-off.png" className=" mb-3"></img>
+          <img src="/icones/toggle-off.png" className=" mb-3" />
         )}
       </button>
       <a
