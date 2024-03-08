@@ -54,9 +54,13 @@ export default function elenco() {
             <p className="text-main-white text-sm font-semibold">
               Participou em:
             </p>
-            {data.participaEm?.map((item, index) => (
-              <img key={index} src={item?.capa} className="w-20 h-30"></img>
-            ))}
+            <div className="flex flex-wrap justify-center gap-10">
+              {data.participaEm?.map((item, index) => (
+                <div className="flex justify-center gap-10">
+                  <img key={index} src={item?.capa} className="w-20 h-30"></img>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       )}
