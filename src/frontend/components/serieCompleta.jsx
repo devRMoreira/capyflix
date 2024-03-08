@@ -56,7 +56,7 @@ export function SerieCompleta({ serie }) {
   return (
     <div className="flex flex-col md:max-w-96 min-h-screen h-full bg-fundo-principal">
       <a href="/">
-        <img src="/icones/Back.png" className=" ml-4 mt-10"></img>
+        <img src="/icones/Back.png" className=" ml-4 mt-12"></img>
       </a>
       <div className="flex mt-5">
         <div className="flex justify-center ">
