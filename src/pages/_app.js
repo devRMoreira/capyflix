@@ -92,7 +92,6 @@ export default function App({ Component, pageProps }) {
   const { asPath, route, pathname } = router
 
 
-
   if (asPath === "/" || asPath === "/registar") {
     return <div>
       <ToastContainer autoClose={2500} />

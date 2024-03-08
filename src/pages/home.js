@@ -54,7 +54,7 @@ export default function home() {
       </h1>
       <div className="mt-4 ml-4 mr-4 mb-2 md:mt-4 md:ml-2 md:mr-2 md:mb-2">
 
-        {conteudo.ultimosCinco.length > 0 ? conteudo.ultimosCinco.map((ele) => <HomeFilmeSerieResumo conteudo={ele} />) : undefined}
+        {conteudo.ultimosCinco.length > 0 ? conteudo.ultimosCinco.map((ele) => <Link href={`/${ele.tipo}/${ele._id}`}><HomeFilmeSerieResumo conteudo={ele} /></Link>) : undefined}
 
       </div>
       <div className=" h-[50px]" />
