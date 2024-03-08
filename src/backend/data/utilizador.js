@@ -70,15 +70,13 @@ export async function alterarPassword(password) {
     return atualizar
 }
 
-export async function alterarTipoPerfil(utilizador) {
+export async function alterarTipoPerfil(utilizador, booleano) {
 
     const filter = { _id: new ObjectId(utilizador) }
 
-    const privado = await getPrivado(filter)
-
     const novoStatus = {
         $set:
-            { privado: !privado.privado }
+            { privado: booleano }
     }
 
     const atualizar = await updateOneDocument(filter, novoStatus, defaultCollection)
@@ -121,7 +119,7 @@ export async function adicionarComentarioHistoricoUtilizador(comentario) {
     return atualizar
 }
 
-async function getHistoricoComentariosUtilizador(filter) {
+export async function getHistoricoComentariosUtilizador(filter) {
 
     const projection = { historicoComentarios: 1, _id: 0 }
 
@@ -129,9 +127,11 @@ async function getHistoricoComentariosUtilizador(filter) {
     return await collection?.findOne(filter, { projection })
 }
 
-async function getPrivado(filter) {
+export async function getPrivado(id) {
 
-    const projection = { privado: 1, _id: 0 }
+    const filter = { _id: new ObjectId(id) }
+
+    const projection = { privado: 1 }
 
     const collection = await getMongoCollection(defaultCollection)
     return await collection?.findOne(filter, { projection })

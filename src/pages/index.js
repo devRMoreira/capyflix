@@ -1,26 +1,49 @@
-import { Botao } from "@/frontend/components/botao";
+import { Botao } from "@/frontend/components/Botao";
 import { Input } from "@/frontend/components/Input";
+import { loginUtilizador } from "@/frontend/services/autenticacao";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { toastError, userStore } from "./_app";
+import { useRouter } from "next/router";
+import { fetchDadosUtilizador } from "@/frontend/services/utilizador";
 
-export default function Login() {
-  const [nome, setNome] = useState("");
+export default function index() {
+  const { userLogado, setUserLogado } = userStore((state) => state)
+
+  const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
 
-  const handleChangeNome = (event) => {
-    setNome(event.target.value);
+  const router = useRouter()
+
+  const handleChangeEmail = (event) => {
+    setEmail(event.target.value);
   };
 
   const handleChangeSenha = (event) => {
     setSenha(event.target.value);
   };
 
-  function handleClick(e) {
+  async function handleClick(e) {
     e.preventDefault();
 
-    console.log("Nome:", nome);
-    console.log("Senha:", senha);
+    if (!email || !senha) {
+      return toastError("Por favor preenche todos os campos.")
+    }
+
+    const login = await loginUtilizador(email, senha)
+
+
+    if (!login) {
+      toastError("Dados inválidos.")
+    } else {
+      const fetchUtilizador = await fetchDadosUtilizador(login)
+      setUserLogado(fetchUtilizador)
+
+
+      router.push("/home")
+    }
+
   }
 
   return (
@@ -34,12 +57,12 @@ export default function Login() {
         <div className="mb-6">
           <Input
             icone="/icones/User.png"
-            placeholder="Insere o teu nome de utilizador"
+            placeholder="Insere o teu email"
             type="text"
             name="username"
             id="username"
-            value={nome}
-            onChange={handleChangeNome}
+            value={email}
+            onChange={handleChangeEmail}
           ></Input>
         </div>
         <div className=" mb-10">

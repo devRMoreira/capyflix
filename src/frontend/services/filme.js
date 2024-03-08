@@ -1,9 +1,15 @@
-export async function getFilme(id) {
+export async function fetchFilme(id) {
     const res = (await fetch(`http://localhost:3000/api/filme/${id}`))
     return await res.json()
 }
 
-export async function getFilmeAleatorio() {
+export async function fetchFilmeAleatorio() {
     const res = (await fetch(`http://localhost:3000/api/filme/random`))
+    return await res.json()
+}
+
+export async function fetchComentariosFilme(id) {
+    const res = (await fetch(`http://localhost:3000/api/filme/${id}comentarios`))
+
     return await res.json()
 }

@@ -1,28 +1,55 @@
-import { Botao } from "@/frontend/components/botao";
+import { Botao } from "@/frontend/components/Botao";
 import { useState, useEffect } from "react";
+import { userStore } from "./_app";
+import { togglePrivado } from "@/frontend/services/utilizador";
+import { toast } from "react-toastify";
+import Link from "next/link";
 
-export default function Configuracoes() {
-  const [istToggled, setIsToggled] = useState(false);
+export default function configuracoes() {
+  const { userLogado } = userStore((state) => state)
+  const [isToggled, setIsToggled] = useState(userLogado.privado);
+  const [desativar, setDesativar] = useState(false)
+
+  async function handleClick(booleano) {
+
+    setDesativar(true)
+    const res = await togglePrivado(booleano, userLogado._id)
+
+    if (res.ok) {
+      toast.success("Alterado com sucesso.")
+    } else {
+      toast.error("Algo correu mal!")
+    }
+
+    toggleImage(booleano)
+
+    setTimeout(() => {
+      setDesativar(false);
+    }, 500);
+
+  }
 
   const toggleImage = () => {
-    setIsToggled(!istToggled);
+    setIsToggled(!isToggled);
   };
+
+  useEffect(() => {
+
+  }, [])
 
   return (
     <div className="flex flex-col md:max-w-96 min-h-screen h-full bg-fundo-principal">
-      <a href="/perfil">
+      <Link href="/perfil/user">
         <img src="/icones/Back.png" className=" ml-4 mt-6"></img>
-      </a>
+      </Link>
       <button
-        onClick={toggleImage}
+        onClick={() => handleClick(!isToggled)}
+        disabled={desativar}
         className=" flex justify-between  mt-12 mx-6 text-main-white border-b border-borda-cinza"
       >
         Perfil Privado
-        {istToggled ? (
-          <img src="/icones/toggle-on.png" className=" mb-3"></img>
-        ) : (
-          <img src="/icones/toggle-off.png" className=" mb-3"></img>
-        )}
+        <img src={`/icones/toggle-${isToggled ? "on" : "off"}.png`} className="mb-3" />
+
       </button>
       <a
         href="/"

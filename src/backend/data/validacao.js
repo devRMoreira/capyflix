@@ -27,7 +27,8 @@ export async function loginValidation(user) {
     }
 
     return {
-        mensagem: "Sucesso."
+        mensagem: "Sucesso.",
+        id: registeredUser._id
     }
 }
 

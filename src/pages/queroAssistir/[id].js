@@ -1,12 +1,23 @@
+import Link from "next/link";
+import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
-
-const id = "65e5a01cde0f619624348e79";
 
 export default function queroAssistir() {
   const [data, setData] = useState(null);
   const [queroAssistir, setQueroAssistir] = useState(null);
 
+  const router = useRouter()
+
+  function handleClick() {
+    router.back()
+  }
+
   useEffect(() => {
+
+    if (!router.isReady) return;
+
+    const { id } = router.query
+
     const fetchDataUser = async () => {
       try {
         const response = await fetch(
@@ -40,14 +51,14 @@ export default function queroAssistir() {
 
     fetchDataUser();
     fetchDataPorVer();
-  }, []);
+  }, [router.isReady]);
 
   return (
     <>
       {data && (
         <div className=" min-h-screen md:max-w-96 h-full bg-fundo-principal flex flex-col">
           <div className=" ml-4 mr-4 mb-24">
-            <a href="/perfil">
+            <a onClick={handleClick}>
               <img src="/icones/Back.png" className="  mt-6"></img>
             </a>
             <h1 className=" mb-6 text-lg mt-8 font-semibold text-main-white">
@@ -55,13 +66,13 @@ export default function queroAssistir() {
             </h1>
             <div className="flex flex-wrap justify-center gap-10">
               {queroAssistir?.map((item, index) => (
-                <a
+                <Link
                   key={index}
-                  href="/filme"
+                  href={`/filme/${item._id}`}
                   className=" flex justify-center gap-10"
                 >
                   <img className=" w-36" src={item?.capa}></img>
-                </a>
+                </Link>
               ))}
             </div>
           </div>

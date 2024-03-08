@@ -1,14 +1,26 @@
 import moment from "moment";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { getFilme } from "../services/filme";
 import { Comentario } from "./Comentario";
+import { userStore } from "@/pages/_app";
+import { fetchComentariosFilme } from "../services/filme";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 
 export function FilmeCompleto({ filme }) {
   const [vistoIsClicked, setvistoIsClicked] = useState(false);
   const [verMaisIsClicked, setverMaisIsClicked] = useState(false);
   const [likeIsClicked, setLikeIsClicked] = useState(false);
+
+  const router = useRouter()
+  const [comentarios, setComentarios] = useState({
+    ver: false,
+    comentarios: []
+  })
+
+  const { userLogado } = userStore((state) => state)
+
 
   const iconeVistoIsClicked = () => {
     setvistoIsClicked(!vistoIsClicked);
@@ -22,20 +34,46 @@ export function FilmeCompleto({ filme }) {
     setLikeIsClicked(!likeIsClicked);
   };
 
+  function handleComentarios() {
+    setComentarios((ps) => ({ ...ps, ver: !ps.ver }))
+  }
+
+  function handleClick(){
+    router.back()
+  }
+
+  useEffect(() => {
+
+    function handleBotoes() {
+      setvistoIsClicked(userLogado.conteudoVisto.find(ele => ele.id === filme._id))
+      setverMaisIsClicked(userLogado.conteudoPorVer.find(ele => ele.id === filme._id))
+      setLikeIsClicked(userLogado.conteudoFavorito.find(ele => ele.id === filme._id))
+    }
+
+    async function fetchDadosComentarios() {
+      if (filme.comentarios.length > 0) {
+        const dados = await fetchComentariosFilme(filme._id)
+        setComentarios((ps) => ({ ...ps, comentarios: dados }))
+      }
+    }
+    handleBotoes()
+    fetchDadosComentarios()
+
+  }, [])
 
   return (
     <div className="flex flex-col md:max-w-96 min-h-screen h-full bg-fundo-principal">
-      <a href="/">
+      <Link href={""} onClick={handleClick}>
         <img src="/icones/Back.png" className=" ml-4 mt-6"></img>
-      </a>
+      </Link>
       <div className="flex mt-5">
         <div className="flex justify-center">
-            <Image
-              className="ml-5 object-cover w-40 h-60"
-              src={filme.capa}
-              width="80"
-              height="80"
-            />
+          <Image
+            className="ml-5 object-cover w-40 h-60"
+            src={filme.capa}
+            width="80"
+            height="80"
+          />
         </div>
         <div className="relative ml-5 mr-1 ">
           <h2 className="text-sm leading-6 text-main-white font-semibold ">
@@ -113,40 +151,24 @@ export function FilmeCompleto({ filme }) {
       </div>
       <div className="mt-5">
         <div className="flex items-center flex-grow mt-3 border border-laranja-principal rounded-lg w-96 content-center mx-auto">
-          <button className=" w-96 h-10 text-main-white font-semibold ml-5 text-left">
-            Comentários:
+          <button className=" w-96 h-10 text-main-white font-semibold ml-5 text-left" onClick={handleComentarios}>
+            Comentários
           </button>
           <img src="/icones/dropdown.png" className="mr-2 h-6"></img>
         </div>
+
         <div className="">
-          <div className="border border-laranja-principal rounded-xl w-80 h-12 ml-10 mb-4 mt-4">
-            <Comentario
-              avatar="/icones/avatar.png"
-              username="Carolina"
-              conteudo="Gostei muito."
-            />
-          </div>
-          <div className="border border-laranja-principal rounded-xl w-80 h-12 ml-10 mb-4">
-            <Comentario
-              avatar="/icones/avatar.png"
-              username="Ricardo"
-              conteudo="Razoável."
-            />
-          </div>
-          <div className="border border-laranja-principal rounded-xl w-80 h-12 ml-10 mb-4">
-            <Comentario
-              avatar="/icones/avatar.png"
-              username="Eduardo"
-              conteudo="Filme bastante bom."
-            />
-          </div>
-          <div className="border border-laranja-principal rounded-xl w-80 h-12 ml-10 mb-4">
-            <Comentario
-              avatar="/icones/avatar.png"
-              username="Nuno"
-              conteudo="Péssimo."
-            />
-          </div>
+          {comentarios.ver ?
+            comentarios.comentarios.length > 0 ?
+
+              comentarios.comentarios.map((ele) =>
+                <div className="border border-laranja-principal rounded-xl w-80 h-12 ml-10 mb-4 mt-4">
+                  {/* <div className="border border-laranja-principal rounded-xl w-80 h-12 ml-10 mb-4"> */}
+                  <Comentario comentario={ele} />
+                </div>)
+
+              : undefined
+            : undefined}
         </div>
       </div>
     </div>

@@ -4,8 +4,6 @@ import moment from "moment";
 import { getTodasAvaliacoes } from "./comentario";
 
 
-
-
 //* se passado um ID a função atualiza as estatisticas do utilizador
 
 export async function atualizarEstatisticasConteudo() {

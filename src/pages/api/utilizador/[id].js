@@ -1,13 +1,20 @@
 import { getCapas } from "@/backend/data/capas"
 import { adicionarSeguidor, getListaQuemSegue, getListaSeguidores, removerSeguidor } from "@/backend/data/seguidores"
-import { alterarPassword, alterarTipoPerfil, findUserInCollection } from "@/backend/data/utilizador"
+import { alterarPassword, alterarTipoPerfil, findUserInCollection, getHistoricoComentariosUtilizador, getPrivado } from "@/backend/data/utilizador"
 import { passwordEncryption } from "@/backend/services/utilizador"
+import { ObjectId } from "mongodb"
 
 export default async function handler(req, res) {
 
     if (req.method === "GET") {
 
         const id = req.query.id.slice(0, 24)
+
+        if (req.query.id.includes("privado")) {
+            const estado = await getPrivado(id)
+
+            return res.status(200).json(estado)
+        }
 
         if (req.query.id.includes("porVer")) {
             const lista = "porVer"
@@ -45,6 +52,13 @@ export default async function handler(req, res) {
             const listaQuemSegue = await getListaQuemSegue(id)
 
             return res.status(200).json(listaQuemSegue)
+        }
+
+        if (req.query.id.includes("comentarios")) {
+
+            const listaComentarios = await getHistoricoComentariosUtilizador({ _id: new ObjectId(id) })
+
+            return res.status(200).json(listaComentarios)
         }
 
         if (id.length !== 24) {
@@ -93,11 +107,13 @@ export default async function handler(req, res) {
 
             return res.status(200).json(alterado)
 
-        } else if (req.body.privado) {
+        } else if (req.body) {
 
             const utilizador = req.query.id
 
-            const alterado = await alterarTipoPerfil(utilizador)
+            const bool = req.body.priv
+
+            const alterado = await alterarTipoPerfil(utilizador, bool)
 
             return res.status(200).json(alterado)
 

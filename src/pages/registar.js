@@ -1,23 +1,24 @@
-import { Botao } from "@/frontend/components/botao";
+import { Botao } from "@/frontend/components/Botao";
 import { Input } from "@/frontend/components/Input";
-import { registarUtilizador } from "@/frontend/services/utilizador";
 import { useState } from "react";
-import { toast, ToastContainer } from "react-toastify";
 import Image from "next/image";
-import { useRouter } from "next/router";
 import 'react-toastify/dist/ReactToastify.css';
+import { toastError, toastSuccess } from "./_app";
+import { useRouter } from "next/router";
+import { registarUtilizador } from "@/frontend/services/autenticacao";
 
 
 
-export default function Registar() {
-  
+export default function registar() {
+
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [confirmarSenha, setConfirmarSenha] = useState("");
-  
+
+
   const router = useRouter()
-  
+
   const handleChangeNome = (event) => {
     setNome(event.target.value);
   };
@@ -37,26 +38,27 @@ export default function Registar() {
   async function handleClick(event) {
     event.preventDefault();
 
+    if ((!nome || !email) || (!senha || confirmarSenha)) {
+      return toastError("Por favor preenche todos os campos.")
+
+    }
+
     if (senha !== confirmarSenha) {
-      toast.error("Dados inválidos")
+      toastError("As senhas não coincidem.")
     }
 
     const sucesso = await registarUtilizador(nome, email, senha)
-    console.log("Nome:", nome);
-    console.log("Email:", email);
-    console.log("Senha:", senha);
-    console.log("Senha Confirmada:", confirmarSenha);
 
     if (!sucesso) {
-      toast.error("O email já se enncontra registado")
+      toastError("O email já se encontra registado!")
     } else {
-      toast.success("Registado com sucesso, por favor verifique o email")
+      toastSuccess("Registado com sucesso, por favor valide no email.")
       router.push("/")
     }
   }
 
   return (
-    <div className="flex flex-col items-center max-w-96 min-h-screen h-full bg-fundo-principal">
+    <div className="flex flex-col items-center min-h-screen h-full bg-fundo-principal">
       <Image src="/logo.png" width="300" height="50" />
       <h1 className=" mb-10 text-2xl font-semibold text-main-white">
         REGISTA-TE
@@ -106,7 +108,9 @@ export default function Registar() {
           <Botao title="REGISTAR"></Botao>
         </div>
       </form>
-      <ToastContainer />
+      <span className="mt-10" onClick={() => router.push("/")}>
+        <Botao title="VOLTAR" />
+      </span>
     </div>
   );
 }

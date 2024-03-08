@@ -6,18 +6,6 @@ import { getListaVistoUtilizador, getTodosUtilizadores } from "./utilizador";
 
 const defaultCollection = "utilizadores"
 
-
-
-
-
-// async function atualizarMediaAvaliacoes() {
-
-// }
-
-//async function atualizarVisualizacoes() {
-
-//}
-
 //* se passado um ID a função atualiza as estatisticas do utilizador
 
 export async function atualizarEstatisticasUtilizadores(utilizador = null) {
