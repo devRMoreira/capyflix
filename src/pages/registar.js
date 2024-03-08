@@ -38,10 +38,7 @@ export default function registar() {
   async function handleClick(event) {
     event.preventDefault();
 
-    if ((!nome || !email) || (!senha || confirmarSenha)) {
-      return toastError("Por favor preenche todos os campos.")
 
-    }
 
     if (senha !== confirmarSenha) {
       toastError("As senhas não coincidem.")
