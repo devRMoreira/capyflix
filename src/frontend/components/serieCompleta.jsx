@@ -182,7 +182,10 @@ export function SerieCompleta({ serie }) {
                     <Comentario comentario={ele} />
                   </div>)
 
-                : undefined
+                : <div className="border border-laranja-principal rounded-xl w-80 h-12 ml-10 mb-4 mt-4">
+                  <h1 className="text-main-white text-center pt-3">Esta série ainda não tem comentários!</h1>
+                </div>
+
               : undefined}
           </div>
         </div>
