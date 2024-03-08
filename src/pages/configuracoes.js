@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import Link from "next/link";
 
 export default function configuracoes() {
-  const { userLogado } = userStore((state) => state)
+  const { userLogado, setUserLogado } = userStore((state) => state)
   const [isToggled, setIsToggled] = useState(userLogado.privado);
   const [desativar, setDesativar] = useState(false)
 
@@ -16,6 +16,7 @@ export default function configuracoes() {
     const res = await togglePrivado(booleano, userLogado._id)
 
     if (res.ok) {
+      setUserLogado((ps) => ({...ps, privado:booleano}))
       toast.success("Alterado com sucesso.")
     } else {
       toast.error("Algo correu mal!")
