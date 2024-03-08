@@ -1,6 +1,10 @@
+import { userStore } from "@/pages/_app";
 import Link from "next/link";
 
 export function PerfilNav({ avatar, username, comentarios, ligacoes, id, config }) {
+
+  const { userLogado } = userStore((state) => state)
+
   return (
     <div className=" flex w-full h-16 bg-navbar px-5">
       <div className=" w-full flex justify-between">
@@ -29,14 +33,14 @@ export function PerfilNav({ avatar, username, comentarios, ligacoes, id, config 
           {ligacoes &&
             <Link href={`/ligacoes/${id}`}>
               <img
-                src={ligacoes}
+                src="/icones/followers.png"
                 alt="Perfis que o usuário segue e seus seguidores"
                 className="pr-2 w-8 h-6"
               ></img>
             </Link>}
           {config &&
             <a href="/configuracoes">
-              <img src={config} alt="Configurações" className=" pl-1"></img>
+              <img src={"/icones/configuracoes.png"} alt="Configurações" className=" pl-1"></img>
             </a>}
         </div>
       </div>

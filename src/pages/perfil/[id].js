@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { fetchDadosUtilizador, fetchPrivado } from "@/frontend/services/utilizador";
 import { fetchListaFavoritos, fetchListaPorVer, fetchListaVisto } from "@/frontend/services/listas";
+import Link from "next/link";
 
 
 export default function perfil() {
@@ -31,9 +32,9 @@ export default function perfil() {
 
                 const dados = await fetchDadosUtilizador(id)
                 setUtilizador(dados)
-                
+
             } else {
-                
+
                 router.push(`/perfil/privado/${id}`)
             }
 
@@ -84,48 +85,63 @@ export default function perfil() {
                             Quero Assistir
                         </h1>
                         {listas.queroAssistir.length > 0 && (
-                            <a href="/filme" className=" flex justify-center gap-10">
-                                <img className=" w-36" src={listas.queroAssistir[0]?.capa}></img>
-                                <img className=" w-36" src={listas.queroAssistir[1]?.capa}></img>
-                            </a>
+                            <div className=" flex justify-center gap-10">
+                                <Link href={`${(listas.queroAssistir[0].tipo === "filme" ? "/filme/" : "/serie/") + listas.queroAssistir[0]._id}`}>
+                                    <img className=" w-36" src={listas.queroAssistir[0]?.capa} />
+                                </Link>
+
+                                <Link href={`${(listas.queroAssistir[1].tipo === "filme" ? "/filme/" : "/serie/") + listas.queroAssistir[1]._id}`}>
+                                    <img className=" w-36" src={listas.queroAssistir[1]?.capa} />
+                                </Link>
+                            </div>
                         )}
 
                         <div className="flex justify-center">
-                            <a href="/queroAssistir">
+                            <Link href={`/queroAssistir/${utilizador._id}`}>
                                 <img className=" mt-4" src="/icones/List.png"></img>
-                            </a>
+                            </Link>
                         </div>
 
                         <h1 className=" mb-6 text-lg mt-6 font-semibold text-main-white">
                             Assistidos
                         </h1>
                         {listas.assistidos.length > 0 && (
-                            <a href="/filme" className=" flex justify-center gap-10">
-                                <img className=" w-36" src={listas.assistidos[0]?.capa}></img>
-                                <img className=" w-36" src={listas.assistidos[1]?.capa}></img>
-                            </a>
+                            <div className=" flex justify-center gap-10">
+                                <Link href={`${(listas.assistidos[0].tipo === "filme" ? "/filme/" : "/serie/") + listas.assistidos[0]._id}`}>
+                                    <img className=" w-36" src={listas.assistidos[0]?.capa} />
+                                </Link>
+
+                                <Link href={`${(listas.assistidos[1].tipo === "filme" ? "/filme/" : "/serie/") + listas.assistidos[1]._id}`}>
+                                    <img className=" w-36" src={listas.assistidos[1]?.capa} />
+                                </Link>
+                            </div>
                         )}
 
                         <div className="flex justify-center">
-                            <a href="/assistidos" className=" ">
+                            <Link href={`/assistidos/${utilizador._id}`}>
                                 <img className=" mt-4" src="/icones/List.png"></img>
-                            </a>
+                            </Link>
                         </div>
 
                         <h1 className=" mb-6 text-lg mt-6 font-semibold text-main-white">
                             Favoritos
                         </h1>
                         {listas.favoritos.length > 0 && (
-                            <a href="/filme" className=" flex justify-center gap-10">
-                                <img className=" w-36" src={listas.favoritos[0]?.capa}></img>
-                                <img className=" w-36" src={listas.favoritos[1]?.capa}></img>
-                            </a>
+                            <div className=" flex justify-center gap-10">
+                                <Link href={`${(listas.favoritos[0].tipo === "filme" ? "/filme/" : "/serie/") + listas.favoritos[0]._id}`}>
+                                    <img className=" w-36" src={listas.favoritos[0]?.capa} />
+                                </Link>
+
+                                <Link href={`${(listas.favoritos[1].tipo === "filme" ? "/filme/" : "/serie/") + listas.favoritos[1]._id}`}>
+                                    <img className=" w-36" src={listas.favoritos[1]?.capa} />
+                                </Link>
+                            </div>
                         )}
 
                         <div className="flex justify-center">
-                            <a href="/favoritos">
+                            <Link href={`/favoritos/${utilizador._id}`}>
                                 <img className=" mt-4" src="/icones/List.png"></img>
-                            </a>
+                            </Link>
                         </div>
 
                         <h1 className=" text-lg mt-6 font-semibold text-main-white">

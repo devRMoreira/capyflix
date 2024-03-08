@@ -3,6 +3,7 @@ import { Estatisticas } from "@/frontend/components/Estatisticas";
 import { useState, useEffect } from "react";
 import { userStore } from "../_app";
 import { fetchListaFavoritos, fetchListaPorVer, fetchListaVisto } from "@/frontend/services/listas";
+import Link from "next/link";
 
 
 export default function perfiluserLogado() {
@@ -20,6 +21,7 @@ export default function perfiluserLogado() {
         async function getListas() {
             const listaAssistidos = await fetchListaVisto(userLogado._id)
             setListas((ps) => ({ ...ps, assistidos: listaAssistidos }))
+
             const listaQueroAssistir = await fetchListaPorVer(userLogado._id)
             setListas((ps) => ({ ...ps, queroAssistir: listaQueroAssistir }))
 
@@ -48,55 +50,70 @@ export default function perfiluserLogado() {
                         comentarios="/icones/comentarios.png"
                         ligacoes="/icones/followers.png"
                         id={userLogado._id}
-                        config="/icones/configuracoes.png"
+                        config={true}
                     />
                     <div className=" ml-4 mr-4">
                         <h1 className=" mb-6 text-lg mt-10 font-semibold text-main-white">
                             Quero Assistir
                         </h1>
                         {listas.queroAssistir.length > 0 && (
-                            <a href="/filme" className=" flex justify-center gap-10">
-                                <img className=" w-36" src={listas.queroAssistir[0]?.capa}></img>
-                                <img className=" w-36" src={listas.queroAssistir[1]?.capa}></img>
-                            </a>
+                            <div className=" flex justify-center gap-10">
+                                <Link href={`${(listas.queroAssistir[0].tipo === "filme" ? "/filme/" : "/serie/") + listas.queroAssistir[0]._id}`}>
+                                    <img className=" w-36" src={listas.queroAssistir[0]?.capa} />
+                                </Link>
+
+                                <Link href={`${(listas.queroAssistir[1].tipo === "filme" ? "/filme/" : "/serie/") + listas.queroAssistir[1]._id}`}>
+                                    <img className=" w-36" src={listas.queroAssistir[1]?.capa} />
+                                </Link>
+                            </div>
                         )}
 
                         <div className="flex justify-center">
-                            <a href="/queroAssistir">
+                            <Link href={`/queroAssistir/${userLogado._id}`}>
                                 <img className=" mt-4" src="/icones/List.png"></img>
-                            </a>
+                            </Link>
                         </div>
 
                         <h1 className=" mb-6 text-lg mt-6 font-semibold text-main-white">
                             Assistidos
                         </h1>
                         {listas.assistidos.length > 0 && (
-                            <a href="/filme" className=" flex justify-center gap-10">
-                                <img className=" w-36" src={listas.assistidos[0]?.capa}></img>
-                                <img className=" w-36" src={listas.assistidos[1]?.capa}></img>
-                            </a>
+                            <div className=" flex justify-center gap-10">
+                                <Link href={`${(listas.assistidos[0].tipo === "filme" ? "/filme/" : "/serie/") + listas.assistidos[0]._id}`}>
+                                    <img className=" w-36" src={listas.assistidos[0]?.capa} />
+                                </Link>
+
+                                <Link href={`${(listas.assistidos[1].tipo === "filme" ? "/filme/" : "/serie/") + listas.assistidos[1]._id}`}>
+                                    <img className=" w-36" src={listas.assistidos[1]?.capa} />
+                                </Link>
+                            </div>
                         )}
 
                         <div className="flex justify-center">
-                            <a href="/assistidos" className=" ">
+                            <Link href={`/assistidos/${userLogado._id}`}>
                                 <img className=" mt-4" src="/icones/List.png"></img>
-                            </a>
+                            </Link>
                         </div>
 
                         <h1 className=" mb-6 text-lg mt-6 font-semibold text-main-white">
                             Favoritos
                         </h1>
                         {listas.favoritos.length > 0 && (
-                            <a href="/filme" className=" flex justify-center gap-10">
-                                <img className=" w-36" src={listas.favoritos[0]?.capa}></img>
-                                <img className=" w-36" src={listas.favoritos[1]?.capa}></img>
-                            </a>
+                            <div className=" flex justify-center gap-10">
+                                <Link href={`${(listas.favoritos[0].tipo === "filme" ? "/filme/" : "/serie/") + listas.favoritos[0]._id}`}>
+                                    <img className=" w-36" src={listas.favoritos[0]?.capa} />
+                                </Link>
+
+                                <Link href={`${(listas.favoritos[1].tipo === "filme" ? "/filme/" : "/serie/") + listas.favoritos[1]._id}`}>
+                                    <img className=" w-36" src={listas.favoritos[1]?.capa} />
+                                </Link>
+                            </div>
                         )}
 
                         <div className="flex justify-center">
-                            <a href="/favoritos">
+                            <Link href={`/favoritos/${userLogado._id}`}>
                                 <img className=" mt-4" src="/icones/List.png"></img>
-                            </a>
+                            </Link>
                         </div>
 
                         <h1 className=" text-lg mt-6 font-semibold text-main-white">

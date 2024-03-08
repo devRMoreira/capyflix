@@ -109,7 +109,7 @@ async function getCapasListaFavoritos(id) {
 export async function getCapaSerie(id) {
 
     const filter = { _id: new ObjectId(id) }
-    const projection = { capa: 1 }
+    const projection = { capa: 1, tipo: "serie" }
 
     const collection = await getMongoCollection(colecaoSeries)
     return await collection?.findOne(filter, { projection })
@@ -119,7 +119,7 @@ export async function getCapaSerie(id) {
 export async function getCapaFilme(id) {
 
     const filter = { _id: new ObjectId(id) }
-    const projection = { capa: 1 }
+    const projection = { capa: 1, tipo: "filme" }
 
     const collection = await getMongoCollection(colecaoFilmes)
     return await collection?.findOne(filter, { projection })
