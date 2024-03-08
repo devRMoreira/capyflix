@@ -1,4 +1,4 @@
-# Existe uma chance de o perfil dar erro porque usamos links externos para as capas e não são os mais rápidos
+# Existe uma chance de o perfil dar erro porque usamos links externos para as capas e não são os mais rápidos e é suposto ser usado com o inspecionar elemento iPhone 14 pro max
 Caso login/registo não dê tens 2 users já existentes, que podes usar para login ou então podes passar para o link /home que tem um user set como global
 
 VBranco@teste.net
