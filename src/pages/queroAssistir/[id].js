@@ -1,10 +1,17 @@
+import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 
 const id = "65e5a01cde0f619624348e79";
 
-export default function favoritos() {
+export default function queroAssistir() {
   const [data, setData] = useState(null);
-  const [favoritos, setFavoritos] = useState(null);
+  const [queroAssistir, setQueroAssistir] = useState(null);
+
+  const router = useRouter()
+
+    function handleClick() {
+        router.back()
+    }
 
   useEffect(() => {
     const fetchDataUser = async () => {
@@ -23,38 +30,38 @@ export default function favoritos() {
       }
     };
 
-    const fetchFavoritos = async () => {
+    const fetchDataPorVer = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3000/api/utilizador/${id}favorito`
+          `http://localhost:3000/api/utilizador/${id}porVer`
         );
         if (!response.ok) {
           throw new Error("Erro ao buscar os dados");
         }
         const jsonData = await response.json();
-        await setFavoritos(jsonData);
+        await setQueroAssistir(jsonData);
       } catch (error) {
         console.error("Erro ao buscar os dados:", error);
       }
     };
 
     fetchDataUser();
-    fetchFavoritos();
-  }, []);
+    fetchDataPorVer();
+  }, [router.isReady]);
 
   return (
     <>
       {data && (
         <div className=" min-h-screen md:max-w-96 h-full bg-fundo-principal flex flex-col">
           <div className=" ml-4 mr-4 mb-24">
-            <a href="/perfil">
+            <a onClick={handleClick}>
               <img src="/icones/Back.png" className="  mt-6"></img>
             </a>
             <h1 className=" mb-6 text-lg mt-8 font-semibold text-main-white">
-              Favoritos
+              Quero Assistir
             </h1>
             <div className="flex flex-wrap justify-center gap-10">
-              {favoritos?.map((item, index) => (
+              {queroAssistir?.map((item, index) => (
                 <a
                   key={index}
                   href="/filme"
