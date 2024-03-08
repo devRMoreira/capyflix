@@ -10,6 +10,6 @@ export async function fetchSerieAleatoria() {
 
 export async function fetchComentariosSerie(id) {
     const res = (await fetch(`http://localhost:3000/api/serie/${id}comentarios`))
-    console.log(res)
+  
     return await res.json()
 }

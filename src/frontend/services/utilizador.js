@@ -1,7 +1,5 @@
 export async function fetchDadosUtilizador(id) {
 
-    console.log("id")
-    console.log(id)
     const response = await fetch(
         `http://localhost:3000/api/utilizador/${id}`
     );

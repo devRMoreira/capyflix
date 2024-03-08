@@ -173,21 +173,17 @@ export function SerieCompleta({ serie }) {
           </div>
 
           <div className="">
-
-
             {comentarios.ver ?
               comentarios.comentarios.length > 0 ?
+
                 comentarios.comentarios.map((ele) =>
                   <div className="border border-laranja-principal rounded-xl w-80 h-12 ml-10 mb-4 mt-4">
                     {/* <div className="border border-laranja-principal rounded-xl w-80 h-12 ml-10 mb-4"> */}
                     <Comentario comentario={ele} />
                   </div>)
+
                 : undefined
               : undefined}
-
-
-
-
           </div>
         </div>
       </div>

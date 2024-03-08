@@ -141,7 +141,7 @@ export function FilmeCompleto({ filme }) {
         </p>
         <h4 className="text-main-white mt-3 font-semibold">Realizador:</h4>
         <p className="text-main-white mt-1">{filme.realizador.nome}</p>
-      </div>{console.log(filme)}
+      </div>
       <div className="mt-5">
         <div className="flex items-center flex-grow mt-3 border border-laranja-principal rounded-lg w-96 content-center mx-auto">
           <button className=" w-96 h-10 text-main-white font-semibold ml-5 text-left" onClick={handleComentarios}>
@@ -153,11 +153,13 @@ export function FilmeCompleto({ filme }) {
         <div className="">
           {comentarios.ver ?
             comentarios.comentarios.length > 0 ?
-              comentarios.comentarios.map((ele) => 
-              <div className="border border-laranja-principal rounded-xl w-80 h-12 ml-10 mb-4 mt-4">
-                {/* <div className="border border-laranja-principal rounded-xl w-80 h-12 ml-10 mb-4"> */}
-                <Comentario comentario={ele} />
-              </div>)
+
+              comentarios.comentarios.map((ele) =>
+                <div className="border border-laranja-principal rounded-xl w-80 h-12 ml-10 mb-4 mt-4">
+                  {/* <div className="border border-laranja-principal rounded-xl w-80 h-12 ml-10 mb-4"> */}
+                  <Comentario comentario={ele} />
+                </div>)
+
               : undefined
             : undefined}
         </div>

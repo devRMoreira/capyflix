@@ -10,6 +10,6 @@ export async function fetchFilmeAleatorio() {
 
 export async function fetchComentariosFilme(id) {
     const res = (await fetch(`http://localhost:3000/api/filme/${id}comentarios`))
-    console.log(res)
+
     return await res.json()
 }

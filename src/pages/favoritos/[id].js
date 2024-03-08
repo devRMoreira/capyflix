@@ -7,11 +7,11 @@ export default function favoritos() {
   const [data, setData] = useState(null);
   const [favoritos, setFavoritos] = useState(null);
 
-    const router = useRouter()
+  const router = useRouter()
 
-    function handleClick() {
-        router.back()
-    }
+  function handleClick() {
+    router.back()
+  }
 
   useEffect(() => {
 
@@ -68,13 +68,13 @@ export default function favoritos() {
             </h1>
             <div className="flex flex-wrap justify-center gap-10">
               {favoritos?.map((item, index) => (
-                <a
+                <Link
                   key={index}
-                  href="/filme"
+                  href={`/filme/${item._id}`}
                   className=" flex justify-center gap-10"
                 >
                   <img className=" w-36" src={item?.capa}></img>
-                </a>
+                </Link>
               ))}
             </div>
           </div>
