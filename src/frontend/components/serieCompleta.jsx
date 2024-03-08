@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { TemporadaCard } from "./TemporadaCard";
 import Link from "next/link";
 import { userStore } from "@/pages/_app";
+import { fetchComentariosSerie } from "../services/serie";
+import { Comentario } from "./Comentario";
 
 export function SerieCompleta({ serie }) {
   const [vistoIsClicked, setvistoIsClicked] = useState(false);
@@ -11,7 +13,14 @@ export function SerieCompleta({ serie }) {
   const [likeIsClicked, setLikeIsClicked] = useState(false);
 
   const { userLogado } = userStore((state) => state)
+  const [comentarios, setComentarios] = useState({
+    ver: false,
+    comentarios: []
+  })
 
+  function handleComentarios() {
+    setComentarios((ps) => ({ ...ps, ver: !ps.ver }))
+  }
 
   const iconeVistoIsClicked = () => {
     setvistoIsClicked(!vistoIsClicked);
@@ -26,15 +35,23 @@ export function SerieCompleta({ serie }) {
   };
 
   useEffect(() => {
-    
-    function handleBotoes(){
+
+    function handleBotoes() {
       setvistoIsClicked(userLogado.conteudoVisto.find(ele => ele.id === serie._id))
       setverMaisIsClicked(userLogado.conteudoPorVer.find(ele => ele.id === serie._id))
       setLikeIsClicked(userLogado.conteudoFavorito.find(ele => ele.id === serie._id))
     }
+
+    async function fetchDadosComentarios() {
+      if (serie.comentarios.length > 0) {
+        const dados = await fetchComentariosSerie(serie._id)
+        setComentarios((ps) => ({ ...ps, comentarios: dados }))
+      }
+    }
     handleBotoes()
-    
-  },[])
+    fetchDadosComentarios()
+
+  }, [])
 
   return (
     <div className="flex flex-col md:max-w-96 min-h-screen h-full bg-fundo-principal">
@@ -127,7 +144,6 @@ export function SerieCompleta({ serie }) {
         <h4 className="text-main-white mt-3 font-semibold">Realizador:</h4>
         <p className="text-main-white mt-1">{serie.realizador.nome}</p>
         <div className="mt-3">
-          {/* <TemporadaCard /> */}
           {serie.temporadas.map((temporada, i) => (
             <div key={i}>
               <p className="font-semibold text-main-white mt-1 ml-2">
@@ -147,6 +163,32 @@ export function SerieCompleta({ serie }) {
               </div> */}
             </div>
           ))}
+        </div>
+        <div className="mt-5">
+          <div className="flex items-center flex-grow mt-3 border border-laranja-principal rounded-lg w-96 content-center mx-auto">
+            <button className=" w-96 h-10 text-main-white font-semibold ml-5 text-left" onClick={handleComentarios}>
+              Comentários
+            </button>
+            <img src="/icones/dropdown.png" className="mr-2 h-6"></img>
+          </div>
+
+          <div className="">
+
+
+            {comentarios.ver ?
+              comentarios.comentarios.length > 0 ?
+                comentarios.comentarios.map((ele) =>
+                  <div className="border border-laranja-principal rounded-xl w-80 h-12 ml-10 mb-4 mt-4">
+                    {/* <div className="border border-laranja-principal rounded-xl w-80 h-12 ml-10 mb-4"> */}
+                    <Comentario comentario={ele} />
+                  </div>)
+                : undefined
+              : undefined}
+
+
+
+
+          </div>
         </div>
       </div>
     </div>

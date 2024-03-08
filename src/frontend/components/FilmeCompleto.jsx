@@ -145,14 +145,12 @@ export function FilmeCompleto({ filme }) {
       <div className="mt-5">
         <div className="flex items-center flex-grow mt-3 border border-laranja-principal rounded-lg w-96 content-center mx-auto">
           <button className=" w-96 h-10 text-main-white font-semibold ml-5 text-left" onClick={handleComentarios}>
-            Comentários:
+            Comentários
           </button>
           <img src="/icones/dropdown.png" className="mr-2 h-6"></img>
         </div>
 
         <div className="">
-
-
           {comentarios.ver ?
             comentarios.comentarios.length > 0 ?
               comentarios.comentarios.map((ele) => 
@@ -162,10 +160,6 @@ export function FilmeCompleto({ filme }) {
               </div>)
               : undefined
             : undefined}
-
-
-
-
         </div>
       </div>
     </div>
