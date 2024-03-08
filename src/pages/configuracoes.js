@@ -4,12 +4,14 @@ import { userStore } from "./_app";
 import { togglePrivado } from "@/frontend/services/utilizador";
 import { toast } from "react-toastify";
 import Link from "next/link";
+import { Router, useRouter } from "next/router";
 
 export default function configuracoes() {
   const { userLogado, setUserLogado } = userStore((state) => state)
   const [isToggled, setIsToggled] = useState(userLogado.privado);
   const [desativar, setDesativar] = useState(false)
-  console.log(userLogado)
+  const router = useRouter()
+
 
   async function handleClick(booleano) {
 
@@ -35,13 +37,19 @@ export default function configuracoes() {
 
   }
 
+  function handleLogout() {
+    setUserLogado({})
+    router.push("/")
+    toast.success("Logout com sucesso.")
+  }
+
   const toggleImage = () => {
     setIsToggled(ps => !ps);
   };
 
   useEffect(() => {
 
-  }, [userLogado.privado])
+  }, [userLogado])
 
   return (
     <div className="flex flex-col md:max-w-96 min-h-screen h-full bg-fundo-principal">
@@ -87,8 +95,8 @@ export default function configuracoes() {
         <img src="/icones/privacidade.png" className="mb-3"></img>
       </a>
 
-      <div className=" flex justify-center mt-20 mb-24">
-        <Botao title="LOGOUT"></Botao>
+      <div className=" flex justify-center mt-20 mb-24" onClick={handleLogout}>
+        <Botao title="LOGOUT" ></Botao>
       </div>
     </div>
   );
