@@ -16,7 +16,7 @@ export default function configuracoes() {
     const res = await togglePrivado(booleano, userLogado._id)
 
     if (res.ok) {
-      setUserLogado((ps) => ({ ...ps, privado: booleano??false }))
+      setUserLogado((ps) => ({ ...ps, privado: booleano ?? false }))
       toast.success("Alterado com sucesso.")
     } else {
       toast.error("Algo correu mal!")
@@ -49,7 +49,8 @@ export default function configuracoes() {
         className=" flex justify-between  mt-12 mx-6 text-main-white border-b border-borda-cinza"
       >
         Perfil Privado
-        <img src={`/icones/toggle-${isToggled ? "on" : "off"}.png`} className="mb-3" />
+        <img src={`/icones/toggle-${isToggled ? "on" : "off"}.png`}
+          className="mb-3" />
 
       </button>
       <a
