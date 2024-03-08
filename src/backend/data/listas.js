@@ -7,9 +7,6 @@ const defaultCollection = "utilizadores"
 
 export async function adicionarLista(conteudo, lista) {
 
-    console.log("conteudo, lista")
-    console.log(conteudo, lista)
-
     if (conteudo.episodio) {
         return await adicionarEpisodio(conteudo)
     }
