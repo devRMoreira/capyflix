@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { CartãoPesquisa } from "@/frontend/components/CartaoPesquisa"
-import { getPesquisa } from "@/frontend/services/pesquisa"
+import { fetchPesquisa } from "@/frontend/services/pesquisa"
 
 
 
@@ -11,7 +11,7 @@ export default function pesquisarConteudo() {
 
     async function onChangeInput(e) {
         if (e.target.value.length > 1) {
-            const resultado = await getPesquisa(e.target.value)
+            const resultado = await fetchPesquisa(e.target.value)
             setPesquisa((ps) => ps = resultado)
         }
     }
