@@ -26,13 +26,14 @@ export function PerfilNav({ avatar, username, comentarios, ligacoes, id, config 
               className="pr-4"
             ></img>
           </Link>
-          <Link href={`/ligacoes/${id}`}>
-            <img
-              src={ligacoes}
-              alt="Perfis que o usuário segue e seus seguidores"
-              className="pr-2 w-8 h-6"
-            ></img>
-          </Link>
+          {ligacoes &&
+            <Link href={`/ligacoes/${id}`}>
+              <img
+                src={ligacoes}
+                alt="Perfis que o usuário segue e seus seguidores"
+                className="pr-2 w-8 h-6"
+              ></img>
+            </Link>}
           {config &&
             <a href="/configuracoes">
               <img src={config} alt="Configurações" className=" pl-1"></img>
