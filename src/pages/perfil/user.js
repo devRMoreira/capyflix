@@ -1,7 +1,6 @@
 import { PerfilNav } from "@/frontend/components/PerfilNav";
 import { Estatisticas } from "@/frontend/components/Estatisticas";
 import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
 import { userStore } from "../_app";
 import { fetchListaFavoritos, fetchListaPorVer, fetchListaVisto } from "@/frontend/services/listas";
 

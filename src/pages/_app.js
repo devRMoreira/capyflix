@@ -3,6 +3,8 @@ import { useRouter } from "next/router";
 import "@/styles/globals.css";
 import { create } from "zustand";
 import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 
 export const toastSuccess = (string) => toast.success(string)
 export const toastError = (string) => toast.error(string)
@@ -93,14 +95,14 @@ export default function App({ Component, pageProps }) {
 
   if (asPath === "/" || asPath === "/registar") {
     return <div>
-      <Component {...pageProps} />
       <ToastContainer autoClose={2500} />
+      <Component {...pageProps} />
     </div>
   } else {
 
     return <div>
+      <ToastContainer autoClose={2500} />
       <Component {...pageProps} />
-      <ToastContainer />
       <NavPrincipal />
       <div className=" h-[35px]" />
     </div>

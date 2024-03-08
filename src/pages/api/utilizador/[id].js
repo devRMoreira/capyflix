@@ -50,7 +50,7 @@ export default async function handler(req, res) {
 
         if (req.query.id.includes("comentarios")) {
 
-            const listaComentarios = await getHistoricoComentariosUtilizador({_id: new ObjectId(id)})
+            const listaComentarios = await getHistoricoComentariosUtilizador({ _id: new ObjectId(id) })
 
             return res.status(200).json(listaComentarios)
         }
@@ -101,11 +101,13 @@ export default async function handler(req, res) {
 
             return res.status(200).json(alterado)
 
-        } else if (req.body.privado) {
+        } else if (req.body) {
 
             const utilizador = req.query.id
 
-            const alterado = await alterarTipoPerfil(utilizador)
+            const bool = req.body.priv
+
+            const alterado = await alterarTipoPerfil(utilizador, bool)
 
             return res.status(200).json(alterado)
 

@@ -19,3 +19,34 @@ export function podeVerPerfil(id, quemSegue, seguidores) {
 
     return quemSegue.includes(id) && seguidores.includes(id)
 }
+
+export async function togglePrivado(booleano, id) {
+
+    if (booleano) {
+        const res = await fetch(`http://localhost:3000/api/utilizador/${id}`, {
+            method: "PATCH",
+            body: JSON.stringify({
+                "priv": true
+            }),
+            headers: {
+                'content-type': 'application/json'
+            }
+        })
+
+        return res
+    } else {
+
+        const res = await fetch(`http://localhost:3000/api/utilizador/${id}`, {
+            method: "PATCH",
+            body: JSON.stringify({
+                "priv": false
+            }),
+            headers: {
+                'content-type': 'application/json'
+            }
+        })
+
+        return res
+
+    }
+}
