@@ -6,41 +6,85 @@ import Link from "next/link";
 import { userStore } from "@/pages/_app";
 import { fetchComentariosSerie } from "../services/serie";
 import { Comentario } from "./Comentario";
+import { useRouter } from "next/router";
+import { gerirLista } from "../services/utilizador";
+import { toast } from "react-toastify";
 
 export function SerieCompleta({ serie }) {
-  const [vistoIsClicked, setvistoIsClicked] = useState(false);
-  const [verMaisIsClicked, setverMaisIsClicked] = useState(false);
-  const [likeIsClicked, setLikeIsClicked] = useState(false);
 
-  const { userLogado } = userStore((state) => state)
+  const { userLogado, setUserLogado } = userStore((state) => state)
+  const router = useRouter()
+
+  const [botaoIsClicked, setBotaoIsClicked] = useState({
+    verMais: userLogado.conteudoPorVer.find(ele => ele.id === serie._id),
+    visto: userLogado.conteudoVisto.find(ele => ele.id === serie._id),
+    favorito: userLogado.conteudoFavorito.find(ele => ele.id === serie._id),
+  })
+
+  const [desativar, setDesativar] = useState({
+    verMais: false,
+    visto: false,
+    favorito: false,
+  })
+
   const [comentarios, setComentarios] = useState({
     ver: false,
     comentarios: []
   })
 
+
+  function handleClick() {
+    router.back()
+  }
+
+  async function handleClickBotao(booleano, botao, conteudo) {
+
+    const res = await gerirLista(booleano, serie._id, userLogado._id, "serie", botao)
+
+    if (res.ok) {
+
+      if (booleano) {
+        setUserLogado(
+          {
+            ...userLogado,
+            [conteudo]: [...[conteudo], `${serie._id}`]
+          }
+        )
+      } else {
+        setUserLogado(
+          {
+            ...userLogado,
+            [conteudo]: (userLogado[conteudo].filter((id) => id !== serie._id))
+          }
+        )
+
+      }
+
+      toggleBotao(booleano, botao)
+
+      toast.success(`${booleano ? "Adicionado à" : "Removido da"} lista ${botao === "porVer" ? "por ver!" : botao === "favorito" ? "de favoritos" : "visto!"} com sucesso!`)
+    } else {
+      toast.error("Algo correu mal!")
+    }
+
+    setDesativar((ps) => ({ ...ps, [botao]: true }))
+
+    setTimeout(() => {
+      setDesativar((ps) => ({ ...ps, [botao]: false }));
+    }, 500);
+  }
+
   function handleComentarios() {
     setComentarios((ps) => ({ ...ps, ver: !ps.ver }))
   }
 
-  const iconeVistoIsClicked = () => {
-    setvistoIsClicked(!vistoIsClicked);
-  };
+  function toggleBotao(booleano, botao) {
+    setBotaoIsClicked((ps) => ({ ...ps, [botao]: booleano }))
+  }
 
-  const iconeVerMaisIsClicked = () => {
-    setverMaisIsClicked(!verMaisIsClicked);
-  };
 
-  const iconeLikeIsClicked = () => {
-    setLikeIsClicked(!likeIsClicked);
-  };
 
   useEffect(() => {
-
-    function handleBotoes() {
-      setvistoIsClicked(userLogado.conteudoVisto.find(ele => ele.id === serie._id))
-      setverMaisIsClicked(userLogado.conteudoPorVer.find(ele => ele.id === serie._id))
-      setLikeIsClicked(userLogado.conteudoFavorito.find(ele => ele.id === serie._id))
-    }
 
     async function fetchDadosComentarios() {
       if (serie.comentarios.length > 0) {
@@ -48,16 +92,15 @@ export function SerieCompleta({ serie }) {
         setComentarios((ps) => ({ ...ps, comentarios: dados }))
       }
     }
-    handleBotoes()
     fetchDadosComentarios()
 
   }, [])
 
   return (
     <div className="flex flex-col md:max-w-96 min-h-screen h-full bg-fundo-principal">
-      <a href="/">
-        <img src="/icones/Back.png" className=" ml-4 mt-12"></img>
-      </a>
+      <Link href={""} onClick={handleClick}>
+        <img src="/icones/Back.png" className=" ml-4 mt-6"></img>
+      </Link>
       <div className="flex mt-5">
         <div className="flex justify-center ">
           <Image
@@ -93,30 +136,32 @@ export function SerieCompleta({ serie }) {
             Classificação: {serie.mediaAvaliacoes}
           </p>
           <div className="flex items-center justify-end gap-3 mr-10 mt-3">
-            <button onClick={iconeVistoIsClicked}>
-              {vistoIsClicked ? (
-                <img src="/icones/visto-pintado.png" className="w-7 h-7"></img>
-              ) : (
-                <img src="/icones/visto.png" className=" w-7 h-7"></img>
-              )}
+            <button
+              onClick={() => handleClickBotao(!botaoIsClicked.visto, "visto", "conteudoVisto")}
+              disabled={desativar.visto}>
+              <img src={`/icones/visto${botaoIsClicked.visto ? "-pintado" : ""}.png`}
+                className="w-7 h-7"></img>
+
             </button>
-            <button onClick={iconeVerMaisIsClicked}>
-              {verMaisIsClicked ? (
-                <img
-                  src="/icones/ver-mais-pintado.png"
-                  className=" w-7 h-7"
-                ></img>
-              ) : (
-                <img src="/icones/vermais.png" className="w-7 h-7"></img>
-              )}
+
+            <button
+              onClick={() => handleClickBotao(!botaoIsClicked.verMais, "porVer", "conteudoPorVer")}
+              disabled={desativar.verMais}>
+              <img src={`/icones/ver-mais${botaoIsClicked.verMais ? "-pintado" : ""}.png`}
+                className="w-7 h-7"></img>
+
             </button>
-            <button onClick={iconeLikeIsClicked}>
-              {likeIsClicked ? (
-                <img src="/icones/like-pintado.png" className=" w-7 h-7"></img>
-              ) : (
-                <img src="/icones/like.png" className="w-7 h-7"></img>
-              )}
+
+            <button
+              onClick={() => handleClickBotao(!botaoIsClicked.favorito, "favorito", "conteudoFavorito")}
+              disabled={desativar.favorito}>
+              <img src={`/icones/favorito${botaoIsClicked.favorito ? "-pintado" : ""}.png`}
+                className="w-7 h-7"></img>
+
             </button>
+
+
+
           </div>
         </div>
       </div>

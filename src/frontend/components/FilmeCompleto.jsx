@@ -12,13 +12,13 @@ import { toast } from "react-toastify";
 
 export function FilmeCompleto({ filme }) {
   const { userLogado, setUserLogado } = userStore((state) => state)
-  console.log(userLogado)
+  const router = useRouter()
+
   const [botaoIsClicked, setBotaoIsClicked] = useState({
     verMais: userLogado.conteudoPorVer.find(ele => ele.id === filme._id),
     visto: userLogado.conteudoVisto.find(ele => ele.id === filme._id),
     favorito: userLogado.conteudoFavorito.find(ele => ele.id === filme._id),
   })
-
 
   const [desativar, setDesativar] = useState({
     verMais: false,
@@ -26,7 +26,6 @@ export function FilmeCompleto({ filme }) {
     favorito: false,
   })
 
-  const router = useRouter()
   const [comentarios, setComentarios] = useState({
     ver: false,
     comentarios: []
@@ -54,7 +53,6 @@ export function FilmeCompleto({ filme }) {
         )
 
       }
-
 
       toggleBotao(booleano, botao)
 
