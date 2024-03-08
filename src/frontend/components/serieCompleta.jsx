@@ -16,13 +16,13 @@ export function SerieCompleta({ serie }) {
   const router = useRouter()
 
   const [botaoIsClicked, setBotaoIsClicked] = useState({
-    verMais: userLogado.conteudoPorVer.find(ele => ele.id === serie._id),
+    porVer: userLogado.conteudoPorVer.find(ele => ele.id === serie._id),
     visto: userLogado.conteudoVisto.find(ele => ele.id === serie._id),
     favorito: userLogado.conteudoFavorito.find(ele => ele.id === serie._id),
   })
 
   const [desativar, setDesativar] = useState({
-    verMais: false,
+    porVer: false,
     visto: false,
     favorito: false,
   })
@@ -145,9 +145,9 @@ export function SerieCompleta({ serie }) {
             </button>
 
             <button
-              onClick={() => handleClickBotao(!botaoIsClicked.verMais, "porVer", "conteudoPorVer")}
-              disabled={desativar.verMais}>
-              <img src={`/icones/ver-mais${botaoIsClicked.verMais ? "-pintado" : ""}.png`}
+              onClick={() => handleClickBotao(!botaoIsClicked.porVer, "porVer", "conteudoPorVer")}
+              disabled={desativar.porVer}>
+              <img src={`/icones/ver-mais${botaoIsClicked.porVer ? "-pintado" : ""}.png`}
                 className="w-7 h-7"></img>
 
             </button>
