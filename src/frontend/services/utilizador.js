@@ -73,3 +73,55 @@ export async function fetchDadosUtilizadorPrivado(id) {
         imagemPerfil: jsonData.utilizadorFiltrado.imagemPerfil
     }
 }
+
+export async function gerirLista(booleano, idConteudo, idUtilizador, tipo, lista) {
+
+    if (booleano) {
+        const res = await adicionarLista(idConteudo, idUtilizador, tipo, lista)
+
+        return res
+    } else {
+        const res = await removerLista(idConteudo, idUtilizador, tipo, lista)
+
+        return res
+    }
+}
+
+
+async function adicionarLista(idConteudo, idUtilizador, tipo, lista) {
+
+    console.log("idConteudo, idUtilizador, tipo, lista")
+    console.log(idConteudo, idUtilizador, tipo, lista)
+
+    const res = await fetch(`http://localhost:3000/api/${tipo}/${idConteudo}`, {
+        method: "PATCH",
+        body: JSON.stringify({
+            "lista": String(lista),
+            "idUtilizador": idUtilizador
+        }),
+        headers: {
+            'content-type': 'application/json'
+        }
+    })
+
+    return res
+}
+
+async function removerLista(idConteudo, idUtilizador, tipo, lista) {
+
+    console.log("idConteudo, idUtilizador, tipo, lista")
+    console.log(idConteudo, idUtilizador, tipo, lista)
+
+    const res = await fetch(`http://localhost:3000/api/${tipo}/${idConteudo}`, {
+        method: "DELETE",
+        body: JSON.stringify({
+            "lista": String(lista),
+            "idUtilizador": idUtilizador
+        }),
+        headers: {
+            'content-type': 'application/json'
+        }
+    })
+
+    return res
+}

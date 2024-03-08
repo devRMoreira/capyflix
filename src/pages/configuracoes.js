@@ -30,8 +30,8 @@ export default function configuracoes() {
 
   }
 
-  const toggleImage = () => {
-    setIsToggled(!isToggled);
+  const toggleImage = (booleano) => {
+    setIsToggled(booleano);
   };
 
   useEffect(() => {

@@ -6,12 +6,25 @@ import { userStore } from "@/pages/_app";
 import { fetchComentariosFilme } from "../services/filme";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { gerirLista } from "../services/utilizador";
+import { toast } from "react-toastify";
 
 
 export function FilmeCompleto({ filme }) {
-  const [vistoIsClicked, setvistoIsClicked] = useState(false);
-  const [verMaisIsClicked, setverMaisIsClicked] = useState(false);
-  const [likeIsClicked, setLikeIsClicked] = useState(false);
+  const { userLogado, setUserLogado } = userStore((state) => state)
+  console.log(userLogado)
+  const [botaoIsClicked, setBotaoIsClicked] = useState({
+    verMais: userLogado.conteudoPorVer.find(ele => ele.id === filme._id),
+    visto: userLogado.conteudoVisto.find(ele => ele.id === filme._id),
+    favorito: userLogado.conteudoFavorito.find(ele => ele.id === filme._id),
+  })
+
+
+  const [desativar, setDesativar] = useState({
+    verMais: false,
+    visto: false,
+    favorito: false,
+  })
 
   const router = useRouter()
   const [comentarios, setComentarios] = useState({
@@ -19,36 +32,57 @@ export function FilmeCompleto({ filme }) {
     comentarios: []
   })
 
-  const { userLogado } = userStore((state) => state)
+
+  async function handleClickBotao(booleano, botao, conteudo) {
+
+    const res = await gerirLista(booleano, filme._id, userLogado._id, "filme", botao)
+
+    if (res.ok) {
+      if (booleano) {
+        setUserLogado(
+          {
+            ...userLogado,
+            [conteudo]: [...[conteudo], `${filme._id}`]
+          }
+        )
+      } else {
+        setUserLogado(
+          {
+            ...userLogado,
+            [conteudo]: (userLogado[conteudo].filter((id) => id !== filme._id))
+          }
+        )
+
+      }
 
 
-  const iconeVistoIsClicked = () => {
-    setvistoIsClicked(!vistoIsClicked);
-  };
+      toggleBotao(booleano, botao)
 
-  const iconeVerMaisIsClicked = () => {
-    setverMaisIsClicked(!verMaisIsClicked);
-  };
+      toast.success(`${booleano ? "Adicionado à" : "Removido da"} lista ${botao === "porVer" ? "por ver!" : botao === "favorito" ? "de favoritos" : "visto!"} com sucesso!`)
+    } else {
+      toast.error("Algo correu mal!")
+    }
 
-  const iconeLikeIsClicked = () => {
-    setLikeIsClicked(!likeIsClicked);
-  };
+    setDesativar((ps) => ({ ...ps, [botao]: true }))
+
+    setTimeout(() => {
+      setDesativar((ps) => ({ ...ps, [botao]: false }));
+    }, 500);
+  }
 
   function handleComentarios() {
     setComentarios((ps) => ({ ...ps, ver: !ps.ver }))
   }
 
-  function handleClick(){
+  function handleClick() {
     router.back()
   }
 
-  useEffect(() => {
+  function toggleBotao(booleano, botao) {
+    setBotaoIsClicked((ps) => ({ ...ps, [botao]: booleano }))
+  }
 
-    function handleBotoes() {
-      setvistoIsClicked(userLogado.conteudoVisto.find(ele => ele.id === filme._id))
-      setverMaisIsClicked(userLogado.conteudoPorVer.find(ele => ele.id === filme._id))
-      setLikeIsClicked(userLogado.conteudoFavorito.find(ele => ele.id === filme._id))
-    }
+  useEffect(() => {
 
     async function fetchDadosComentarios() {
       if (filme.comentarios.length > 0) {
@@ -56,7 +90,6 @@ export function FilmeCompleto({ filme }) {
         setComentarios((ps) => ({ ...ps, comentarios: dados }))
       }
     }
-    handleBotoes()
     fetchDadosComentarios()
 
   }, [])
@@ -101,29 +134,28 @@ export function FilmeCompleto({ filme }) {
             Classificação: {filme.mediaAvaliacoes}
           </p>
           <div className="flex items-center justify-end gap-3 mr-10 mt-3">
-            <button onClick={iconeVistoIsClicked}>
-              {vistoIsClicked ? (
-                <img src="/icones/visto-pintado.png" className="w-7 h-7"></img>
-              ) : (
-                <img src="/icones/visto.png" className=" w-7 h-7"></img>
-              )}
+            <button
+              onClick={() => handleClickBotao(!botaoIsClicked.visto, "visto", "conteudoVisto")}
+              disabled={desativar.visto}>
+              <img src={`/icones/visto${botaoIsClicked.visto ? "-pintado" : ""}.png`}
+                className="w-7 h-7"></img>
+
             </button>
-            <button onClick={iconeVerMaisIsClicked}>
-              {verMaisIsClicked ? (
-                <img
-                  src="/icones/ver-mais-pintado.png"
-                  className=" w-7 h-7"
-                ></img>
-              ) : (
-                <img src="/icones/vermais.png" className="w-7 h-7"></img>
-              )}
+
+            <button
+              onClick={() => handleClickBotao(!botaoIsClicked.verMais, "porVer", "conteudoPorVer")}
+              disabled={desativar.verMais}>
+              <img src={`/icones/ver-mais${botaoIsClicked.verMais ? "-pintado" : ""}.png`}
+                className="w-7 h-7"></img>
+
             </button>
-            <button onClick={iconeLikeIsClicked}>
-              {likeIsClicked ? (
-                <img src="/icones/like-pintado.png" className=" w-7 h-7"></img>
-              ) : (
-                <img src="/icones/like.png" className="w-7 h-7"></img>
-              )}
+
+            <button
+              onClick={() => handleClickBotao(!botaoIsClicked.favorito, "favorito", "conteudoFavorito")}
+              disabled={desativar.favorito}>
+              <img src={`/icones/favorito${botaoIsClicked.favorito ? "-pintado" : ""}.png`}
+                className="w-7 h-7"></img>
+
             </button>
           </div>
         </div>
