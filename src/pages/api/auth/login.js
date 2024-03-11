@@ -11,7 +11,7 @@ export default async function handler(req, res) {
 
         const user = {
             email: req.body.email,
-            password: passwordEncryption(req.body.password)
+            password: req.body.password
         }
 
         const validation = await loginValidation(user)

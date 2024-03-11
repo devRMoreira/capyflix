@@ -15,7 +15,7 @@ export async function registarUtilizador(nome, email, password) {
 }
 
 export async function loginUtilizador(email, password) {
-
+    console.log(email, password)
     const res = await fetch("http://localhost:3000/api/auth/login", {
         method: "POST",
         body: JSON.stringify({
@@ -27,6 +27,6 @@ export async function loginUtilizador(email, password) {
     })
 
     const dados = await res.json()
-    
+
     return dados.id
 }
