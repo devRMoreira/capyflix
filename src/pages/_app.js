@@ -70,14 +70,14 @@ export const userStore = create((set) => ({
     "privado": true,
     "estatisticas": {
       "filmes": {
-        "quantidade": 0,
-        "tempo": 0,
-        "generos": []
+        "quantidade": 1,
+        "tempo": 114,
+        "generos": ["Romance", "Aventura", "Comédia", "Drama", "Fantasia"]
       },
       "series": {
-        "quantidade": 0,
-        "tempo": 0,
-        "generos": []
+        "quantidade": 1,
+        "tempo": 72,
+        "generos": ["Comédia", "Musical"]
       }
     },
     "imagemPerfil": "https://i.imgur.com/eOtKaB8.jpeg",

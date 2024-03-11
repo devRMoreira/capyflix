@@ -39,6 +39,7 @@ export default function index() {
     } else {
       const fetchUtilizador = await fetchDadosUtilizador(login)
       setUserLogado(fetchUtilizador)
+      console.log(userLogado)
 
 
       router.push("/home")
