@@ -1,6 +1,11 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## !!
+
+Para correr a app utilizar o ficheiro Database.zip, contém um JSON para importar no Imsomnia com todos os endpoints implementados e na pasta mongoDb todas as coleções de demonstração prontas a utilizar, colocar o link do mongoDB em src/backend/data/mongodb.js
+
 
 ## Getting Started
+
+
 
 First, run the development server:
 
