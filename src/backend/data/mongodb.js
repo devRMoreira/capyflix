@@ -1,7 +1,7 @@
 const { MongoClient } = require('mongodb')
 
 const DEFAULT_DB_NAME = "capyflix"
-const URL = "mongodb+srv://ricardo:t5sa6sFaQn6NPCFa@cluster0.2nzoof0.mongodb.net/"
+const URL = "URL_AQUI"
 
 let client
 
